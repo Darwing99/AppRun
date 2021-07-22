@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:AppRun"
+             x:Class="AppRun.MainPage">
+    <ContentPage.BindingContext>
+        <vm:VistaCaurosel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <OnPlatform.iOS>
+                0,20,0,0
+            </OnPlatform.iOS>
+            <OnPlatform.Android>
+                0,20,0,0
+            </OnPlatform.Android>
+        </OnPlatform>
+    </ContentPage.Padding>
+    <ContentPage.ToolbarItems>
+   
+    </ContentPage.ToolbarItems>
+    <StackLayout>
+      
+            
+      
+        <CarouselView   ItemsSource="{Binding images}" HeightRequest="200" WidthRequest="200" Visual="Material" Opacity="8" AutomationId="1" IsSwipeEnabled="True" ItemsUpdatingScrollMode="KeepScrollOffset" IsScrollAnimated="True" FlowDirection="MatchParent"  PeekAreaInsets="4">
+
+            <CarouselView.ItemTemplate>
+                <DataTemplate>
+
+                    <StackLayout>
+                        <Frame HeightRequest="200" WidthRequest="600" 
+               
+                           BackgroundColor="White" Padding="0"
+                           HasShadow="True" Margin="3" CornerRadius="10"
+                           HorizontalOptions="CenterAndExpand">
+                            <Grid>
+                                <StackLayout  BackgroundColor="White">
+                                    <Image Source="{Binding imgSource}" 
+                                    HeightRequest="200" Opacity="0.6"
+                                    Aspect="AspectFill"/>
+                                </StackLayout>
+                               
+                            </Grid>
+
+
+                        </Frame>
+                    </StackLayout>
+
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+        </CarouselView>
+  
+            <Frame Visual="Material" Margin="5" VerticalOptions="Start">  
+             <ScrollView  HorizontalScrollBarVisibility="Never" VerticalScrollBarVisibility="Never">
+                <StackLayout Padding="20,20,20,20">
+                    <Entry BackgroundColor="white"  ClearButtonVisibility="WhileEditing" IsTextPredictionEnabled="True"  Visual="Material"  x:Name="txtId" Margin="0,10" Placeholder="ID"></Entry>
+                    <Entry BackgroundColor="white" ClearButtonVisibility="WhileEditing"  IsTextPredictionEnabled="True" Visual="Material" x:Name="txtName" Placeholder="Enter Name"></Entry>
+                    <Entry BackgroundColor="white" ClearButtonVisibility="WhileEditing"  IsTextPredictionEnabled="True"  Visual="Material" x:Name="txtCorreo" Margin="0,10" Keyboard="Email" Placeholder="Enter Correo"></Entry>
+                    <Entry BackgroundColor="White" IsTextPredictionEnabled="True" Visual="Material" x:Name="txtPassword" MaxLength="20" IsPassword="True" Keyboard="Text" Placeholder="Enter Password"></Entry>
+                    <StackLayout  HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
+                        <Button FontAttributes="Bold" BackgroundColor="#20CBFA" Visual="Material" Margin="0,10" x:Name="btnAdd" WidthRequest="200" Text="Sign Up" Clicked="BtnAdd_Clicked"/>
+                    </StackLayout>
+                    <StackLayout>
+                        <Grid>
+                            <Label Grid.Row="0" Grid.Column="0" BackgroundColor="#bababa" HeightRequest="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" ></Label>
+                            <Label Grid.Row="0" Grid.Column="1" HorizontalOptions="Center" TextColor="Black"  FontAttributes="Bold" Text="OR" ></Label>
+                            <Label Grid.Row="0" Grid.Column="2" BackgroundColor="#bababa"  HeightRequest="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand"></Label>
+                           
+                        </Grid>
+                        <Grid>
+                         
+                            <Label Text="Facebook" Grid.Row="0" TextType="Text" HorizontalOptions="Center"   ></Label>
+                        </Grid>
+                    </StackLayout>
+                    
+                </StackLayout>
+               </ScrollView>
+            </Frame> 
+           
+        
+       
+        
+    </StackLayout>
+
+</ContentPage>

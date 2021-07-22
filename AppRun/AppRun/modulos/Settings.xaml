@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppRun.Settings"
+             Title="Settings">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Frame Margin="20" CornerRadius="10">
+                    <Grid>
+                        <StackLayout Orientation="Vertical">
+                            <Label IsVisible="false" x:Name="idusuario">
+                                
+                            </Label>
+                            <Button Visual="Material" HorizontalOptions="CenterAndExpand" CornerRadius="60" x:Name="perfil" HeightRequest="{OnPlatform iOS=120,Android=120}"
+                                WidthRequest="{OnPlatform iOS=120,Android=120}" ImageSource="camera.png">
+
+                            </Button>
+                            <Label x:Name="nombre" Margin="10" Text="Darwing Hernandez" FontAttributes="Bold" FontSize="20" HorizontalTextAlignment="Center">
+
+                            </Label>
+                            <Label x:Name="correo"  FontSize="17" HorizontalTextAlignment="Center" Text="">
+
+                            </Label>
+
+                            <Button x:Name="updateProfile" Clicked="updateProfile_Clicked" Margin="10" BackgroundColor="White" TextColor="Black" CornerRadius="10" HorizontalOptions="CenterAndExpand" Visual="Material" Text="Edit Perfil" ImageSource="settings.png">
+
+                            </Button>
+
+
+                        </StackLayout>
+
+                    </Grid>
+
+                </Frame>
+                <Frame Margin="20" CornerRadius="10">
+                    <Grid>
+                        <StackLayout Orientation="Vertical">
+
+                            <Label Margin="10" Text="Soporte Tecnico" FontAttributes="Bold" FontSize="17" >
+
+                            </Label>
+                            <Label  Margin="10"  FontSize="17" FontAttributes="Bold"  Text="Preguntas Frecuentes">
+
+                            </Label>
+                            <Label Margin="10"   FontSize="17" FontAttributes="Bold"  Text="Acerca de">
+
+                            </Label>
+                            <Label Margin="10"   FontSize="17" FontAttributes="Bold"  Text="Terminos y condiciones">
+
+                            </Label>
+                            <Label Margin="10"   FontSize="17" FontAttributes="Bold"  Text="Politica de privacidad">
+
+                            </Label>
+                            <Label  Margin="10"  FontSize="17" FontAttributes="Bold"  Text="Copyrigh">
+
+                            </Label>
+
+                            <Button x:Name="cerrar" Clicked="cerrar_Clicked"  BackgroundColor="White" TextColor="Black" Margin="10" CornerRadius="10" HorizontalOptions="StartAndExpand" Visual="Material" Text="Sign Out" >
+
+                            </Button>
+
+
+                        </StackLayout>
+
+                    </Grid>
+
+                </Frame>
+            </StackLayout>
+        </ScrollView>
+       
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mapa="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+         
+             x:Class="AppRun.Home"
+             Title="Home" >
+
+   
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <StackLayout Padding="5" HorizontalOptions="FillAndExpand" Orientation="Vertical">
+                    <Label HorizontalOptions="Center" FontAttributes="Bold" FontSize="20" Text="Rutina"></Label>
+                    <Frame HasShadow="False" HorizontalOptions="FillAndExpand"  HeightRequest="400">
+                        <mapa:Map FlowDirection="MatchParent" HasScrollEnabled="True"  MoveToLastRegionOnLayoutChange="True"
+                                  MapType="Hybrid"  HasZoomEnabled="True" VerticalOptions="FillAndExpand"  HorizontalOptions="FillAndExpand"  x:Name="m" IsShowingUser="True">
+                        </mapa:Map>
+                    </Frame>
+                    
+                </StackLayout>
+                <StackLayout Padding="5" Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                    <StackLayout HorizontalOptions="Center" Margin="10,0,10,0" Orientation="Vertical">
+                        <Label Text="Tiempo"></Label>
+                        <Label FontAttributes="Bold" FontSize="20"  Text="2:50"></Label>
+                    </StackLayout>
+                    <StackLayout HorizontalOptions="Center" Margin="10,0,10,0" Orientation="Vertical">
+                        <Label Text="Velocidad"></Label>
+                        <Label FontAttributes="Bold" FontSize="20" Text="20km/h"></Label>
+                    </StackLayout>
+                    <StackLayout HorizontalOptions="Center" Margin="10,0,10,0" Orientation="Vertical">
+                        <Label Text="Distancia"></Label>
+                        <Label FontAttributes="Bold" FontSize="20" Text="200 metros"></Label>
+                    </StackLayout>
+
+
+                </StackLayout>
+                <StackLayout Padding="20"  VerticalOptions="Center" Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                    <Button BackgroundColor="OrangeRed" Text="Iniciar" CornerRadius="50">
+                        
+                    </Button>
+                    <Button  BackgroundColor="OrangeRed" Text="Terminar" CornerRadius="50">
+
+                    </Button>
+                    <Button  BackgroundColor="OrangeRed" Clicked="Button_Clicked" ImageSource="estadisticas.png" CornerRadius="50">
+
+                    </Button>
+                </StackLayout>
+              
+               
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

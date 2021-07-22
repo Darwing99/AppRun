@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppRun.Corredores"
+              Title="Corredores"
+             >
+    <ContentPage.Content>
+        <StackLayout>
+            <SearchBar PlaceholderColor="white" Placeholder="Buscar Corredores">
+                
+            </SearchBar>
+            <ScrollView>
+                <StackLayout>
+                    <ListView>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame CornerRadius="10">
+                                    <StackLayout Orientation="Horizontal">
+                                        <StackLayout>
+                                            
+                                            <Image Source="{Binding image}">
+
+                                            </Image>
+                                        </StackLayout >
+                                        
+                                        <StackLayout Orientation="Vertical">
+                                            <Label FontAttributes="Bold" Text="{Binding nombre}"></Label>
+                                            <Label FontAttributes="Bold" Text="{Binding direccion}"></Label>
+                                        </StackLayout> 
+                                        <StackLayout Orientation="Vertical">
+                                            <Button></Button>
+                                            <Button></Button>
+
+                                        </StackLayout>
+                                    </StackLayout>
+                                   
+                                 
+                                </Frame>
+                                
+                               
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
