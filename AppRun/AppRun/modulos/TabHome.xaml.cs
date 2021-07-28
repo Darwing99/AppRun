@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+
+
 namespace AppRun
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
@@ -16,15 +18,11 @@ namespace AppRun
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
-            var ExploreIIS = new FontImageSource()
-            {
-                FontFamily = "UserIcons",
-                Glyph = "\U000f0434"
-            };
+          
             var PostIIS = new FontImageSource()
             {
                 FontFamily = "UserIcons",
-                Glyph = "\U000f0035"
+                Glyph = "\U000F0CBD"
             };
             var MyAdsIIS = new FontImageSource()
             {
@@ -34,14 +32,15 @@ namespace AppRun
             var ProfileIIS = new FontImageSource()
             {
                 FontFamily = "UserIcons",
-                Glyph = "\U000f03d2"
+                Glyph = "\U000F07CC",
+                
             };
 
 
        
             tabpage.Children.Add(new NavigationPage(new Progreso()) { Title = "Progreso", IconImageSource = PostIIS });
-            tabpage.Children.Add(new NavigationPage(new Home()) { Title = "Home", IconImageSource = MyAdsIIS });
-            tabpage.Children.Add(new NavigationPage(new Settings()) { Title = "Settings", IconImageSource = ProfileIIS });
+            tabpage.Children.Add(new NavigationPage(new Home()) { Title = "Iniciar", IconImageSource = MyAdsIIS });
+            tabpage.Children.Add(new NavigationPage(new Clasificacion()) { Title = "Clasificación", IconImageSource = ProfileIIS });
         }
     }
 }

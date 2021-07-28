@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -29,14 +26,17 @@ namespace AppRun
             var item = e.SelectedItem as MenuItem;
             if (item == null)
                 return;
+        
+                var page = (Page)Activator.CreateInstance(item.TargetType);
+                page.Title = item.Title;
 
-            var page = (Page)Activator.CreateInstance(item.TargetType);
-            page.Title = item.Title;
+                Detail = new NavigationPage(page);
+                IsPresented = false;
 
-            Detail = new NavigationPage(page);
-            IsPresented = false;
-
-            FlyoutPage.ListView.SelectedItem = null;
+                FlyoutPage.ListView.SelectedItem = null;
+            
+            
+           
         }
     }
 }

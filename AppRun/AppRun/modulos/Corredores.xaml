@@ -2,41 +2,48 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppRun.Corredores"
-              Title="Corredores"
+             xmlns:xct="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
+             Title="Corredores"
              >
     <ContentPage.Content>
         <StackLayout>
-            <SearchBar PlaceholderColor="white" Placeholder="Buscar Corredores">
+            <SearchBar PlaceholderColor="Black" x:Name="search" Text="{Binding BuscarCorredores}" SearchCommand="{Binding BuscarCorredor}"  Placeholder="Buscar Corredores">
                 
             </SearchBar>
+            
             <ScrollView>
-                <StackLayout>
-                    <ListView>
+              
+                <StackLayout Margin="10">
+                    
+                    <ListView RefreshControlColor="OrangeRed" IsPullToRefreshEnabled="True"  IsRefreshing="{Binding Refresc}" SelectedItem="{Binding SelectedCorredor}"   
+                              RowHeight="100"  x:Name="listaCorredores" ItemsSource="{Binding ListOfItems}"  >
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <Frame CornerRadius="10">
-                                    <StackLayout Orientation="Horizontal">
-                                        <StackLayout>
+                                <ViewCell>
+                                    <Frame HeightRequest="50" CornerRadius="2">
+                                        <StackLayout  Margin="0" Orientation="Horizontal">
+                                            <StackLayout Padding="-10,-10"  HeightRequest="100" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand">
+                                                <Frame Padding="-10,-10" HeightRequest="100" HorizontalOptions="StartAndExpand" IsClippedToBounds="True" CornerRadius="100">
+                                                    <Image HeightRequest="100"  WidthRequest="100" Source="{Binding image,Converter={StaticResource bisc}}" ></Image>
+                                                </Frame>
                                             
-                                            <Image Source="{Binding image}">
+                                            </StackLayout >
 
-                                            </Image>
-                                        </StackLayout >
-                                        
-                                        <StackLayout Orientation="Vertical">
-                                            <Label FontAttributes="Bold" Text="{Binding nombre}"></Label>
-                                            <Label FontAttributes="Bold" Text="{Binding direccion}"></Label>
-                                        </StackLayout> 
-                                        <StackLayout Orientation="Vertical">
-                                            <Button></Button>
-                                            <Button></Button>
+                                            <StackLayout HorizontalOptions="EndAndExpand" Orientation="Vertical">
+                                                <Label FontAttributes="Bold" Text="{Binding name}"></Label>
+                                                <Label FontAttributes="Bold" Text="{Binding direccion}"></Label>
+                                            </StackLayout>
+                                            <StackLayout Orientation="Vertical">
 
+                                                <Switch IsToggled="{Binding estado}"></Switch>   
+                                            </StackLayout>
                                         </StackLayout>
-                                    </StackLayout>
-                                   
-                                 
-                                </Frame>
-                                
+
+
+                                    </Frame>
+
+                                </ViewCell>
+                               
                                
                             </DataTemplate>
                         </ListView.ItemTemplate>

@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using AppRun.clases;
+using AppRun.Model;
+using AppRun.services;
 using Firebase.Auth;
 using Newtonsoft.Json;
 using Xamarin.Essentials;
@@ -12,13 +16,19 @@ namespace AppRun.ViewModel
     
         public class LoginViewModel : BaseViewModel
         {
+        private readonly IGoogleManager _googleManager;
+        GoogleUser GoogleUser = new GoogleUser();
+        public bool IsLogedIn { get; set; }
+        IFirebaseAuthentication auth;
 
+        List<UsuariosRest> service;
+        RestApiLogin restService;
         public LoginViewModel()
         {
             this.IsEnabledTxt = true;
-            //LoginCommandGoogle = new Command(() => LoginGoogle());
-            //LoginCommand = new Command(() => LoginMethod());
-            //forgotPassword = new Command(() => ResetPasswordEmail());
+            
+            restService = new RestApiLogin();
+            _googleManager  = DependencyService.Get<IGoogleManager>();
         }
         
         public string email;
@@ -72,11 +82,6 @@ namespace AppRun.ViewModel
 
         }
 
-
-       // public ICommand LoginCommandGoogle { private get; set;/*login google*/ }
-       // public ICommand LoginCommand { private get; set;/*LoginMethod*/ }
-        //public ICommand forgotPassword { private get; set;/*ResetPasswordEmail*/ }
-
         public ICommand LoginCommand
         {
             get
@@ -125,7 +130,9 @@ namespace AppRun.ViewModel
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert("Alert", "Cuenta no existe", "OK");
+                var message = ex.Message;
+
+                await App.Current.MainPage.DisplayAlert("Alert", "Cuenta no existe"+ ex.Message.ToString(), "OK");
             }
 
             this.IsEnabledTxt = false;
@@ -168,10 +175,20 @@ namespace AppRun.ViewModel
                     var content = await auth.GetFreshAuthAsync();
                     var serializedcontnet = JsonConvert.SerializeObject(content);
 
+                    string token = content.FirebaseToken;
                     string correo = content.User.Email.ToString();
                     string iduser = content.User.LocalId.ToString();
-                    string date = content.Created.ToString();
-
+                    service = await restService.GetRepositoriesAsync(Constantes.urlGet);
+                    var listaSeleccionada = service.Where(c => c.idToken.ToString().Contains(iduser.ToString()));
+                  
+                    if (listaSeleccionada != null)
+                    {
+              
+                        byte[] image = listaSeleccionada.FirstOrDefault().image;
+                        Preferences.Set("id", listaSeleccionada.FirstOrDefault().id.ToString());
+                     
+                        Preferences.Set("nombre", listaSeleccionada.FirstOrDefault().name);
+                }
                     Preferences.Set("correo", correo);
                     Preferences.Set("iduser", iduser);
                   
@@ -227,6 +244,45 @@ namespace AppRun.ViewModel
 
 
 
+
+
+        //Login Con Google
+
+        public ICommand AuthCommandGoogle
+        {
+            get
+            {
+                return new Command(() => GoogleAuth());
+            }
+        }
+
+        private void OnLoginComplete(GoogleUser googleUser, string message)
+        {
+
+
+            if (googleUser != null)
+            {
+                GoogleUser = googleUser;
+
+                Preferences.Set("id", GoogleUser.id);
+                Preferences.Set("correo", GoogleUser.Email);
+                Preferences.Set("nombre", GoogleUser.Name);
+                Preferences.Set("foto", GoogleUser.Picture.ToString());
+                EmailTxt = GoogleUser.Email;
+                IsLogedIn = true;
+            }
+            else
+            {
+                Application.Current.MainPage.DisplayAlert("Message", message, "Ok");
+            }
+        }
+
+      
+        private void GoogleAuth()
+        {
+            _googleManager.Login(OnLoginComplete);
+           
+        }
 
     }
 }

@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppRun.modulos.UpdateFoto"
+             Title="Cambiar Perfil">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Frame Margin="40" CornerRadius="10">
+                    <Grid>
+                        <StackLayout Orientation="Vertical">
+                            <Label IsVisible="false" x:Name="idusuario">
+
+                            </Label>
+                            <Frame  HeightRequest="{OnPlatform iOS=200,Android=200}"
+                                WidthRequest="{OnPlatform iOS=200,Android=200}" Padding="0" HorizontalOptions="CenterAndExpand" IsClippedToBounds="True" CornerRadius="100">
+                                <Image   HeightRequest="{OnPlatform iOS=200,Android=200}"
+                                WidthRequest="{OnPlatform iOS=200,Android=200}" Source="{Binding PerfilRest, Mode=TwoWay}" IsVisible="{Binding fotoVisible, Mode=TwoWay}" Visual="Material" HorizontalOptions="CenterAndExpand"  x:Name="perfil">
+
+
+                                </Image>
+                            </Frame>
+
+
+                            <Label x:Name="nombre"  Text="{Binding NombrePreferencias, Mode=TwoWay}"  Margin="10"  FontAttributes="Bold" FontSize="20" HorizontalTextAlignment="Center">
+
+                            </Label>
+                            <Label x:Name="correo" Text="{Binding EmailPreferencias, Mode=TwoWay}" FontSize="17" HorizontalTextAlignment="Center">
+
+                            </Label>
+
+                            <StackLayout  HeightRequest="50" VerticalOptions="CenterAndExpand" Orientation="Horizontal"  x:Name="updateProfile"  Margin="10"  HorizontalOptions="CenterAndExpand">
+                              
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding CameraCommand}">
+                                        
+                                    </TapGestureRecognizer>
+                                </StackLayout.GestureRecognizers>
+                            
+                                    
+                                        <StackLayout Margin="10" Orientation="Horizontal">
+                                        <Label TextColor="OrangeRed" FontAttributes="Bold"  Text="Editar Perfil">
+
+                                        </Label>
+                                        <Label FontAttributes="Bold" Text="&#xe5cc;" FontSize="30" FontFamily="Material/Sharp">
+
+                                        </Label>
+                                    </StackLayout>
+                                   
+                              
+                                
+                            </StackLayout>
+                            <StackLayout   HorizontalOptions="CenterAndExpand">
+                                <ActivityIndicator
+                           IsRunning="{Binding RunningProgress, Mode=TwoWay}"
+                           IsVisible="{Binding Progress, Mode=TwoWay}"
+                           Color="SeaGreen"
+
+                           />   
+                            </StackLayout>
+                            <StackLayout  HeightRequest="50" VerticalOptions="CenterAndExpand" Orientation="Horizontal"   Margin="10"  HorizontalOptions="CenterAndExpand">
+
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding ActualizarPerfil}">
+
+                                    </TapGestureRecognizer>
+                                </StackLayout.GestureRecognizers>
+
+
+                                <StackLayout Margin="10" Orientation="Horizontal">
+                                    <Label VerticalOptions="End" Text="&#xe923;" FontSize="30" FontFamily="Material/Sharp" TextColor="Red"></Label>
+                                    <Label TextColor="OrangeRed" FontAttributes="Bold"  Text="Actualizar Perfil">
+
+                                    </Label>
+                                    
+                                </StackLayout>
+
+
+
+                            </StackLayout>
+
+
+                        </StackLayout>
+
+                    </Grid>
+
+                </Frame>
+            
+
+
+
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

@@ -12,16 +12,14 @@ namespace AppRun
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Login : ContentPage
     {
-        private readonly IGoogleManager _googleManager;
-        GoogleUser GoogleUser = new GoogleUser();
-        public bool IsLogedIn { get; set; }
-        IFirebaseAuthentication auth;
+      
 
         public Login()
-        {   
+        {
+ 
             
-             BindingContext = new LoginViewModel();
-            _googleManager = DependencyService.Get<IGoogleManager>();
+            BindingContext = new LoginViewModel();
+          
           
             InitializeComponent();
             Device.SetFlags(new string[] { "MediaElement_Experimental" });
@@ -29,13 +27,6 @@ namespace AppRun
             
         }
 
-     
-
-        private void GoogleLogout()
-        {
-            _googleManager.Logout();
-            IsLogedIn = false;
-        }
         private async void registro_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new RegistrarUsuario());
@@ -46,34 +37,14 @@ namespace AppRun
             await Navigation.PushAsync(new Inicio());
         }
 
-        private void Button_Clicked(object sender, EventArgs e)
+       
+  
+        private async void ButtonForgot(object sender, EventArgs e)
         {
-            _googleManager.Login(OnLoginComplete);
+            await Navigation.PushAsync(new ForgotPassword());
+
         }
-        private void GoogleAuth()
-        {
-            _googleManager.Login(OnLoginComplete);
-        }
-
-        private void OnLoginComplete(GoogleUser googleUser, string message)
-        {
-
-
-            if (googleUser != null)
-            {
-                GoogleUser = googleUser;
-
-                Preferences.Set("id", GoogleUser.id);
-                Preferences.Set("correo", GoogleUser.Email);
-                Preferences.Set("nombre", GoogleUser.Name);
-                Preferences.Set("foto", GoogleUser.Picture.ToString());
-                email.Text = GoogleUser.Email;
-                IsLogedIn = true;
-            }
-            else
-            {
-                Application.Current.MainPage.DisplayAlert("Message", message, "Ok");
-            }
-        }
+      
     }
+
 }

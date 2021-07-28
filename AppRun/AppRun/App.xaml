@@ -20,7 +20,6 @@
                 <Setter Property="BarTextColor"  Value="Black"/>
             </Style>
 
-            
             <!--Convertidores de tipos de datos-->
             <converters:ByteArrayToImageSourceConverter x:Key="bisc" />
             <converters:EmptyStringToFillTextConverter x:Key="esft" />

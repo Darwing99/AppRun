@@ -5,11 +5,12 @@
              xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
              x:Class="AppRun.TabHome"
              android:TabbedPage.ToolbarPlacement="Bottom"
-             SelectedTabColor="White"
+             SelectedTabColor="Black"
              BackgroundColor="White"
-             BarTextColor="black"
+             BarTextColor="Black"
              Visual="Material"
-             UnselectedTabColor="Gray"
+             
+             UnselectedTabColor="OrangeRed"
              BarBackgroundColor="White"
              x:Name="tabpage"
              Title="TabHome">

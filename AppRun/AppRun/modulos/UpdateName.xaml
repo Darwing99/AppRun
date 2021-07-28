@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            
+             x:Class="AppRun.modulos.UpdateName"
+             Title="Cambiar Nombre de Usuario">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <StackLayout>
+                     <Frame Margin="20" CornerRadius="10">
+                            <Grid>
+                                <StackLayout Orientation="Horizontal">
+
+                                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                                    <Label   Text="{Binding NombrePreferencias, Mode=TwoWay}" Margin="10" FontAttributes="Bold" FontSize="20" HorizontalTextAlignment="Start">
+
+                                        </Label>
+                                    <Label  Text="{Binding EmailPreferencias, Mode=TwoWay}"  FontSize="17" HorizontalTextAlignment="Start" >
+
+                                     </Label>
+                                    </StackLayout>
+                                    <StackLayout  HorizontalOptions="EndAndExpand">
+                                        <Frame HeightRequest="{OnPlatform iOS=120,Android=120}"
+                                        WidthRequest="{OnPlatform iOS=120,Android=120}" HasShadow="True" HorizontalOptions="CenterAndExpand" Padding="-15" CornerRadius="100">
+                                            <Image  HeightRequest="{OnPlatform iOS=100,Android=100}"
+                                        WidthRequest="{OnPlatform iOS=100,Android=100}" Source="{Binding PerfilRest, Mode=TwoWay}" ></Image>
+                                        </Frame>
+
+                                    </StackLayout>
+
+
+
+
+
+                                </StackLayout>
+
+                            </Grid>
+
+                        </Frame>  
+                </StackLayout>
+                <StackLayout>
+                    <Frame Margin="20" CornerRadius="10">
+                        <Grid>
+                            <StackLayout Orientation="Vertical">
+
+                                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                                    <Label   Text="Nombre" Margin="10" FontAttributes="Bold" FontSize="20" HorizontalTextAlignment="Start">
+
+                                    </Label>
+                                    <StackLayout Orientation="Horizontal">
+
+                                        <Entry BackgroundColor="white" TextColor="Black" Text="{Binding NameUpdate, Mode=TwoWay}"  Keyboard="Text" Visual="Material" x:Name="correonuevo" FontSize="17" HorizontalOptions="FillAndExpand" >
+
+                                        </Entry>
+                                    </StackLayout>
+
+                                </StackLayout>
+                                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                                    <Label  Text="Contraseña" Margin="10" FontAttributes="Bold" FontSize="20" HorizontalTextAlignment="Start">
+
+                                    </Label>
+                                    <StackLayout  Orientation="Horizontal">
+
+                                        <Entry BackgroundColor="white" TextColor="Black" Text="{Binding conPasswordUpdate, Mode=TwoWay}"  Keyboard="Text" IsPassword="True" Visual="Material" x:Name="password" FontSize="17" HorizontalOptions="FillAndExpand" >
+
+                                        </Entry>
+                                    </StackLayout>
+
+                                </StackLayout>
+                                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+
+                                    <StackLayout   HorizontalOptions="CenterAndExpand">
+                                        <ActivityIndicator
+                                           IsRunning="{Binding RunningProgress, Mode=TwoWay}"
+                                           IsVisible="{Binding Progress, Mode=TwoWay}"
+                                           Color="SeaGreen"
+
+                                         />
+                                    </StackLayout>
+
+                                    <StackLayout Margin="30"  HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding updateNombre}">
+
+                                            </TapGestureRecognizer>
+                                        </StackLayout.GestureRecognizers>
+                                        <Frame>
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label VerticalOptions="End" Text="&#xe923;" FontSize="30" FontFamily="Material/Sharp" TextColor="Red"></Label>
+                                                <Label  BackgroundColor="White" TextColor="Black"  HorizontalOptions="FillAndExpand" Text="Actualizar Nombre"></Label>
+                                            </StackLayout>
+                                        </Frame>
+
+                                    </StackLayout>
+
+                                </StackLayout>
+
+
+
+                            </StackLayout>
+
+                        </Grid>
+
+                    </Frame>
+                </StackLayout>
+
+            </StackLayout>
+          
+
+
+           
+        
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

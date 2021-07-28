@@ -1,8 +1,4 @@
-﻿using AppRun.clases;
-using AppRun.Model;
-using AppRun.services;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,19 +7,14 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace AppRun
+namespace AppRun.modulos
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Corredores : ContentPage
+    public partial class ForgotPassword : ContentPage
     {
-        
-        public Corredores()
+        public ForgotPassword()
         {
             InitializeComponent();
-
-            BindingContext = new ViewModel.ListaCorredores(Navigation);
-
         }
-       
     }
 }

@@ -17,13 +17,13 @@ namespace AppRun
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Home : ContentPage
     {
-       
-        
+        double dataLatitude, datalongitude;
+
         public Home()
         {
             InitializeComponent();
             UbicationPin();
-
+           
         }
         List<Posicion> p;
 
@@ -51,6 +51,9 @@ namespace AppRun
                     location.PositionChanged += (posicion, args) =>
                     {
                         var ubicacion = args.Position;
+                        Application.Current.Properties["latitude"] = ubicacion.Latitude;
+                        Application.Current.Properties["longitude"] = ubicacion.Longitude;
+
                         p = new List<Posicion>();
 
                         p.Add(new Posicion {latitud=ubicacion.Latitude,longitud=ubicacion.Longitude});
@@ -80,6 +83,7 @@ namespace AppRun
 
 
                         m.MapElements.Add(polyline);
+                      
                     };
 
 
@@ -90,12 +94,29 @@ namespace AppRun
 
         protected  override void OnAppearing()
         {
+       
+            if (Application.Current.Properties.ContainsKey("latitude"))
+            {
+                dataLatitude = Convert.ToDouble(Application.Current.Properties["latitude"] as string);
+              
+            }
+            if (Application.Current.Properties.ContainsKey("longitude"))
+            {
+               datalongitude = Convert.ToDouble(Application.Current.Properties["longitude"] as string);
+            }
+          //  p.Add(new Posicion { latitud = dataLatitude,longitud=datalongitude});
+
+
+
+
+            /*
          Device.StartTimer(TimeSpan.FromSeconds(1), () => {
             var shouldTimerContinueWork = true;
-           
-          
-            return shouldTimerContinueWork;
-          });
+             var location = CrossGeolocator.Current;
+             location.DesiredAccuracy = 50;
+
+             return shouldTimerContinueWork;
+          });*/
 
             base.OnAppearing();
         }

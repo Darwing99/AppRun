@@ -7,9 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using AppRun.clases;
+using Plugin.FilePicker;
 using AppRun.Firebase;
 using AppRun.Model;
-using AppRun.services;
+
 using Firebase.Auth;
 using Newtonsoft.Json;
 using Plugin.Media;
@@ -19,8 +20,9 @@ using Xamarin.Forms;
 
 namespace AppRun.ViewModel
 {
-    class RegistrarViewModel: BaseViewModel
+    class RegistrarViewModel : BaseViewModel
     {
+
         public RegistrarViewModel()
         {
             this.IsEnabledTxt = true;
@@ -28,7 +30,7 @@ namespace AppRun.ViewModel
         }
 
         FirebaseHelp firebase = new FirebaseHelp();
-        
+
         public string email;
         public string password;
         public string name;
@@ -40,7 +42,7 @@ namespace AppRun.ViewModel
         public ImageSource camera;
 
 
-  
+
         public ImageSource Camarabtn
         {
             get { return this.camera; }
@@ -58,7 +60,11 @@ namespace AppRun.ViewModel
             get { return this.password; }
             set { SetValue(ref this.password, value); }
         }
-
+        public byte[] MiPerfil
+        {
+            get { return this.miperfil; }
+            set { SetValue(ref this.miperfil, value); }
+        }
         public string NameTxt
         {
             get { return this.name; }
@@ -89,7 +95,7 @@ namespace AppRun.ViewModel
             set { SetValue(ref this.isRunning, value); }
         }
 
-   
+
         public ICommand RegisterCommand
         {
             get
@@ -97,44 +103,7 @@ namespace AppRun.ViewModel
                 return new Command(() => validarDatos());
             }
         }
-        public ICommand CameraCommand
-        {
-            get
-            {
-                return new Command(() => Camera());
-            }
-        }
-
-        public async void Camera()
-        {
-            var camera = new StoreCameraMediaOptions();
-            camera.PhotoSize = PhotoSize.Small;
-            camera.Name = "img";
-            camera.Directory = "MiApp";
-
-
-            var foto = await CrossMedia.Current.TakePhotoAsync(camera);
-
-
-            if (foto != null)
-            {
-
-                Camarabtn = ImageSource.FromStream(() => foto.GetStream());
-             
-                using (MemoryStream memory = new MemoryStream())
-                {
-
-                    Stream stream = foto.GetStream();
-                    stream.CopyTo(memory);
-                    miperfil = memory.ToArray();
-                }
-            }
-            else
-            {
-                Camarabtn = "camera.png";
-            }
-        }
-        private async void validarDatos()
+        public async void validarDatos()
         {
             if (string.IsNullOrEmpty(this.email))
             {
@@ -161,7 +130,7 @@ namespace AppRun.ViewModel
                     "ok");
                 return;
             }
-            if (string.IsNullOrEmpty(this.confpassword) )
+            if (string.IsNullOrEmpty(this.confpassword))
             {
                 await Application.Current.MainPage.DisplayAlert(
                     "Alert",
@@ -178,33 +147,33 @@ namespace AppRun.ViewModel
                 return;
 
             }
-           
+
             try
             {
-                
+
                 var authProvider = new FirebaseAuthProvider(new FirebaseConfig(Constantes.ApiKey));
                 var auth = await authProvider.CreateUserWithEmailAndPasswordAsync(EmailTxt.ToString(), PasswordTxt.ToString());
                 string gettoken = auth.FirebaseToken;
-                  this.IsVisibleTxt = true;
-                  this.IsRunningTxt = true;
-                  this.IsEnabledTxt = false;
+                this.IsVisibleTxt = true;
+                this.IsRunningTxt = true;
+                this.IsEnabledTxt = false;
 
                 string idtoken = auth.FirebaseToken;
-                
+
                 var user = new UsuariosRest
                 {
-                    id=0,
-                    idToken=auth.User.LocalId,
-                    tokenfirebase=idtoken,
-                    correo= auth.User.Email,
-                    name=NameTxt.ToString(),
-                    fecha= auth.Created.Date,
-                    estado=true,
-                    password=PasswordTxt.ToString(),
-                    image= miperfil,
-                    direccion="",
-                 
-                 };
+                    id = 0,
+                    idToken = auth.User.LocalId,
+                    tokenfirebase = idtoken,
+                    correo = auth.User.Email,
+                    name = NameTxt.ToString(),
+                    fecha = auth.Created.Date,
+                    estado = true,
+                    password = PasswordTxt.ToString(),
+                    image = MiPerfil,
+                    direccion = "",
+
+                };
 
 
                 var client = new HttpClient();
@@ -222,7 +191,7 @@ namespace AppRun.ViewModel
                 {
                     this.IsRunningTxt = false;
                     await App.Current.MainPage.DisplayAlert("Datos", "Error al guardar", "OK");
-                    var authdelete= new FirebaseAuthProvider(new FirebaseConfig(Constantes.ApiKey));
+                    var authdelete = new FirebaseAuthProvider(new FirebaseConfig(Constantes.ApiKey));
                     var delete = authdelete.DeleteUserAsync(idtoken);
                     idtoken = "";
                 }
@@ -234,11 +203,115 @@ namespace AppRun.ViewModel
             }
 
 
-          
-          
         }
-       
 
-       
+        public ICommand CameraCommand
+        {
+            get
+            {
+                return new Command(() => TomarSeleccionarFoto());
+            }
+        }
+        async void TomarSeleccionarFoto()
+        {
+            string action = await App.Current.MainPage.DisplayActionSheet("Perfil de Usuario", "Cancel", null, "Cámara", "Seleccionar de la galería");
+            switch (action)
+            {
+                case "Cámara": Camara();
+                   
+                    break;
+                case "Seleccionar de la galería":selectFile();
+                    break;
+            }
+        }
+
+        public async void selectFile()
+        {
+            string[] fileTypes = null;
+
+            if (Device.RuntimePlatform == Device.Android)
+            {
+                fileTypes = new string[] { "image/png", "image/jpeg", "image/jpg" };
+            }
+            await PickAndShowFile(fileTypes);
+        }
+
+        public async void Camara()
+        {
+            await CrossMedia.Current.Initialize();
+
+            if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+            {
+                await App.Current.MainPage.DisplayAlert("No Camera", "Camara no disponible", "OK");
+                return;
+            }
+
+            var file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
+            {
+                Directory = "AppRun",
+                Name = "perfil.jpg",
+                SaveToAlbum = true,
+                CompressionQuality = 75,
+                CustomPhotoSize = 50,
+                PhotoSize = PhotoSize.MaxWidthHeight,
+                MaxWidthHeight = 2000,
+                DefaultCamera = CameraDevice.Front
+            });
+
+            if (file == null)
+                return;
+
+
+
+            if (file != null)
+            {
+
+                Camarabtn = ImageSource.FromStream(() => file.GetStream());
+
+                using (MemoryStream memory = new MemoryStream())
+                {
+
+                    Stream stream = file.GetStream();
+                    stream.CopyTo(memory);
+                    miperfil = memory.ToArray();
+                }
+            }
+
+        }
+        public async Task PickAndShowFile(string[] fileTypes)
+        {
+
+            var file = await CrossFilePicker.Current.PickFile(fileTypes);
+
+            if (file != null)
+            {
+
+                Camarabtn = file.FileName;
+
+                if (file.FileName.EndsWith("jpg", StringComparison.OrdinalIgnoreCase)
+                       || file.FileName.EndsWith("png", StringComparison.OrdinalIgnoreCase))
+                {
+                    Camarabtn = ImageSource.FromStream(() =>
+                    {
+                        return file.GetStream();
+                    });
+
+                    using (MemoryStream memory = new MemoryStream())
+                    {
+
+                        Stream stream = file.GetStream();
+                        stream.CopyTo(memory);
+                        miperfil = memory.ToArray();
+                    }
+
+                }
+
+            }
+
+
+
+        }
+
+        
     }
 }

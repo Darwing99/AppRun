@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace AppRun
 {
@@ -14,7 +15,7 @@ namespace AppRun
         }
         public int Id { get; set; }
         public string Title { get; set; }
-        public string icono { get; set; }
+        public ImageSource icono { get; set; }
         public Type TargetType { get; set; }
     }
 }

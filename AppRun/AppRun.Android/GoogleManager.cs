@@ -41,6 +41,7 @@ namespace AppRun.Droid
 				.AddConnectionCallbacks(this)
 				.AddOnConnectionFailedListener(this)
 				.AddApi(Auth.GOOGLE_SIGN_IN_API, gso)
+				
 				.Build();
 
 			_onLoginComplete = onLoginComplete;
@@ -61,7 +62,6 @@ namespace AppRun.Droid
 
 		public void OnAuthCompleted(GoogleSignInResult result)
 		{
-			var r = result.IsSuccess;
 			
 			if (result.IsSuccess)
 			{

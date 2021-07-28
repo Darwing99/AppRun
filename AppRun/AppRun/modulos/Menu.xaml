@@ -1,9 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:local="clr-namespace:AppRun.ViewModel"
              x:Class="AppRun.Menu"
+         
              Title="Flyout">
- 
+   
+   
   <StackLayout BackgroundColor="White">
        
         <ListView x:Name="MenuItemsListView"
@@ -11,43 +14,51 @@
               HasUnevenRows="true"
               ItemsSource="{Binding MenuItems}">
       <ListView.Header>
-                <Grid BackgroundColor="White">
-          <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="10"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="10"/>
-          </Grid.ColumnDefinitions>
-          <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="10"/>
-          </Grid.RowDefinitions>
-          <Label
-              Grid.Column="1"
-              Grid.Row="1"
-              FontSize="27"
-              FontAttributes="Bold"
-              Text="Run App"
-              Style="{DynamicResource SubtitleStyle}"/>
-        </Grid>
-      </ListView.Header>
+
+                <StackLayout Margin="0,0,0,40" Orientation="Vertical">
+                    <StackLayout>
+
+                        <Frame  Padding="-20"  IsClippedToBounds="True" CornerRadius="100" HorizontalOptions="CenterAndExpand" HeightRequest="{OnPlatform iOS=150,Android=150}"
+                                              WidthRequest="{OnPlatform iOS=150,Android=150}"  Margin="0,32,0,0" BackgroundColor="#3498db" >
+                            <Image  x:Name="perfil" Source="{Binding PerfilRest, Mode=TwoWay}" HorizontalOptions="Center" VerticalOptions="Center" Aspect="AspectFill" />
+                        </Frame>
+                     </StackLayout>
+                    <StackLayout>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="ToolbarItem_Clicked"></TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+
+                        <Label Margin="10" x:Name="userlogueado"  FontAttributes="Bold" FontSize="20" HorizontalTextAlignment="Center">
+
+                        </Label>
+                       
+                    </StackLayout>
+
+
+                </StackLayout>
+            </ListView.Header>
+            
       <ListView.ItemTemplate>
         <DataTemplate>
           <ViewCell>
-            <StackLayout Orientation="Horizontal" Padding="15,10" HorizontalOptions="FillAndExpand">
+            <StackLayout Orientation="Horizontal" Padding="30,15" HorizontalOptions="FillAndExpand">
 
-               <Image Source="{Binding icono}"></Image> 
-              <Label  VerticalOptions="FillAndExpand" 
+               <Image Aspect="AspectFill" Source="{Binding icono}"></Image> 
+              <Label Margin="5"  VerticalOptions="FillAndExpand" 
                     VerticalTextAlignment="Center" 
                     Text="{Binding Title}" 
                     FontAttributes="Bold"
                     FontSize="20"/>
+                
             </StackLayout>
+              
           </ViewCell>
+            
         </DataTemplate>
       </ListView.ItemTemplate>
     </ListView>
-        <ImageButton HeightRequest="30" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Margin="20" BackgroundColor="White" Clicked="ToolbarItem_Clicked" Source="settings.png"></ImageButton>
-  </StackLayout>
+
+        
+
+    </StackLayout>
 </ContentPage>
