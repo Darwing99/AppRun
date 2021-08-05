@@ -81,8 +81,6 @@ namespace AppRun.ViewModel
         }
         public async void ListCorredores()
         {
-           
-           
         
             userRest = await restApiLogin.GetRepositoriesAsync(Constantes.urlGet);
             if (userRest != null)

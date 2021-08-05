@@ -18,7 +18,6 @@
                                 <Image   HeightRequest="{OnPlatform iOS=130,Android=130}"
                                 WidthRequest="{OnPlatform iOS=130,Android=130}" Source="{Binding PerfilRest, Mode=TwoWay}" Visual="Material" HorizontalOptions="CenterAndExpand"  x:Name="perfil">
 
-
                                 </Image>
                             </Frame>
 

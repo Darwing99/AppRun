@@ -16,5 +16,6 @@ namespace AppRun.ViewModel
         void Login(Action<GoogleUser, string> OnLoginComplete);
 
         void Logout();
+
     }
 }

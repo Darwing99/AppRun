@@ -19,7 +19,7 @@ namespace AppRun.ViewModel
         private readonly IGoogleManager _googleManager;
         GoogleUser GoogleUser = new GoogleUser();
         public bool IsLogedIn { get; set; }
-        IFirebaseAuthentication auth;
+        IFirebaseAuthentication aut;
 
         List<UsuariosRest> service;
         RestApiLogin restService;
@@ -110,10 +110,11 @@ namespace AppRun.ViewModel
         {
 
             var authProvider = new FirebaseAuthProvider(new FirebaseConfig(Constantes.ApiKey));
+           
             try
             {
-
-                var auth = await authProvider.SignInWithGoogleIdTokenAsync("645734344");
+                
+                var auth = await authProvider.SignInWithGoogleIdTokenAsync("666");
                 var content = await auth.GetFreshAuthAsync();
                 var serializedcontnet = JsonConvert.SerializeObject(content);
                 string correo = content.User.Email.ToString();
@@ -170,8 +171,8 @@ namespace AppRun.ViewModel
                 var authProvider = new FirebaseAuthProvider(new FirebaseConfig(Constantes.ApiKey));
                 try
                 {
-                    
-                    var auth = await authProvider.SignInWithEmailAndPasswordAsync(EmailTxt.ToString(), PasswordTxt.ToString());
+               
+                var auth = await authProvider.SignInWithEmailAndPasswordAsync(EmailTxt.ToString(), PasswordTxt.ToString());
                     var content = await auth.GetFreshAuthAsync();
                     var serializedcontnet = JsonConvert.SerializeObject(content);
 
@@ -256,24 +257,27 @@ namespace AppRun.ViewModel
             }
         }
 
-        private void OnLoginComplete(GoogleUser googleUser, string message)
+        private async void OnLoginComplete(GoogleUser googleUser, string message)
         {
-
+           
 
             if (googleUser != null)
             {
                 GoogleUser = googleUser;
-
-                Preferences.Set("id", GoogleUser.id);
-                Preferences.Set("correo", GoogleUser.Email);
+               
+                string correo = GoogleUser.Email;
+                string iduser = GoogleUser.id;
+               
+                Preferences.Set("correo", correo);
+                Preferences.Set("iduser", iduser);
                 Preferences.Set("nombre", GoogleUser.Name);
                 Preferences.Set("foto", GoogleUser.Picture.ToString());
-                EmailTxt = GoogleUser.Email;
-                IsLogedIn = true;
+                LoginGoogle();
+                await Application.Current.MainPage.Navigation.PushAsync(new Inicio());
             }
             else
             {
-                Application.Current.MainPage.DisplayAlert("Message", message, "Ok");
+                await Application.Current.MainPage.DisplayAlert("Message", message, "Ok");
             }
         }
 
