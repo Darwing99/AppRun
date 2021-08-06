@@ -11,13 +11,13 @@ namespace AppRun.Model
         [JsonProperty("idToken")]
         public int idToken { get; set; }
         [JsonProperty("carrera")]
-        public object carrera { get; set; }
+        public string carrera { get; set; }
         [JsonProperty("fecha")]
-        public object fecha { get; set; }
+        public DateTime fecha { get; set; }
         [JsonProperty("distancia")]
-        public int distancia { get; set; }
+        public double distancia { get; set; }
         [JsonProperty("fotos")]
-        public int fotos { get; set; }
+        public byte[] fotos { get; set; }
         [JsonProperty("tiempo")]
         public double tiempo { get; set; }
         [JsonProperty("estado")]
