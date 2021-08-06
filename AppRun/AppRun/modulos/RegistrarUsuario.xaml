@@ -168,7 +168,7 @@
                         <ActivityIndicator
                        IsRunning="{Binding IsRunningTxt, Mode=TwoWay}"
                        IsVisible="{Binding IsVisibleTxt, Mode=TwoWay}"
-                       Color="Black"
+                       Color="OrangeRed"
 
                        />
                     </StackLayout>
