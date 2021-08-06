@@ -16,17 +16,21 @@ using Newtonsoft.Json;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Xamarin.Forms;
-
+using AppRun.services;
+using System.Threading;
 
 namespace AppRun.ViewModel
 {
     class RegistrarViewModel : BaseViewModel
     {
-
+      
+      
         public RegistrarViewModel()
         {
+          
             this.IsEnabledTxt = true;
             Camarabtn = "camera.png";
+          
         }
 
         FirebaseHelp firebase = new FirebaseHelp();
@@ -35,12 +39,18 @@ namespace AppRun.ViewModel
         public string password;
         public string name;
         public string confpassword;
+        public string _paisSeleccionado;
         public byte[] miperfil;
         public bool isRunning;
         public bool isVisible;
         public bool isEnabled;
         public ImageSource camera;
 
+        public string paisSeleccionado
+        {
+            get { return this._paisSeleccionado; }
+            set { SetValue(ref this._paisSeleccionado, value); }
+        }
 
 
         public ImageSource Camarabtn
@@ -166,6 +176,7 @@ namespace AppRun.ViewModel
                     idToken = auth.User.LocalId,
                     tokenfirebase = idtoken,
                     correo = auth.User.Email,
+                    pais=paisSeleccionado.ToString(),
                     name = NameTxt.ToString(),
                     fecha = auth.Created.Date,
                     estado = true,
@@ -183,7 +194,6 @@ namespace AppRun.ViewModel
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
                     await App.Current.MainPage.DisplayAlert("Registro", "Se creo tu cuenta", "OK");
-
                     this.IsRunningTxt = false;
                     await Application.Current.MainPage.Navigation.PushAsync(new Login());
                 }
@@ -224,7 +234,9 @@ namespace AppRun.ViewModel
                     break;
             }
         }
+        //paises 
 
+      
         public async void selectFile()
         {
             string[] fileTypes = null;

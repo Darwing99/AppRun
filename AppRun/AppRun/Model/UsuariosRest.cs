@@ -17,6 +17,8 @@ namespace AppRun.Model
         public string tokenfirebase { get; set; }
         [JsonProperty("correo")]
         public string correo { get; set; }
+        [JsonProperty("pais")]
+        public string pais;
         [JsonProperty("fecha")]
         public DateTime fecha { get; set; }
         [JsonProperty("image")]

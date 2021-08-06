@@ -7,7 +7,10 @@ namespace AppRun.clases
     public class Constantes
     {
 
+        //Paises
 
+        public const string urlall = "https://restcountries.eu/rest/v2";
+        public const string url = "https://restcountries.eu/rest/v2/region/";
         //mapa
         public const string GoogleMapsApiKey = "AIzaSyA-br9OkoOrVyuMfLXiuuU27Olu81EcPWg";   
         

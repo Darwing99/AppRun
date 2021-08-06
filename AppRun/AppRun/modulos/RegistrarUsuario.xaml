@@ -72,8 +72,7 @@
                  
                     FontSize="{OnPlatform Android=15,iOS=16}"
                     Text="{Binding EmailTxt, Mode=TwoWay}"
-                    IsEnabled="{Binding IsEnabledTxt}"
-                    />
+                    IsEnabled="{Binding IsEnabledTxt}" />
                         </Frame>
                     </StackLayout>
 
@@ -164,7 +163,34 @@
 
                     </StackLayout>
 
-                    <StackLayout Grid.Row="6" HorizontalOptions="Center">
+                    <StackLayout BackgroundColor="Black" Grid.Row="6" HorizontalOptions="Center" WidthRequest="300" Orientation="Horizontal" Spacing="20">
+                        <StackLayout BackgroundColor="Black" WidthRequest="300">
+
+
+
+                            <Frame
+                                   BackgroundColor="#1F2821" 
+                                 BorderColor="#D40015"   
+                                 HasShadow="{OnPlatform Android=true,iOS=false}"
+                                 Padding="{OnPlatform Android=6,iOS=0}"
+                                 CornerRadius="{OnPlatform Android=7}"
+                                 >
+
+                                <StackLayout >
+                                    <Label   BackgroundColor="#1F2821" TextColor="OrangeRed" Text="Selecciona Pais"></Label>
+                                    <Picker SelectedItem="{Binding paisSeleccionado}"  BackgroundColor="#1F2821" 
+                                     TextColor="White" Visual="Material"   x:Name="pickerRegion" ></Picker>
+                                   
+                                </StackLayout>
+
+                            </Frame>
+                        </StackLayout>
+
+
+
+                    </StackLayout>
+
+                    <StackLayout Grid.Row="7" HorizontalOptions="Center">
                         <ActivityIndicator
                        IsRunning="{Binding IsRunningTxt, Mode=TwoWay}"
                        IsVisible="{Binding IsVisibleTxt, Mode=TwoWay}"
@@ -174,7 +200,7 @@
                     </StackLayout>
 
 
-                    <StackLayout BackgroundColor="black" Grid.Row="7" HorizontalOptions="Center" Orientation="Vertical" >
+                    <StackLayout BackgroundColor="black" Grid.Row="8" HorizontalOptions="Center" Orientation="Vertical" >
                         <Button 
                      Text="Register"
                             
@@ -184,8 +210,7 @@
                             BackgroundColor="#881921"
                             BorderColor="#f2f2f2"
                             BorderWidth="1.0"
-                          
-                          
+                   
                             WidthRequest="300"
                             HeightRequest="50"
                             CornerRadius="7"

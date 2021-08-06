@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using AppRun.clases;
@@ -106,6 +107,7 @@ namespace AppRun.ViewModel
 
         //Autenticacion con google
 
+      
         public async void LoginGoogle()
         {
 
@@ -165,45 +167,44 @@ namespace AppRun.ViewModel
                         "Ok");
                     return;
                 }
+            var authProvider = new FirebaseAuthProvider(new FirebaseConfig(Constantes.ApiKey));
+            try
+            {
 
-
-
-                var authProvider = new FirebaseAuthProvider(new FirebaseConfig(Constantes.ApiKey));
-                try
-                {
-               
                 var auth = await authProvider.SignInWithEmailAndPasswordAsync(EmailTxt.ToString(), PasswordTxt.ToString());
-                    var content = await auth.GetFreshAuthAsync();
-                    var serializedcontnet = JsonConvert.SerializeObject(content);
+                var content = await auth.GetFreshAuthAsync();
+                var serializedcontnet = JsonConvert.SerializeObject(content);
 
-                    string token = content.FirebaseToken;
-                    string correo = content.User.Email.ToString();
-                    string iduser = content.User.LocalId.ToString();
-                    service = await restService.GetRepositoriesAsync(Constantes.urlGet);
-                    var listaSeleccionada = service.Where(c => c.idToken.ToString().Contains(iduser.ToString()));
-                  
-                    if (listaSeleccionada != null)
-                    {
-              
-                        byte[] image = listaSeleccionada.FirstOrDefault().image;
-                        Preferences.Set("id", listaSeleccionada.FirstOrDefault().id.ToString());
-                     
-                        Preferences.Set("nombre", listaSeleccionada.FirstOrDefault().name);
+                string token = content.FirebaseToken;
+                string correo = content.User.Email.ToString();
+                string iduser = content.User.LocalId.ToString();
+                service = await restService.GetRepositoriesAsync(Constantes.urlGet);
+                var listaSeleccionada = service.Where(c => c.idToken.ToString().Contains(iduser.ToString()));
+
+                if (listaSeleccionada != null)
+                {
+
+                    // byte[] image = listaSeleccionada.FirstOrDefault().image;
+                    Preferences.Set("id", listaSeleccionada.FirstOrDefault().id.ToString());
+
+                    Preferences.Set("nombre", listaSeleccionada.FirstOrDefault().name);
                 }
-                    Preferences.Set("correo", correo);
-                    Preferences.Set("iduser", iduser);
-                  
-                    this.IsVisibleTxt = true;
-                    this.IsRunningTxt = true;
-                    await Application.Current.MainPage.Navigation.PushAsync(new Inicio());
+                Preferences.Set("correo", correo);
+                Preferences.Set("iduser", iduser);
+
+                this.IsVisibleTxt = true;
+                this.IsRunningTxt = true;
+                await Application.Current.MainPage.Navigation.PushAsync(new Inicio());
 
             }
-                catch (Exception ex)
-                {
-                    await App.Current.MainPage.DisplayAlert("Alert", "Usuario o contraseña invalida", "OK");
-                }
+            catch (Exception ex)
+            {
+                await App.Current.MainPage.DisplayAlert("Alert", "Usuario o contraseña invalida", "OK");
+            }
 
-                this.IsEnabledTxt = false;
+
+
+            this.IsEnabledTxt = false;
 
                 await Task.Delay(20);
 
@@ -244,8 +245,7 @@ namespace AppRun.ViewModel
 
 
 
-
-
+      
 
         //Login Con Google
 

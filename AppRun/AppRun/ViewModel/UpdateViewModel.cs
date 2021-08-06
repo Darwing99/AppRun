@@ -50,7 +50,12 @@ namespace AppRun.ViewModel
             get { return this.runningprogreso; }
             set { SetValue(ref this.runningprogreso, value); }
         }
-
+        public string _paisSeleccionado;
+        public string paisSeleccionado
+        {
+            get { return this._paisSeleccionado; }
+            set { SetValue(ref this._paisSeleccionado, value); }
+        }
 
         //datos de informacion traidas de preferencias y Api rest
         public string passwordactual;
@@ -150,6 +155,7 @@ namespace AppRun.ViewModel
                         id = listaSeleccionada.FirstOrDefault().id.ToString();
                         idtoken = listaSeleccionada.FirstOrDefault().idToken;
                         passwordactual = listaSeleccionada.FirstOrDefault().password;
+                        _paisSeleccionado = listaSeleccionada.FirstOrDefault().pais;
                         fecha = listaSeleccionada.FirstOrDefault().fecha;
                         perfilbyte = listaSeleccionada.FirstOrDefault().image;
                         if (perfilbyte != null)
@@ -373,13 +379,14 @@ namespace AppRun.ViewModel
                 this.RunningProgress = true;
                 this.Progress = true;
 
-                var user = new UsuariosRest
-                {
+            var user = new UsuariosRest
+            {
                     id = Convert.ToInt32(Id),
                     idToken = IdToken,
                     tokenfirebase = IdTokenFirebase,
                     correo = EmailPreferencias,
                     name = NombrePreferencias,
+                    pais = paisSeleccionado,
                     fecha = Fecha,
                     estado = true,
                     password = PasswordActual,
@@ -432,6 +439,7 @@ namespace AppRun.ViewModel
                     idToken = IdToken,
                     tokenfirebase = IdTokenFirebase,
                     correo = EmailPreferencias,
+                    pais = paisSeleccionado,
                     name = NameUpdate,
                     fecha = Fecha,
                     estado = true,
@@ -497,6 +505,7 @@ namespace AppRun.ViewModel
                         tokenfirebase = IdTokenFirebase,
                         correo = EmailUpdate,
                         name = NameUpdate,
+                        pais = paisSeleccionado,
                         fecha = Fecha,
                         estado = true,
                         password = PasswordActual,
