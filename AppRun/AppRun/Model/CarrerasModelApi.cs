@@ -19,7 +19,7 @@ namespace AppRun.Model
         [JsonProperty("fotos")]
         public int fotos { get; set; }
         [JsonProperty("tiempo")]
-        public int tiempo { get; set; }
+        public double tiempo { get; set; }
         [JsonProperty("estado")]
         public bool estado { get; set; }
         [JsonProperty("idUser")]
