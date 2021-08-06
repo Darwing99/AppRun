@@ -8,7 +8,6 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Essentials;
@@ -27,6 +26,7 @@ namespace AppRun.ViewModel
 
         public bool HasRouteRunning { get; set; }
         string _distancia;
+
         public string DistanciaPoints
         {
             get
@@ -41,6 +41,20 @@ namespace AppRun.ViewModel
         }
         string _originLatitud;
         string _originLongitud;
+        bool enableRefresc;
+        public bool EnableRefresc
+        {
+            get
+            {
+                return enableRefresc;
+            }
+            set
+            {
+                enableRefresc = value;
+
+            }
+        }
+
         string _originLatitudActual;
         public string OriginLatitud
         {
@@ -85,6 +99,7 @@ namespace AppRun.ViewModel
                 _placeSelected = value;
                 if (_placeSelected != null)
                     GetPlaceDetailCommand.Execute(_placeSelected);
+                if (_placeSelected == null) App.Current.MainPage.DisplayAlert("error","Hola","ok");
             }
         }
         public ICommand FocusOriginCommand { get; set; }
@@ -142,9 +157,22 @@ namespace AppRun.ViewModel
             }
         }
 
-        public ViewModelMap()
-
+        public ICommand PlacesRefrescCommand
         {
+            get { return new Command(() => RefresList()); }
+        }
+
+        public void RefresList()
+        {
+            enableRefresc = true;
+            GetPlacesCommand = new Command<string>(async (param) => await GetPlacesByName(param));
+            enableRefresc = false;
+        }
+
+
+        public ViewModelMap()
+        {
+            enableRefresc = false;
             LoadRouteCommand = new Command(async () => await LoadRoute());
             StopRouteCommand = new Command(StopRoute);
             GetPlacesCommand = new Command<string>(async (param) => await GetPlacesByName(param));
@@ -155,7 +183,6 @@ namespace AppRun.ViewModel
         public async Task LoadRoute()
         {
 
-            var positionIndex = 1;
             try
             {
 
@@ -164,12 +191,12 @@ namespace AppRun.ViewModel
 
                 if (googleDirection.Routes != null && googleDirection.Routes.Count > 0)
                 {
-                    var positions = (Enumerable.ToList(PolylineHelper.Decode(googleDirection.Routes.First().OverviewPolyline.Points)));
+                    var positions = Enumerable.ToList(PolylineHelper.Decode(googleDirection.Routes.First().OverviewPolyline.Points));
                     CalculateRouteCommand.Execute(positions);
 
                     HasRouteRunning = true;
 
-                    var distance = ((googleDirection.Routes.First().Legs.First().Distance.Text));
+                    var distance = googleDirection.Routes.First().Legs.First().Distance.Text;
                     _distancia = distance.ToString();
 
 
@@ -207,8 +234,12 @@ namespace AppRun.ViewModel
             {
                 Places = new ObservableCollection<GooglePlaceAutoCompletePrediction>(placeResult);
             }
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("Error", "ubicacion nula", "Ok");
+            }
 
-            ShowRecentPlaces = (placeResult == null || placeResult.Count == 0);
+            ShowRecentPlaces = placeResult == null || placeResult.Count == 0;
         }
 
         public async Task GetPlacesDetail(GooglePlaceAutoCompletePrediction placeA)
@@ -274,7 +305,7 @@ namespace AppRun.ViewModel
                     var lgt = placemark.Location.Longitude;
                     _originLatitudActual = lat.ToString();
                     _originLongitudActual = lgt.ToString();
-                    return;
+                    
                 }
                 else
                 {

@@ -2,6 +2,8 @@
 using Xamarin.Forms;
 using Xamarin.Essentials;
 using AppRun.services;
+using AppRun.clases;
+
 
 
 
@@ -14,12 +16,14 @@ namespace AppRun
         public App()
         {
             InitializeComponent();
-        
+            GoogleMapsApiService.Initialize(Constantes.GoogleMapsApiKey);
             if (Preferences.Get("Rememberme",true)!=false && (Preferences.Get("correo", "") != "") && (Preferences.Get("iduser", "") != ""))
             {
               
                 MainPage = new NavigationPage(new Inicio());
-               //{ BarBackgroundColor = Color.OrangeRed, BarTextColor = Color.Black };
+              
+              
+             
             }
             else
             {

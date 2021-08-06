@@ -33,12 +33,8 @@
                                                 <Label FontAttributes="Bold" Text="{Binding name}"></Label>
                                                 <Label FontAttributes="Bold" Text="{Binding direccion}"></Label>
                                             </StackLayout>
-                                            <StackLayout Orientation="Vertical">
-
-                                                <Switch IsToggled="{Binding estado}"></Switch>   
-                                            </StackLayout>
+                                          
                                         </StackLayout>
-
 
                                     </Frame>
 

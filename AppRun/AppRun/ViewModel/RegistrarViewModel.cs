@@ -182,7 +182,7 @@ namespace AppRun.ViewModel
                 var response = await client.PostAsync(Constantes.urlPost, contentJSON);
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
-                    await App.Current.MainPage.DisplayAlert("Datos", "Se guardo la ubicacion", "OK");
+                    await App.Current.MainPage.DisplayAlert("Registro", "Se creo tu cuenta", "OK");
 
                     this.IsRunningTxt = false;
                     await Application.Current.MainPage.Navigation.PushAsync(new Login());
@@ -190,7 +190,7 @@ namespace AppRun.ViewModel
                 else
                 {
                     this.IsRunningTxt = false;
-                    await App.Current.MainPage.DisplayAlert("Datos", "Error al guardar", "OK");
+                    await App.Current.MainPage.DisplayAlert("Registro", "No se pudo crear la cuenta", "OK");
                     var authdelete = new FirebaseAuthProvider(new FirebaseConfig(Constantes.ApiKey));
                     var delete = authdelete.DeleteUserAsync(idtoken);
                     idtoken = "";
@@ -199,7 +199,7 @@ namespace AppRun.ViewModel
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert("Alerta", "Este usuario ya está registrado", "OK");
+                await App.Current.MainPage.DisplayAlert("Registro", "Este usuario ya está registrado", "OK");
             }
 
 
@@ -220,7 +220,7 @@ namespace AppRun.ViewModel
                 case "Cámara": Camara();
                    
                     break;
-                case "Seleccionar de la galería":selectFile();
+                case "Seleccionar de la galería": selectFile();
                     break;
             }
         }
@@ -249,7 +249,7 @@ namespace AppRun.ViewModel
             var file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
             {
                 Directory = "AppRun",
-                Name = "perfil.jpg",
+                Name = "perfil",
                 SaveToAlbum = true,
                 CompressionQuality = 75,
                 CustomPhotoSize = 50,
@@ -289,7 +289,7 @@ namespace AppRun.ViewModel
                 Camarabtn = file.FileName;
 
                 if (file.FileName.EndsWith("jpg", StringComparison.OrdinalIgnoreCase)
-                       || file.FileName.EndsWith("png", StringComparison.OrdinalIgnoreCase))
+                       || file.FileName.EndsWith("png", StringComparison.OrdinalIgnoreCase) || file.FileName.EndsWith("jpeg", StringComparison.OrdinalIgnoreCase))
                 {
                     Camarabtn = ImageSource.FromStream(() =>
                     {

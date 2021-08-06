@@ -10,6 +10,7 @@ using AppRun.clases;
 using AppRun.ViewModel;
 using System.Text.Json.Serialization;
 using AppRun.modulos;
+using Xamarin.Essentials;
 
 namespace AppRun
 {

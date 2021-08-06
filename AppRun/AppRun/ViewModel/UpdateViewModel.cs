@@ -152,16 +152,20 @@ namespace AppRun.ViewModel
                         passwordactual = listaSeleccionada.FirstOrDefault().password;
                         fecha = listaSeleccionada.FirstOrDefault().fecha;
                         perfilbyte = listaSeleccionada.FirstOrDefault().image;
-                        PerfilRest = ImageSource.FromStream(() => new MemoryStream(perfilbyte));
-                        if (Camarabtn.IsEmpty)
+                        if (perfilbyte != null)
                         {
                             PerfilRest = ImageSource.FromStream(() => new MemoryStream(perfilbyte));
-                            return;
+                            if (Camarabtn.IsEmpty)
+                            {
+                                PerfilRest = ImageSource.FromStream(() => new MemoryStream(perfilbyte));
+                                return;
+                            }
+                            else
+                            {
+                                PerfilRest = Camarabtn;
+                            }
                         }
-                        else
-                        {
-                            PerfilRest = Camarabtn;
-                        }
+                      
 
                     }
                     else
@@ -289,7 +293,7 @@ namespace AppRun.ViewModel
             var file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
             {
                 Directory = "AppRun",
-                Name = "perfil.jpg",
+                Name = "perfil",
                 SaveToAlbum = true,
                 CompressionQuality = 75,
                 CustomPhotoSize = 50,
@@ -329,7 +333,7 @@ namespace AppRun.ViewModel
                 PerfilRest = file.FileName;
 
                 if (file.FileName.EndsWith("jpg", StringComparison.OrdinalIgnoreCase)
-                       || file.FileName.EndsWith("png", StringComparison.OrdinalIgnoreCase))
+                       || file.FileName.EndsWith("png", StringComparison.OrdinalIgnoreCase) || file.FileName.EndsWith("jpeg", StringComparison.OrdinalIgnoreCase))
                 {
                     PerfilRest = ImageSource.FromStream(() =>
                     {

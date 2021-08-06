@@ -56,28 +56,7 @@ namespace AppRun.services
         }
 
 
-        public async Task<Leg> GetDistance(string originLatitude, string originLongitude, string destinationLatitude, string destinationLongitude)
-        {
-            Leg distance = new Leg();
-
-            using (var httpClient = CreateClient())
-            {
-                var response = await httpClient.GetAsync($"api/directions/json?mode=driving&transit_routing_preference=less_driving&origin={originLatitude},{originLongitude}&destination={destinationLatitude},{destinationLongitude}&key={_googleMapsKey}").ConfigureAwait(false);
-                if (response.IsSuccessStatusCode)
-                {
-                    var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    if (!string.IsNullOrWhiteSpace(json))
-                    {
-                        distance = await Task.Run(() =>
-                           JsonConvert.DeserializeObject<Leg>(json)
-                        ).ConfigureAwait(false);
-
-                    }
-                }
-            }
-
-            return distance;
-        }
+       
 
         public async Task<GooglePlaceAutoCompleteResult> GetPlaces(string text)
         {
@@ -121,9 +100,6 @@ namespace AppRun.services
             return result;
         }
 
-        Task<Step> IGoogleMapsApiService.GetDistance(string originLatitude, string originLongitude, string destinationLatitude, string destinationLongitude)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

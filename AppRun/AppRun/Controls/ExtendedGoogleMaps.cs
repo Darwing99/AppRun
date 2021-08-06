@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Essentials;
@@ -14,7 +13,7 @@ namespace AppRun.Controls
     public class ExtendedMap : Xamarin.Forms.GoogleMaps.Map
     {
         public static readonly BindableProperty CalculateCommandProperty =
-            BindableProperty.Create(nameof(CalculateCommand), typeof(ICommand), typeof(MainPage), null, BindingMode.TwoWay);
+            BindableProperty.Create(nameof(CalculateCommand), typeof(ICommand), typeof(Home), null, BindingMode.TwoWay);
 
         public ICommand CalculateCommand
         {
@@ -23,7 +22,7 @@ namespace AppRun.Controls
         }
 
         public static readonly BindableProperty UpdateCommandProperty =
-          BindableProperty.Create(nameof(UpdateCommand), typeof(ICommand), typeof(MainPage), null, BindingMode.TwoWay);
+          BindableProperty.Create(nameof(UpdateCommand), typeof(ICommand), typeof(Home), null, BindingMode.TwoWay);
 
         public ICommand UpdateCommand
         {
@@ -32,7 +31,7 @@ namespace AppRun.Controls
         }
 
         public static readonly BindableProperty GetActualLocationCommandProperty =
-          BindableProperty.Create(nameof(GetActualLocationCommand), typeof(ICommand), typeof(MainPage), null, BindingMode.TwoWay);
+          BindableProperty.Create(nameof(GetActualLocationCommand), typeof(ICommand), typeof(Home), null, BindingMode.TwoWay);
 
         public ICommand GetActualLocationCommand
         {
@@ -74,7 +73,7 @@ namespace AppRun.Controls
         }
 
 
-        async void Update(Xamarin.Forms.GoogleMaps.Position position)
+        async void Update(Position position)
         {
             if (Pins.Count == 1 && Polylines != null && Polylines?.Count > 1)
                 return;
@@ -99,22 +98,22 @@ namespace AppRun.Controls
 
         }
 
-        void Calculate(List<Xamarin.Forms.GoogleMaps.Position> list)
+        void Calculate(List<Position> list)
         {
             OnCalculate?.Invoke(this, default(EventArgs));
             Polylines.Clear();
             var polyline = new Xamarin.Forms.GoogleMaps.Polyline();
             polyline.StrokeColor = Color.OrangeRed;
-            polyline.StrokeWidth = 8;
+            polyline.StrokeWidth = 4;
             foreach (var p in list)
             {
                 polyline.Positions.Add(p);
 
             }
             Polylines.Add(polyline);
-            MoveToRegion(MapSpan.FromCenterAndRadius(new Position(polyline.Positions[0].Latitude, polyline.Positions[0].Longitude), Xamarin.Forms.GoogleMaps.Distance.FromMiles(0.50f)));
+            MoveToRegion(MapSpan.FromCenterAndRadius(new Position(polyline.Positions[0].Latitude, polyline.Positions[0].Longitude), Distance.FromMiles(0.50f)));
 
-            var pin = new Xamarin.Forms.GoogleMaps.Pin
+            var pin = new Pin
             {
                 Type = PinType.Place,
                 Position = new Position(polyline.Positions.First().Latitude, polyline.Positions.First().Longitude),
@@ -125,7 +124,7 @@ namespace AppRun.Controls
 
             };
             Pins.Add(pin);
-            var pin1 = new Xamarin.Forms.GoogleMaps.Pin
+            var pin1 = new Pin
             {
                 Type = PinType.Place,
                 Position = new Position(polyline.Positions.Last().Latitude, polyline.Positions.Last().Longitude),

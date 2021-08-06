@@ -67,7 +67,7 @@ namespace AppRun.ViewModel
 
         public  ListaCorredores(INavigation navigation)
         {
-            Refresc = true;
+            Refresc = false;
             Navigation = navigation;
             infoCorredorCommand = new Command<Type>(async (pageType) => await infoCorredor(pageType));
           
@@ -89,8 +89,14 @@ namespace AppRun.ViewModel
 
                 Refresc = false;
             }
+            if (string.IsNullOrEmpty(BuscarCorredor.ToString()))
+            {
+                userRest = await restApiLogin.GetRepositoriesAsync(Constantes.urlGet);
+                var corredores = userRest.Where(c => c.name.ToString().Contains(BuscarCorredores.ToString()));
+                ListOfItems = corredores.ToList();
+                Refresc = false;
+            }
            
-
 
         }
         async Task infoCorredor(Type pageType)
