@@ -12,7 +12,7 @@
                     <StackLayout  Padding="20,10,20,0"  HorizontalOptions="FillAndExpand" Orientation="Vertical">
                      
                         <StackLayout HorizontalOptions="FillAndExpand">
-                            <Label Text="Calorias Quemadas"  FontSize="20" FontAttributes="Bold" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+                            <Label Text="Distancias recorridas "  FontSize="20" FontAttributes="Bold" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
                             <Frame VerticalOptions="FillAndExpand" CornerRadius="5" HasShadow="True">
 
                                 <StackLayout Orientation="Vertical">
@@ -34,8 +34,8 @@
                                 </StackLayout>
 
                             </Frame>
-                            <Label Text="Tiempo"  FontSize="20" FontAttributes="Bold" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
-                            <Frame VerticalOptions="FillAndExpand" CornerRadius="5" HasShadow="True">
+                            <Label IsVisible="false" Text="Tiempo"  FontSize="20" FontAttributes="Bold" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+                            <Frame IsVisible="false" VerticalOptions="FillAndExpand" CornerRadius="5" HasShadow="True">
 
                                 <StackLayout Orientation="Vertical">
 
@@ -46,7 +46,7 @@
                                 </StackLayout>
 
                             </Frame>
-                            <Frame VerticalOptions="FillAndExpand" CornerRadius="5" HasShadow="True">
+                            <Frame IsVisible="false" VerticalOptions="FillAndExpand" CornerRadius="5" HasShadow="True">
 
                                 <StackLayout Orientation="Vertical">
 
@@ -56,6 +56,7 @@
                                 </StackLayout>
 
                             </Frame>
+                            <Label Text="Tiempos en carreras"  FontSize="20" FontAttributes="Bold" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
                             <Frame VerticalOptions="FillAndExpand" CornerRadius="5" HasShadow="True">
 
                                 <StackLayout Orientation="Vertical">

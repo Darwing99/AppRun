@@ -23,6 +23,8 @@ namespace AppRun.clases
 
         //Carreras
 
-
+        public const string urlPostCarreras = "https://servicerunn.herokuapp.com/carreras/key=2d3r5h8c1e3h2c1/insertlista";
+        public const string urlDeleteCarreras = "https://servicerunn.herokuapp.com/carreras/key=2d3r5h8c1e3h2c1/lista/";
+        public const string urlGetCarreras = "https://servicerunn.herokuapp.com/carreras/key=2d3r5h8c1e3h2c1/lista/";
     }
 }
