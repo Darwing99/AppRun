@@ -317,11 +317,18 @@ namespace AppRun.ViewModel
 
        public async void Calculos()
         {
+
+            //// a velocidad de 8km/h (2.22222m/s) en 35 minutos(2100 segundos) se queman 235 calorias equivale a 0.0010582m/s:s=235 ==>(1m/s:s=222075.222 calorias)
+            ///
+
+            
             var DateAndTime = DateTime.Now;
             var Date = DateAndTime.Date.ToString("dd-MM-yyyy");
             Fecha =Convert.ToDateTime(Date);
-            string user = Preferences.Get("id", "");
             TiempoSegundos = Convert.ToDouble(Horas) * 3600 + Convert.ToDouble(Minutos) * 60 + Convert.ToDouble(Segundos);
+            double velocidadenmetrosporsegundo = distanciaF / tiempoSegundos;
+            double calorias = (velocidadenmetrosporsegundo/ TiempoSegundos)*(222075.222);
+            string user = Preferences.Get("id", "");
             Velocidad = Distancia/TiempoSegundos;
             var carreras = new CarrerasModelApi
             {
@@ -331,7 +338,11 @@ namespace AppRun.ViewModel
                 tiempo=TiempoSegundos,
                 distancia=Distancia,
                 carrera = NombreCarrera,
+                calorias=calorias,
                 fecha = Fecha,
+                velocidad= velocidadenmetrosporsegundo,
+                tiempohoras=tiempoSegundos/3600,
+                
                 fotos=null,
                 estado = true
                

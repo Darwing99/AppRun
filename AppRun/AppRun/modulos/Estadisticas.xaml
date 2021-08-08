@@ -11,32 +11,76 @@
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout>
-            <StackLayout Padding="10">
-                <Image  HeightRequest="150" Source="fondo.png">
-                    
-                </Image>
-            </StackLayout>
+           
             
             <ScrollView>
 
                 <StackLayout Margin="10">
+                    <StackLayout Padding="10">
+                        <Image  HeightRequest="150" Source="fondo.png">
 
+                        </Image>
+                    </StackLayout>
                     <ListView RefreshControlColor="OrangeRed" IsPullToRefreshEnabled="True"  IsRefreshing="{Binding Refresc}"    
-                              RowHeight="100"  x:Name="listaCorredores" ItemsSource="{Binding Corredores}"  >
+                              RowHeight="250"  x:Name="listaCorredores" ItemsSource="{Binding Carreras}"  >
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
                                     <Frame HeightRequest="50" CornerRadius="2">
-                                        <StackLayout  Margin="0" Orientation="Vertical">
+                                        <StackLayout  Margin="0" Orientation="Horizontal">
                                            
 
-                                            <StackLayout HorizontalOptions="EndAndExpand" Orientation="Horizontal">
-                                                <Label FontAttributes="Bold" Text="{Binding carrera}"></Label>
-                                                <Label FontAttributes="Bold" Text="{Binding fecha}"></Label>
+                                            <StackLayout HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Margin="10" Orientation="Vertical">
+                                                <Label  Text="&#xe566;" FontSize="40" FontFamily="Material/Sharp"></Label>
+                                               
+
                                             </StackLayout>
-                                            <StackLayout HorizontalOptions="EndAndExpand" Orientation="Horizontal">
-                                                <Label FontAttributes="Bold" Text="{Binding distancia }"></Label>
-                                                <Label FontAttributes="Bold" Text="{Binding tiempo}"></Label>
+                                            <StackLayout HorizontalOptions="EndAndExpand" Orientation="Vertical">
+
+                                                <Label Margin="10" TextColor="OrangeRed" FontAttributes="Bold" Text="{Binding carrera}"></Label>
+
+                                                <Label TextColor="Gray" FontAttributes="Bold" >
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text="Fecha: "></Span>
+                                                            <Span Text="{Binding fecha}"></Span>
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+                                                <Label TextColor="Gray"  >
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text="{Binding distancia}"></Span>
+                                                            <Span Text=" "></Span>
+                                                            <Span Text="Metros"></Span>
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+                                                <Label  TextColor="Gray" >
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text="{Binding tiempohoras,Mode=TwoWay}"></Span>
+                                                            <Span Text=" Horas"></Span>
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+                                                <Label  TextColor="Gray" >
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text="{Binding velocidad,Mode=TwoWay}"></Span>
+                                                            <Span Text=" m/s"></Span>
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+                                                <Label  TextColor="Gray"  >
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text="{Binding calorias,Mode=TwoWay}"></Span>
+                                                            <Span Text=" Calorias Quemadas"></Span>
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+
                                             </StackLayout>
 
 

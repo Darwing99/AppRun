@@ -119,13 +119,15 @@ namespace AppRun.ViewModel
                     Carreras = data.ToList();
                     Refresc = false;
                 }
-                
+                  Refresc = false;
+
+                }
          }
 
        
            
 
 
-        }
+   }
     
-}
+

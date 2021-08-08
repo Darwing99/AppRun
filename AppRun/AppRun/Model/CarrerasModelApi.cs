@@ -7,6 +7,8 @@ namespace AppRun.Model
   
     public class CarrerasModelApi
     {
+
+     
         [JsonProperty("idToken")]
         public int idToken { get; set; }
         [JsonProperty("carrera")]
@@ -23,6 +25,15 @@ namespace AppRun.Model
         public bool estado { get; set; }
         [JsonProperty("idUser")]
         public int idUser { get; set; }
+        [JsonProperty("velocidad")]
+        public double velocidad { get; set; }
+        [JsonProperty("tiempohoras")]
+        public double tiempohoras { get; set; }
+        [JsonProperty("calorias")]
+        public double calorias{ get; set; }
+
+      
+
     }
 
 
