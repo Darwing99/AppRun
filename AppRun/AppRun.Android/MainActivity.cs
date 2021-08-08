@@ -19,16 +19,16 @@ namespace AppRun.Droid
             ToolbarResource = Resource.Layout.Toolbar;
             base.OnCreate(savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-          
-            FirebaseApp.InitializeApp(this);
-           
             var platformConfig = new PlatformConfig
             {
                 BitmapDescriptorFactory = new CachingNativeBitmapDescriptorFactory()
             };
+
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+            Xamarin.FormsGoogleMaps.Init(this, savedInstanceState, platformConfig);
+            FirebaseApp.InitializeApp(this);
            
-            Xamarin.FormsGoogleMaps.Init(this, savedInstanceState, platformConfig); // initialize for Xamarin.Forms.GoogleMaps
+           
             LoadApplication(new App());
         }
 

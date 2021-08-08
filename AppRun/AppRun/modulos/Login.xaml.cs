@@ -11,7 +11,7 @@ namespace AppRun
     public partial class Login : ContentPage
     {
       
-
+        protected override bool OnBackButtonPressed() { return true; }
         public Login()
         {
  

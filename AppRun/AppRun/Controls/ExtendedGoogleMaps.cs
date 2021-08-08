@@ -102,7 +102,7 @@ namespace AppRun.Controls
         {
             OnCalculate?.Invoke(this, default(EventArgs));
             Polylines.Clear();
-            var polyline = new Xamarin.Forms.GoogleMaps.Polyline();
+            var polyline = new Polyline();
             polyline.StrokeColor = Color.OrangeRed;
             polyline.StrokeWidth = 4;
             foreach (var p in list)

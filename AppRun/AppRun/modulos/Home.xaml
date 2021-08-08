@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:vm="clr-namespace:AppRun.ViewModel"
+            
              xmlns:controls="clr-namespace:AppRun.Controls"
+              xmlns:vm="clr-namespace:AppRun.ViewModel"
              x:Class="AppRun.Home"
              Title="Home" NavigationPage.BackButtonTitle=""
              NavigationPage.HasNavigationBar="false"
@@ -30,32 +31,43 @@
                  WidthRequest="35"
                  VerticalOptions="CenterAndExpand"
                  HorizontalOptions="CenterAndExpand"/>
-        <StackLayout BackgroundColor="White"
+        <StackLayout BackgroundColor="Transparent"
                         Orientation="Horizontal"
                         VerticalOptions="Start"
                         Padding="10"
-                      IsVisible="false"
+                        IsVisible="false"
                         x:Name="distanceAndTime"
-                        Margin="30,50,30,0">
+                        Margin="10,40,10,10">
 
-            <Label Text="{Binding DistanciaPoints, Mode=TwoWay}"
-                   Margin="40"
+            <Label Text="{Binding DistanciaPoints}"
+                   Margin="0"
                    x:Name="distancia"
                    BackgroundColor="Transparent"
                    TextColor="Red"
-                   FontSize="57"
+                   FontSize="47"
                   
                   
                   />
-            <Label Text="0:0:0"
-                   Margin="40"
+            <Label 
+                   Margin="0"
                    x:Name="timer"
                    BackgroundColor="Transparent"
                    TextColor="Red"
-                   FontSize="50"
+                   FontSize="47"
                   
                   
-                  />
+                  >
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="  "></Span>
+                        <Span Text="{Binding Horas}"></Span>
+                        <Span Text=":"></Span>
+                        <Span Text="{Binding Minutos}"></Span>
+                        <Span Text=":"></Span>
+                        <Span Text="{Binding Segundos}"></Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
 
         </StackLayout>
         <StackLayout BackgroundColor="White"

@@ -1,13 +1,19 @@
 ﻿
+using AppRun.ViewModel;
 using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace AppRun.modulos
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
+   
     public partial class SearchPlacePage : ContentPage
     {
+
+        public SearchPlacePage()
+        {
+            InitializeComponent();
+        }
         public static readonly BindableProperty FocusOriginCommandProperty =
            BindableProperty.Create(nameof(FocusOriginCommand), typeof(ICommand), typeof(SearchPlacePage), null, BindingMode.TwoWay);
 
@@ -16,12 +22,6 @@ namespace AppRun.modulos
             get { return (ICommand)GetValue(FocusOriginCommandProperty); }
             set { SetValue(FocusOriginCommandProperty, value); }
         }
-
-        public SearchPlacePage()
-        {
-            InitializeComponent();
-        }
-
         protected override void OnBindingContextChanged()
         {
             base.OnBindingContextChanged();
@@ -30,7 +30,7 @@ namespace AppRun.modulos
                 FocusOriginCommand = new Command(OnOriginFocus);
             }
         }
-
+     
         void OnOriginFocus()
         {
             destinationEntry.Focus();

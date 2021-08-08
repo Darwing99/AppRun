@@ -22,7 +22,7 @@ namespace AppRun.Model
         [JsonProperty("estado")]
         public bool estado { get; set; }
         [JsonProperty("idUser")]
-        public string idUser { get; set; }
+        public int idUser { get; set; }
     }
 
 

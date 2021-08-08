@@ -17,7 +17,7 @@ namespace AppRun.modulos
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class UpdateFoto : ContentPage
     {
-       
+        protected override bool OnBackButtonPressed() { return false; }
         public UpdateFoto()
         {
             InitializeComponent();

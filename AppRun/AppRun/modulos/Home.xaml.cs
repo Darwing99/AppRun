@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xamarin.Forms.Maps;
+
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using AppRun.clases;
-using AppRun.ViewModel;
+
 using System.Text.Json.Serialization;
 using AppRun.modulos;
-using Xamarin.Essentials;
+
 
 namespace AppRun
 {
@@ -22,9 +17,9 @@ namespace AppRun
         public Home()
         {
             InitializeComponent();
-          
-           
+
         }
+
         public async void OnEnterAddressTapped(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new SearchPlacePage() { BindingContext = this.BindingContext }, false);
@@ -67,5 +62,7 @@ namespace AppRun
 
 
 
-    }
+    
+
+}
 }

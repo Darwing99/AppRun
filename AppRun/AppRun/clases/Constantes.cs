@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AppRun.clases
 {
-    public class Constantes
+    public static class Constantes
     {
 
         //Paises

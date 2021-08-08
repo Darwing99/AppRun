@@ -1,21 +1,25 @@
 ﻿using AppRun.clases;
 using AppRun.Model;
 using AppRun.services;
-using MvvmHelpers.Commands;
+using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows.Input;
 using Xamarin.Essentials;
+using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps;
 
 namespace AppRun.ViewModel
 {
-   public class ViewModelMap : INotifyPropertyChanged
+    public class ViewModelMap : INotifyPropertyChanged
     {
         public ICommand CalculateRouteCommand { get; set; }
         public ICommand UpdatePositionCommand { get; set; }
@@ -23,10 +27,9 @@ namespace AppRun.ViewModel
         public ICommand LoadRouteCommand { get; set; }
         public ICommand StopRouteCommand { get; set; }
         IGoogleMapsApiService googleMapsApi = new GoogleMapsApiService();
-
+      
         public bool HasRouteRunning { get; set; }
         string _distancia;
-
         public string DistanciaPoints
         {
             get
@@ -36,25 +39,56 @@ namespace AppRun.ViewModel
             set
             {
                 _distancia = value;
+            
+
+            }
+        }
+
+        double distanciaF;
+        public double Distancia
+        {
+            get
+            {
+                return distanciaF;
+            }
+            set
+            {
+                distanciaF = value;
+
+
+            }
+        }
+        double velocidad;
+        public double Velocidad
+        {
+            get
+            {
+                return velocidad;
+            }
+            set
+            {
+                velocidad = value;
+
+
+            }
+        }
+
+        double tiempoSegundos;
+        public double TiempoSegundos
+        {
+            get
+            {
+                return tiempoSegundos;
+            }
+            set
+            {
+                tiempoSegundos = value;
+
 
             }
         }
         string _originLatitud;
         string _originLongitud;
-        bool enableRefresc;
-        public bool EnableRefresc
-        {
-            get
-            {
-                return enableRefresc;
-            }
-            set
-            {
-                enableRefresc = value;
-
-            }
-        }
-
         string _originLatitudActual;
         public string OriginLatitud
         {
@@ -65,7 +99,7 @@ namespace AppRun.ViewModel
             set
             {
                 _originLatitudActual = value;
-
+               
             }
         }
         string _originLongitudActual;
@@ -87,8 +121,51 @@ namespace AppRun.ViewModel
         string _destinationLatitud;
         string _destinationLongitud;
 
+        Stopwatch Stopwatch = new Stopwatch();
+        private Timer time = new Timer();
+
+        private DateTime fecha;
+        public DateTime Fecha
+        {
+            get { return fecha; }
+            set
+            {
+                fecha = value;
+
+            }
+        }
+    
+
+        private string horas;
+        public string Horas
+        {
+            get { return horas; }
+            set { horas = value;
+             
+            }
+        }
+        private string minutos;
+        public string Minutos
+        {
+            get { return minutos; }
+            set
+            {
+                minutos = value;
+               
+            }
+        }
+        private string segundos;
+        public string Segundos
+        {
+            get { return segundos; }
+            set
+            {
+                segundos = value;
+               
+            }
+        }
         GooglePlaceAutoCompletePrediction _placeSelected;
-        public GooglePlaceAutoCompletePrediction PlaceSelected
+        public  GooglePlaceAutoCompletePrediction PlaceSelected
         {
             get
             {
@@ -98,8 +175,10 @@ namespace AppRun.ViewModel
             {
                 _placeSelected = value;
                 if (_placeSelected != null)
+                {
                     GetPlaceDetailCommand.Execute(_placeSelected);
-                if (_placeSelected == null) App.Current.MainPage.DisplayAlert("error","Hola","ok");
+                     App.Current.MainPage.Navigation.PopAsync(false);
+                }
             }
         }
         public ICommand FocusOriginCommand { get; set; }
@@ -148,6 +227,20 @@ namespace AppRun.ViewModel
             }
         }
 
+
+        string _nombre;
+        public string NombreCarrera
+        {
+            get
+            {
+                return _nombre;
+            }
+            set
+            {
+                _nombre = value;
+             
+            }
+        }
         public ICommand GetLocationNameCommand { get; set; }
         public bool IsRouteNotRunning
         {
@@ -157,22 +250,10 @@ namespace AppRun.ViewModel
             }
         }
 
-        public ICommand PlacesRefrescCommand
-        {
-            get { return new Command(() => RefresList()); }
-        }
-
-        public void RefresList()
-        {
-            enableRefresc = true;
-            GetPlacesCommand = new Command<string>(async (param) => await GetPlacesByName(param));
-            enableRefresc = false;
-        }
-
 
         public ViewModelMap()
         {
-            enableRefresc = false;
+
             LoadRouteCommand = new Command(async () => await LoadRoute());
             StopRouteCommand = new Command(StopRoute);
             GetPlacesCommand = new Command<string>(async (param) => await GetPlacesByName(param));
@@ -182,7 +263,7 @@ namespace AppRun.ViewModel
 
         public async Task LoadRoute()
         {
-
+            Position position=new Position();
             try
             {
 
@@ -191,13 +272,29 @@ namespace AppRun.ViewModel
 
                 if (googleDirection.Routes != null && googleDirection.Routes.Count > 0)
                 {
-                    var positions = Enumerable.ToList(PolylineHelper.Decode(googleDirection.Routes.First().OverviewPolyline.Points));
+                    var positions = (Enumerable.ToList(PolylineHelper.Decode(googleDirection.Routes.First().OverviewPolyline.Points)));
                     CalculateRouteCommand.Execute(positions);
 
                     HasRouteRunning = true;
-
+                    var placemarks = await Geocoding.GetPlacemarksAsync(position.Latitude, position.Longitude);
                     var distance = googleDirection.Routes.First().Legs.First().Distance.Text;
-                    _distancia = distance.ToString();
+                    var distancef = googleDirection.Routes.First().Legs.First().Distance.Value;
+                    DistanciaPoints = distance.ToString();
+                    Distancia = distancef/1000;
+                    Stopwatch.Reset();
+                    Stopwatch.Start();
+                    Horas = Stopwatch.Elapsed.Hours.ToString();
+                    Minutos = Stopwatch.Elapsed.Minutes.ToString();
+                    Segundos = Stopwatch.Elapsed.Seconds.ToString();
+                    NombreCarrera = OriginText;
+                    Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+                    {
+                        GetPosition();
+                        Horas = Stopwatch.Elapsed.Hours.ToString();
+                        Minutos = Stopwatch.Elapsed.Minutes.ToString();
+                        Segundos = Stopwatch.Elapsed.Seconds.ToString();
+                        return true;
+                    });
 
 
                 }
@@ -218,12 +315,51 @@ namespace AppRun.ViewModel
 
 
 
+       public async void Calculos()
+        {
+            var DateAndTime = DateTime.Now;
+            var Date = DateAndTime.Date.ToString("dd-MM-yyyy");
+            Fecha =Convert.ToDateTime(Date);
+            string user = Preferences.Get("id", "");
+            TiempoSegundos = Convert.ToDouble(Horas) * 3600 + Convert.ToDouble(Minutos) * 60 + Convert.ToDouble(Segundos);
+            Velocidad = Distancia/TiempoSegundos;
+            var carreras = new CarrerasModelApi
+            {
 
+                idToken = 0,
+                idUser =Convert.ToInt32(user),
+                tiempo=TiempoSegundos,
+                distancia=Distancia,
+                carrera = NombreCarrera,
+                fecha = Fecha,
+                fotos=null,
+                estado = true
+               
+
+            };
+
+
+            var client = new HttpClient();
+            var json = JsonConvert.SerializeObject(carreras);
+            var contentJSON = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await client.PostAsync(Constantes.urlPostCarreras, contentJSON);
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                await App.Current.MainPage.DisplayAlert("Registro", "Rutina Guardada", "OK");
+                CleanFields();
+            }
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("Registro", "Error al guardar Rutina", "OK");
+            }
+        }
 
 
         public void StopRoute()
         {
             HasRouteRunning = false;
+            Stopwatch.Stop();
+            Calculos();
         }
 
         public async Task GetPlacesByName(string placeText)
@@ -234,12 +370,8 @@ namespace AppRun.ViewModel
             {
                 Places = new ObservableCollection<GooglePlaceAutoCompletePrediction>(placeResult);
             }
-            else
-            {
-                await App.Current.MainPage.DisplayAlert("Error", "ubicacion nula", "Ok");
-            }
 
-            ShowRecentPlaces = placeResult == null || placeResult.Count == 0;
+            ShowRecentPlaces = (placeResult == null || placeResult.Count == 0);
         }
 
         public async Task GetPlacesDetail(GooglePlaceAutoCompletePrediction placeA)
@@ -248,7 +380,6 @@ namespace AppRun.ViewModel
 
             if (place != null)
             {
-
 
 
                 if (_isPickupFocused)
@@ -271,12 +402,12 @@ namespace AppRun.ViewModel
                         await App.Current.MainPage.DisplayAlert("Error", "Ruta invalida", "Ok");
                     }
                     else
-                    {
+                    {  
                         LoadRouteCommand.Execute(null);
                         await App.Current.MainPage.Navigation.PopAsync(false);
-                        CleanFields();
+                      
                     }
-
+                  
                 }
             }
         }
@@ -288,6 +419,11 @@ namespace AppRun.ViewModel
             PlaceSelected = null;
         }
 
+        public void GetPosition()
+        {
+            var position= new Command<Position>(async (param) => await GetLocationName(param));
+            UpdatePositionCommand.Execute(position);
+        }
 
         //Get place 
         public async Task GetLocationName(Position position)
@@ -305,7 +441,7 @@ namespace AppRun.ViewModel
                     var lgt = placemark.Location.Longitude;
                     _originLatitudActual = lat.ToString();
                     _originLongitudActual = lgt.ToString();
-                    
+                  
                 }
                 else
                 {
@@ -319,6 +455,5 @@ namespace AppRun.ViewModel
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
     }
 }

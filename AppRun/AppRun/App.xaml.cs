@@ -3,8 +3,7 @@ using Xamarin.Forms;
 using Xamarin.Essentials;
 using AppRun.services;
 using AppRun.clases;
-
-
+using Xamarin.Forms.Xaml;
 
 
 namespace AppRun
@@ -16,14 +15,14 @@ namespace AppRun
         public App()
         {
             InitializeComponent();
-            GoogleMapsApiService.Initialize(Constantes.GoogleMapsApiKey);
+         
             if (Preferences.Get("Rememberme",true)!=false && (Preferences.Get("correo", "") != "") && (Preferences.Get("iduser", "") != ""))
             {
               
                 MainPage = new NavigationPage(new Inicio());
-              
-              
-             
+
+                GoogleMapsApiService.Initialize(Constantes.GoogleMapsApiKey);
+
             }
             else
             {
