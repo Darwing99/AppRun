@@ -170,7 +170,8 @@ namespace AppRun.ViewModel
             var authProvider = new FirebaseAuthProvider(new FirebaseConfig(Constantes.ApiKey));
             try
             {
-
+                this.IsVisibleTxt = true;
+                this.IsRunningTxt = true;
                 var auth = await authProvider.SignInWithEmailAndPasswordAsync(EmailTxt.ToString(), PasswordTxt.ToString());
                 var content = await auth.GetFreshAuthAsync();
                 var serializedcontnet = JsonConvert.SerializeObject(content);
@@ -192,9 +193,9 @@ namespace AppRun.ViewModel
                 Preferences.Set("correo", correo);
                 Preferences.Set("iduser", iduser);
 
-                this.IsVisibleTxt = true;
-                this.IsRunningTxt = true;
-                await Application.Current.MainPage.Navigation.PushAsync(new Inicio());
+                this.IsVisibleTxt = false;
+                this.IsRunningTxt = false;
+                await Application.Current.MainPage.Navigation.PushAsync(new Inicio(),true);
 
             }
             catch (Exception ex)

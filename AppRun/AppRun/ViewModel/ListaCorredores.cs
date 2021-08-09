@@ -108,7 +108,7 @@ namespace AppRun.ViewModel
                 page.BindingContext = new CorredorViewModel()
                 {
                    
-                };
+                };`
 
                 await Navigation.PushAsync(page);
             }

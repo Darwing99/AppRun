@@ -21,7 +21,7 @@ namespace AppRun
         {
             InitializeComponent();
 
-            BindingContext = new ViewModel.ListaCorredores(Navigation);
+            BindingContext = new ViewModel.CorredoresViewModel();
 
         }
        

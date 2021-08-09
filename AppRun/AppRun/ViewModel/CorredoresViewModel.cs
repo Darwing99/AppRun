@@ -77,7 +77,7 @@ namespace AppRun.ViewModel
             else
             {
                 userRest = await restApiLogin.GetRepositoriesAsync(Constantes.urlGet);
-                var corredores =  userRest.Where(c=>c.name.ToString().Contains(buscar.ToString()));
+                var corredores =  userRest.Where(c=>c.name.ToString().ToLower().Contains(buscar.ToString().ToLower()));
                 ListOfItems = corredores.ToList();
                 Refresc = false;
             }

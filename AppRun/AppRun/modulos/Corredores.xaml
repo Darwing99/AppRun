@@ -15,12 +15,12 @@
               
                 <StackLayout Margin="10">
                     
-                    <ListView RefreshControlColor="OrangeRed" IsPullToRefreshEnabled="True"  IsRefreshing="{Binding Refresc}" SelectedItem="{Binding SelectedCorredor}"   
+                    <ListView RefreshControlColor="OrangeRed"  IsRefreshing="{Binding Refresc}" SelectedItem="{Binding SelectedCorredor}"   
                               RowHeight="100"  x:Name="listaCorredores" ItemsSource="{Binding ListOfItems}"  >
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
-                                    <Frame HeightRequest="50" CornerRadius="2">
+                                    <Frame Margin="10" HeightRequest="50" CornerRadius="2">
                                         <StackLayout  Margin="0" Orientation="Horizontal">
                                             <StackLayout Padding="-10,-10"  HeightRequest="100" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand">
                                                 <Frame Padding="-10,-10" HeightRequest="100" HorizontalOptions="StartAndExpand" IsClippedToBounds="True" CornerRadius="100">

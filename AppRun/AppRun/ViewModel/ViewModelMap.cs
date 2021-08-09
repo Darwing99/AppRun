@@ -177,7 +177,7 @@ namespace AppRun.ViewModel
                 if (_placeSelected != null)
                 {
                     GetPlaceDetailCommand.Execute(_placeSelected);
-                     App.Current.MainPage.Navigation.PopAsync(false);
+                     
                 }
             }
         }
@@ -272,7 +272,7 @@ namespace AppRun.ViewModel
 
                 if (googleDirection.Routes != null && googleDirection.Routes.Count > 0)
                 {
-                    var positions = (Enumerable.ToList(PolylineHelper.Decode(googleDirection.Routes.First().OverviewPolyline.Points)));
+                    var positions = Enumerable.ToList(PolylineHelper.Decode(googleDirection.Routes.First().OverviewPolyline.Points));
                     CalculateRouteCommand.Execute(positions);
 
                     HasRouteRunning = true;
@@ -327,7 +327,7 @@ namespace AppRun.ViewModel
             Fecha =Convert.ToDateTime(Date);
             TiempoSegundos = Convert.ToDouble(Horas) * 3600 + Convert.ToDouble(Minutos) * 60 + Convert.ToDouble(Segundos);
             double velocidadenmetrosporsegundo = distanciaF / tiempoSegundos;
-            double calorias = (velocidadenmetrosporsegundo/ TiempoSegundos)*(222075.222);
+            double calorias = velocidadenmetrosporsegundo/TiempoSegundos*(222075.222);
             string user = Preferences.Get("id", "");
             Velocidad = Distancia/TiempoSegundos;
             var carreras = new CarrerasModelApi
@@ -413,10 +413,15 @@ namespace AppRun.ViewModel
                         await App.Current.MainPage.DisplayAlert("Error", "Ruta invalida", "Ok");
                     }
                     else
-                    {  
+                    {
+                       
+                        await Application.Current.MainPage.Navigation.PopAsync(false);
+                        
                         LoadRouteCommand.Execute(null);
-                        await App.Current.MainPage.Navigation.PopAsync(false);
-                      
+                        CleanFields();
+
+
+
                     }
                   
                 }

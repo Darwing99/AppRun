@@ -29,7 +29,9 @@ namespace AppRun
         }
 
         private readonly List<ChartEntry> lista=new List<ChartEntry>();
-
+        private readonly List<ChartEntry> calorias = new List<ChartEntry>();
+        private readonly List<ChartEntry> velocidad = new List<ChartEntry>();
+        private readonly List<ChartEntry> distancias = new List<ChartEntry>();
         private readonly List<ChartEntry> tiempo=new List<ChartEntry>();
         public async void Data()
         {
@@ -57,10 +59,24 @@ namespace AppRun
 
                         });
 
-                        tiempo.Add(new ChartEntry((float)(data.tiempo))
+                        distancias.Add(new ChartEntry((float)(data.distancia))
                         {
                             Label = (data.carrera.ToString()==null ||data.carrera.ToString()=="") ? "carrera"+data.fecha.ToString():data.carrera.ToString(),
-                            ValueLabel = data.tiempo.ToString(),
+                            ValueLabel = data.distancia.ToString(),
+                            Color = SKColor.Parse(color)
+
+                        });
+                        calorias.Add(new ChartEntry((float)(data.calorias))
+                        {
+                            Label = (data.carrera.ToString() == null || data.carrera.ToString() == "") ? "carrera" + data.fecha.ToString() : data.carrera.ToString(),
+                            ValueLabel = data.calorias.ToString(),
+                            Color = SKColor.Parse(color)
+
+                        });
+                        velocidad.Add(new ChartEntry((float)(data.velocidad))
+                        {
+                            Label = (data.carrera.ToString() == null || data.carrera.ToString() == "") ? "carrera" + data.fecha.ToString() : data.carrera.ToString(),
+                            ValueLabel = data.velocidad.ToString(),
                             Color = SKColor.Parse(color)
 
                         });
@@ -83,13 +99,16 @@ namespace AppRun
             base.OnAppearing();
             
             tiempo.Clear();
+            distancias.Clear();
+            calorias.Clear();
             lista.Clear();
+            velocidad.Clear();
             Data();
             
             
             MyLineChart.Chart = new LineChart { Entries = lista, AnimationProgress = 4, LineMode = LineMode.Straight, LabelTextSize = 20, IsAnimated = true };
-            MyDonutChart.Chart = new DonutChart { Entries = lista, IsAnimated = true };
-            MyBarChart.Chart = new BarChart { Entries = tiempo, IsAnimated = true, BarAreaAlpha = 29 };
+            MyDonutChart.Chart = new DonutChart { Entries = distancias, IsAnimated = true };
+            MyBarChart.Chart = new BarChart { Entries = velocidad, IsAnimated = true, BarAreaAlpha = 29};
             MyPointChart.Chart = new PointChart { Entries = lista, IsAnimated = true };
            // MyRadialGaugeChart.Chart = new RadialGaugeChart { Entries = lista, IsAnimated = true };
         }

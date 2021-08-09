@@ -115,6 +115,8 @@ namespace AppRun.ViewModel
         }
         public async void validarDatos()
         {
+            this.IsVisibleTxt = true;
+            this.IsRunningTxt = true;
             if (string.IsNullOrEmpty(this.email))
             {
                 await Application.Current.MainPage.DisplayAlert(
@@ -164,8 +166,7 @@ namespace AppRun.ViewModel
                 var authProvider = new FirebaseAuthProvider(new FirebaseConfig(Constantes.ApiKey));
                 var auth = await authProvider.CreateUserWithEmailAndPasswordAsync(EmailTxt.ToString(), PasswordTxt.ToString());
                 string gettoken = auth.FirebaseToken;
-                this.IsVisibleTxt = true;
-                this.IsRunningTxt = true;
+              
                 this.IsEnabledTxt = false;
 
                 string idtoken = auth.FirebaseToken;

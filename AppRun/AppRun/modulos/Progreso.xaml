@@ -22,7 +22,7 @@
                                 </StackLayout>
 
                             </Frame>
-                            <Label Text="Carreras" Padding="10"  TextColor="Black" HorizontalOptions="CenterAndExpand"  FontSize="25" FontAttributes="Bold"  VerticalOptions="FillAndExpand" />
+                            <Label Text="Distancias Recorridas" Padding="10"  TextColor="Black" HorizontalOptions="CenterAndExpand"  FontSize="25" FontAttributes="Bold"  VerticalOptions="FillAndExpand" />
                             <Frame VerticalOptions="FillAndExpand" CornerRadius="5" HasShadow="True">
 
                                 <StackLayout Orientation="Vertical">
@@ -46,12 +46,10 @@
                                 </StackLayout>
 
                             </Frame>
-                            <Label Text="Tiempo por carrera" Padding="10"  TextColor="Black" HorizontalOptions="CenterAndExpand"  FontSize="25" FontAttributes="Bold"  VerticalOptions="FillAndExpand" />
+                            <Label Text="Velocidad por carrera" Padding="10"  TextColor="Black" HorizontalOptions="CenterAndExpand"  FontSize="25" FontAttributes="Bold"  VerticalOptions="FillAndExpand" />
                             <Frame VerticalOptions="FillAndExpand" CornerRadius="5" HasShadow="True">
 
                                 <StackLayout Orientation="Vertical">
-
-
 
                                     <chart1:ChartView HeightRequest="200"  VerticalOptions="FillAndExpand" x:Name="MyBarChart" ></chart1:ChartView>
 
