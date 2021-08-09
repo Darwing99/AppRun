@@ -9,7 +9,7 @@
                 <Frame Margin="40" CornerRadius="10">
                     <Grid>
                         <StackLayout Orientation="Vertical">
-                            <Label IsVisible="false" x:Name="idusuario">
+                            <Label IsVisible="false" x:Name="idusuario" TextColor="black">
 
                             </Label>
                             <Frame  HeightRequest="{OnPlatform iOS=200,Android=200}"
@@ -22,33 +22,35 @@
                             </Frame>
 
 
-                            <Label x:Name="nombre"  Text="{Binding NombrePreferencias, Mode=TwoWay}"  Margin="10"  FontAttributes="Bold" FontSize="20" HorizontalTextAlignment="Center">
+                            <Label x:Name="nombre" TextColor="black"  Text="{Binding NombrePreferencias, Mode=TwoWay}"  Margin="10"  FontAttributes="Bold" FontSize="20" HorizontalTextAlignment="Center">
 
                             </Label>
-                            <Label x:Name="correo" Text="{Binding EmailPreferencias, Mode=TwoWay}" FontSize="17" HorizontalTextAlignment="Center">
+                            <Label x:Name="correo" TextColor="black" Text="{Binding EmailPreferencias, Mode=TwoWay}" FontSize="14" HorizontalOptions="CenterAndExpand">
 
                             </Label>
 
                             <StackLayout  HeightRequest="50" VerticalOptions="CenterAndExpand" Orientation="Horizontal"  x:Name="updateProfile"  Margin="10"  HorizontalOptions="CenterAndExpand">
-                              
+
                                 <StackLayout.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding CameraCommand}">
-                                        
+
                                     </TapGestureRecognizer>
                                 </StackLayout.GestureRecognizers>
-                            
-                                    
-                                        <StackLayout Margin="10" Orientation="Horizontal">
-                                        <Label TextColor="OrangeRed" FontAttributes="Bold"  Text="Editar Perfil">
 
-                                        </Label>
-                                        <Label FontAttributes="Bold" Text="&#xe5cc;" FontSize="30" FontFamily="Material/Sharp">
 
-                                        </Label>
-                                    </StackLayout>
-                                   
-                              
-                                
+                                <StackLayout Margin="0" Orientation="Vertical">
+                                    <Label TextColor="OrangeRed" FontAttributes="Bold" HorizontalOptions="Start"  Text="Editar Perfil">
+
+                                    </Label>
+                                    <ProgressBar Visual="Material" BackgroundColor="Black"></ProgressBar>
+                                    <Label FontAttributes="Bold" Text="&#xe5cc;" FontSize="30" FontFamily="Material/Sharp">
+
+                                    </Label>
+
+                                </StackLayout>
+
+
+
                             </StackLayout>
                             <StackLayout   HorizontalOptions="CenterAndExpand">
                                 <ActivityIndicator
@@ -56,7 +58,7 @@
                            IsVisible="{Binding Progress, Mode=TwoWay}"
                            Color="SeaGreen"
 
-                           />   
+                           />
                             </StackLayout>
                             <StackLayout  HeightRequest="50" VerticalOptions="CenterAndExpand" Orientation="Horizontal"   Margin="10"  HorizontalOptions="CenterAndExpand">
 
@@ -68,11 +70,11 @@
 
 
                                 <StackLayout Margin="10" Orientation="Horizontal">
-                                    <Label VerticalOptions="End" Text="&#xe923;" FontSize="30" FontFamily="Material/Sharp" TextColor="Red"></Label>
-                                    <Label TextColor="OrangeRed" FontAttributes="Bold"  Text="Actualizar Perfil">
+                                    <Label VerticalOptions="Center" Text="&#xe923;" FontSize="30" FontFamily="Material/Sharp" TextColor="OrangeRed"></Label>
+                                    <Label TextColor="OrangeRed" FontAttributes="Bold"  VerticalOptions="Center"  Text="Actualizar Perfil">
 
                                     </Label>
-                                    
+
                                 </StackLayout>
 
 
@@ -85,8 +87,6 @@
                     </Grid>
 
                 </Frame>
-            
-
 
 
 

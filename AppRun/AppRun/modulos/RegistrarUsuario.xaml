@@ -1,14 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-              
+             xmlns:xct="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
              x:Class="AppRun.modulos.RegistrarUsuario"
              Title="Sign Up">
     <ContentPage.Content>
         <ScrollView>
-            <Grid BackgroundColor="Black">
-               
+            <Grid>
+                <xct:MediaElement Source="ms-appx:///jogger.mp4" ShowsPlaybackControls="False" Aspect="AspectFill" AutoPlay="True" Volume="0" IsLooping="True" />
                 <Grid RowSpacing="{OnPlatform iOS=25,Android=20}">
+
 
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -43,8 +44,8 @@
                             <Image
                         HorizontalOptions="CenterAndExpand"
                         Source="{Binding Camarabtn}"
-                        HeightRequest="{OnPlatform iOS=80,Android=80}"
-                        WidthRequest="{OnPlatform iOS=80,Android=80}"
+                        HeightRequest="{OnPlatform iOS=120,Android=120}"
+                        WidthRequest="{OnPlatform iOS=120,Android=120}"
                     />
                         </Frame>
 
@@ -52,102 +53,68 @@
 
 
 
-                    <StackLayout Grid.Row="2" HorizontalOptions="Center" BackgroundColor="Black" WidthRequest="{OnPlatform iOS=300,Android=300}" Orientation="Vertical"  >
+                    <StackLayout Grid.Row="2" HorizontalOptions="Center" WidthRequest="{OnPlatform iOS=300,Android=300}" Orientation="Vertical"  >
 
-                        <Frame
-                          BackgroundColor="#1F2821" 
-                          BorderColor="#D40015"
-                            HasShadow="{OnPlatform Android=true,iOS=false}"
-                            Padding="{OnPlatform Android=8,iOS=0}"
-                            CornerRadius="{OnPlatform Android=10}"
-                    >
-                            <Entry
+
+                        <Entry
                     Placeholder="Email"
                     Visual="Material"
                     Keyboard="Email"
-                    IsTextPredictionEnabled="True"
-                    MaxLength="200"
-                    BackgroundColor="#1F2821" 
-                    TextColor="White"
-                 
+                    MaxLength="50"
                     FontSize="{OnPlatform Android=15,iOS=16}"
                     Text="{Binding EmailTxt, Mode=TwoWay}"
-                    IsEnabled="{Binding IsEnabledTxt}" />
-                        </Frame>
+                    IsEnabled="{Binding IsEnabledTxt}"
+                    />
+
                     </StackLayout>
 
-                    <StackLayout BackgroundColor="Black" Grid.Row="3" HorizontalOptions="Center" WidthRequest="300" Orientation="Vertical" >
+                    <StackLayout Grid.Row="3" HorizontalOptions="Center" WidthRequest="300" Orientation="Vertical" >
 
 
 
-                        <Frame
-                     HasShadow="{OnPlatform Android=true,iOS=false}"
-                     Padding="{OnPlatform Android=6,iOS=0}"
-                    CornerRadius="{OnPlatform Android=7}"
-                    BackgroundColor="#1F2821" 
-                    BorderColor="#D40015"
-                  
-                     >
 
-                            <Entry
+
+                        <Entry
                     Placeholder="Paswword"
                     Visual="Material"
-                    MaxLength="50"
-                    BackgroundColor="#1F2821" 
-                    TextColor="White"
+                    MaxLength="25"
                     IsPassword="True"
                     FontSize="{OnPlatform Android=15,iOS=16}"
                     Text="{Binding PasswordTxt, Mode=TwoWay}"
                     IsEnabled="{Binding IsEnabledTxt}"
                     />
 
-                        </Frame>
+
 
                     </StackLayout>
 
-                    <StackLayout BackgroundColor="Black" Grid.Row="4" HorizontalOptions="Center" WidthRequest="300" Orientation="Vertical" >
+                    <StackLayout Grid.Row="4" HorizontalOptions="Center" WidthRequest="300" Orientation="Vertical" >
 
 
-                        <Frame
-                        BackgroundColor="#1F2821" 
-                     BorderColor="#D40015"      
-                     HasShadow="{OnPlatform Android=true,iOS=false}"
-                     Padding="{OnPlatform Android=6,iOS=0}"
-                     CornerRadius="{OnPlatform Android=7}"
-                     >
 
-                            <Entry
+
+                        <Entry
                     Placeholder="Nombre"
                     Visual="Material"
-                    MaxLength="205"
-                    BackgroundColor="#1F2821" 
-                    TextColor="White"
+                    MaxLength="25"
                     Keyboard="Text"
                     FontSize="{OnPlatform Android=15,iOS=16}"
                     Text="{Binding NameTxt, Mode=TwoWay}"
                     IsEnabled="{Binding IsEnabledTxt}"
                     />
 
-                        </Frame>
+
                     </StackLayout>
-                    <StackLayout BackgroundColor="Black" Grid.Row="5" HorizontalOptions="Center" WidthRequest="300" Orientation="Horizontal" Spacing="20">
-                        <StackLayout BackgroundColor="Black" WidthRequest="300">
+                    <StackLayout Grid.Row="5" HorizontalOptions="Center" WidthRequest="300" Orientation="Horizontal" Spacing="20">
+                        <StackLayout WidthRequest="300">
 
 
 
-                            <Frame
-                       BackgroundColor="#1F2821" 
-                     BorderColor="#D40015"   
-                     HasShadow="{OnPlatform Android=true,iOS=false}"
-                     Padding="{OnPlatform Android=6,iOS=0}"
-                     CornerRadius="{OnPlatform Android=7}"
-                     >
 
-                                <Entry
+
+                            <Entry
                     Placeholder="Confirmar Contraseña"
                     MaxLength="25"
-                    BackgroundColor="#1F2821" 
-                    TextColor="White"
                     Visual="Material"
                     IsPassword="True"
                     FontSize="{OnPlatform Android=15,iOS=16}"
@@ -156,13 +123,12 @@
                     IsEnabled="{Binding IsEnabledTxt}"
                     />
 
-                            </Frame>
+
                         </StackLayout>
 
 
 
                     </StackLayout>
-
                     <StackLayout BackgroundColor="Black" Grid.Row="6" HorizontalOptions="Center" WidthRequest="300" Orientation="Horizontal" Spacing="20">
                         <StackLayout BackgroundColor="Black" WidthRequest="300">
 
@@ -180,7 +146,7 @@
                                     <Label   BackgroundColor="#1F2821" TextColor="OrangeRed" Text="Selecciona Pais"></Label>
                                     <Picker SelectedItem="{Binding paisSeleccionado}"  BackgroundColor="#1F2821" 
                                      TextColor="White" Visual="Material"   x:Name="pickerRegion" ></Picker>
-                                   
+
                                 </StackLayout>
 
                             </Frame>
@@ -194,23 +160,21 @@
                         <ActivityIndicator
                        IsRunning="{Binding IsRunningTxt, Mode=TwoWay}"
                        IsVisible="{Binding IsVisibleTxt, Mode=TwoWay}"
-                       Color="OrangeRed"
+                       Color="Black"
 
                        />
                     </StackLayout>
 
 
-                    <StackLayout BackgroundColor="black" Grid.Row="8" HorizontalOptions="Center" Orientation="Vertical" >
+                    <StackLayout Grid.Row="8" HorizontalOptions="Center" Orientation="Vertical" >
                         <Button 
                      Text="Register"
-                            
-                             TextColor="{OnPlatform iOS=White,Android=white}"
-                            Font="Ubuntu"
-                           FontSize="{OnPlatform Android=14,iOS=14}"
-                            BackgroundColor="#881921"
-                            BorderColor="#f2f2f2"
-                            BorderWidth="1.0"
-                   
+                            TextColor="Black"
+                           
+                            FontSize="{OnPlatform Android=15}"
+                            BackgroundColor="#fcfcfc"
+                            BorderColor="Black"
+                            BorderWidth="1.5"
                             WidthRequest="300"
                             HeightRequest="50"
                             CornerRadius="7"
@@ -220,13 +184,9 @@
                         <Button
                              CornerRadius="7"
                             Text="Already have an acount? Log in"
-                            TextColor="{OnPlatform iOS=White,Android=white}"
+                            TextColor="{OnPlatform iOS=Black}"
                             FontSize="{OnPlatform Android=11,iOS=12}"
-                            BackgroundColor="#881921"
-                            BorderColor="#f2f2f2"
-                            BorderWidth="1.0"
-                          
-                          
+                            BackgroundColor="OrangeRed"
                             Clicked="NavToLogin_Clicked"
                             />
 
@@ -234,6 +194,6 @@
                 </Grid>
             </Grid>
         </ScrollView>
-       
+
     </ContentPage.Content>
 </ContentPage>

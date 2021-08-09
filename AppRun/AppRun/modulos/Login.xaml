@@ -3,102 +3,99 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design" NavigationPage.HasNavigationBar="False"
              xmlns:xct="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
+              xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              x:Class="AppRun.Login">
 
     <ContentPage.ToolbarItems  >
-        
+
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <ScrollView>
             <Grid BackgroundColor="Black">
-                
-          
+                <Grid RowSpacing="{OnPlatform iOS=25,Android=18}">
 
-            <Grid RowSpacing="{OnPlatform iOS=25,Android=18}">
-              
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="90"/>
-                    <!---->
-                    <RowDefinition Height="Auto"/>
-                    <!--1-->
-                    <RowDefinition Height="Auto"/>
-                    <!--2-->
-                    <RowDefinition Height="Auto"/>
-                    <!--3-->
-                    <RowDefinition Height="Auto"/>
-                    <!--4-->
-                    <RowDefinition Height="Auto"/>
-                    <!--5-->
-                    <RowDefinition Height="Auto"/>
-                    <!--6-->
-                    <RowDefinition Height="Auto"/>
-                    <!--8-->
-                </Grid.RowDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="90"/>
+                        <!---->
+                        <RowDefinition Height="Auto"/>
+                        <!--1-->
+                        <RowDefinition Height="Auto"/>
+                        <!--2-->
+                        <RowDefinition Height="Auto"/>
+                        <!--3-->
+                        <RowDefinition Height="Auto"/>
+                        <!--4-->
+                        <RowDefinition Height="Auto"/>
+                        <!--5-->
+                        <RowDefinition Height="Auto"/>
+                        <!--6-->
+                        <RowDefinition Height="Auto"/>
+                        <!--8-->
+                    </Grid.RowDefinitions>
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                    <StackLayout Grid.Row="0" HorizontalOptions="Center" Orientation="Vertical" Margin="0,10,0,10">
-                        <Label Text="&#xe71c;" FontSize="80" FontFamily="Material/Sharp" TextColor="Red"></Label>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <StackLayout  Grid.Row="0" Orientation="Vertical" HorizontalOptions="CenterAndExpand">
+                        <yummy:PancakeView WidthRequest="100" Margin="0,32,0,0" BackgroundColor="OrangeRed" Padding="30,0"
+                               HorizontalOptions="FillAndExpand" HeightRequest="300" CornerRadius="100">
 
+                            <yummy:PancakeView.Shadow>
+                                <yummy:DropShadow x:Name="shadow" Color="{Binding ShadowColor}" Offset="{Binding ShadowOffset}" />
+                            </yummy:PancakeView.Shadow>
+
+                            <Image  x:Name="perfil" Source="loguito" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Aspect="AspectFit" />
+
+                        </yummy:PancakeView>
                     </StackLayout>
 
-                   
-
-                <StackLayout Grid.Row="1" HorizontalOptions="Center" Orientation="Vertical" Margin="0,10,0,10">
-                    <Label
-                         Text="Bienvenido!"
+                    <StackLayout Grid.Row="1" HorizontalOptions="Center" Orientation="Vertical" Margin="0,10,0,10">
+                        <Label
+                         Text="Bienvenido a RunForce!"
                          FontAttributes="Bold"
-                        
+                        TextColor="Black"
                         HorizontalOptions="CenterAndExpand"
                      
                         FontSize="{OnPlatform Android=24,iOS=24}"
                          Margin="0,0,0,5"
-                         WidthRequest="300"
-                         TextColor="{OnPlatform Android=white}"
-                         />
-                    <Label
+                         WidthRequest="300"/>
+                        <Label
                     Text="Inicia Sesion para continuar..."
-                            TextColor="white"
-                           FontSize="{OnPlatform Android=18,iOS=18}"
-                       
-                            WidthRequest="300"
+                             TextColor="Black"
+                             FontSize="{OnPlatform Android=18,iOS=18}"
+                             WidthRequest="300"
                     />
-                </StackLayout>
+                    </StackLayout>
 
-                    <StackLayout IsVisible="false" HorizontalOptions="Center" Margin="0,10,0,10" Orientation="Horizontal" Grid.Row="2">
+                    <StackLayout HorizontalOptions="Center" Margin="0,10,0,10" Orientation="Horizontal" Grid.Row="2">
                         <StackLayout  HorizontalOptions="StartAndExpand" Orientation="Vertical" >
                             <Button Margin="0"
-                            Text="Google"
-                            
-                            TextColor="white"
-                            Font="Ubuntu"
+                            Text="Google"                            
+                            TextColor="Black"
                             HorizontalOptions="StartAndExpand"
-                            IsVisible="True"
+                            IsVisible="false"
                             Command="{Binding AuthCommandGoogle}"
-                            BackgroundColor="#1F2821"
+                            BackgroundColor="OrangeRed"
                             FontSize="{OnPlatform Android=16}"
-                            BorderColor="#D40015"
+                            BorderColor="Black"
                             BorderWidth="1.5"
                             CornerRadius="10"
                             WidthRequest="{OnPlatform Android=146,iOS=146}"
-                            HeightRequest="50"
-                            
-                    />
-
+                            HeightRequest="50"/>
                         </StackLayout>
                         <StackLayout    Orientation="Vertical" >
                             <Button
+                            
                             HorizontalOptions="EndAndExpand"
                             Text="&#xf234;"
-                            BackgroundColor="#1F2821"
-                            TextColor="white"
+                            BackgroundColor="OrangeRed"
+                            TextColor="Black"
                             Font="Ubuntu"
                             FontFamily="Material/Sharp"
                             CornerRadius="10"
-                            IsVisible="True"
+                            IsVisible="false"
                             FontSize="{OnPlatform Android=35}"
-                            BorderColor="#D40015"
+                            BorderColor="Black"
                             BorderWidth="1.5"
                             WidthRequest="{OnPlatform Android=146,iOS=146}"
                        
@@ -110,68 +107,39 @@
 
                         </StackLayout>
                     </StackLayout>
-                    
-                    <StackLayout Grid.Row="3" BackgroundColor="Black" HorizontalOptions="Center" WidthRequest="{OnPlatform iOS=300,Android=300}" Orientation="Vertical"  >
-                 
-                    <Frame
-                    BackgroundColor="#1F2821" 
-                    BorderColor="#D40015"
-                    HasShadow="{OnPlatform Android=true,iOS=false}"
-                    Padding="{OnPlatform Android=8,iOS=0}"
-                    CornerRadius="{OnPlatform Android=10}"
-                    >
+
+                    <StackLayout Grid.Row="3" HorizontalOptions="Center" WidthRequest="{OnPlatform iOS=300,Android=300}" Orientation="Vertical"  >
+
+
                         <Entry
                     Placeholder="Email"
                     Keyboard="Email"
                     Visual="Material"
                     IsTextPredictionEnabled="True"
                     MaxLength="100"
-                    BackgroundColor="#1F2821" 
-                    TextColor="White"
+                      BackgroundColor="White"
+                    TextColor="Black"
                     
                     x:Name="email"
                     Text="{Binding EmailTxt, Mode=TwoWay}"
                     IsEnabled="{Binding IsEnabledTxt}"
                     FontSize="{OnPlatform Android=18,iOS=18}"
                     />
-                    </Frame>
-                </StackLayout>
 
-                <StackLayout Grid.Row="4" HorizontalOptions="Center" WidthRequest="300" Orientation="Vertical" >
-
-                    <StackLayout Orientation="Horizontal" VerticalOptions="Center" Padding="0">
-                   
-                        <Button
-                     Text="¿Forgot password?"
-                    
-                            
-                     FontSize="{OnPlatform Android=11}"
-                     WidthRequest="150"
-                     TextColor="#D40015"
-                     FontAttributes="bold"
-                     HorizontalOptions="EndAndExpand"
-                     BackgroundColor="Transparent"
-                     HeightRequest="35"
-                     Padding="0"
-                     Visual="Material"
-                     Clicked="ButtonForgot"
-                     IsEnabled="{Binding IsEnabledTxt}"
-                    />
                     </StackLayout>
-                    <Frame
-                     BackgroundColor="#1F2821" 
-                     BorderColor="#D40015"
-                     HasShadow="{OnPlatform Android=true,iOS=false}"
-                     Padding="{OnPlatform Android=8,iOS=0}"
-                     CornerRadius="{OnPlatform Android=7}"
-                     >
+
+                    <StackLayout Grid.Row="4" HorizontalOptions="Center" WidthRequest="300" Orientation="Vertical" >
+
+
+
 
                         <Entry
                     Placeholder="Password"
                     Visual="Material"
                     MaxLength="25"
-                    BackgroundColor="#1F2821" 
-                    TextColor="White"
+                      BackgroundColor="White"
+                    TextColor="black"
+                            
                     IsPassword="True"
                   FontSize="{OnPlatform Android=18,iOS=18}"
                     Text="{Binding PasswordTxt, Mode=TwoWay}"
@@ -179,33 +147,54 @@
                     
                     />
 
-                    </Frame>
-
-                </StackLayout>
 
 
-             
-                
+                    </StackLayout>
 
-                <StackLayout Grid.Row="6" HorizontalOptions="Center" Padding="0">
-                    <ActivityIndicator
+
+
+
+
+                    <StackLayout Grid.Row="6" HorizontalOptions="Center" Padding="0">
+
+                        <StackLayout >
+
+                            <Button
+                       
+                     Text="¿Forgot password?"
+                     FontSize="{OnPlatform Android=11}"
+                     WidthRequest="150"
+                     TextColor="White" 
+                     HorizontalOptions="EndAndExpand"
+                     BackgroundColor="OrangeRed"
+                     Padding="0"
+                        BorderColor="black"
+                            FontAttributes="Bold"
+                            CornerRadius="10"
+                            BorderWidth="1.0"
+                     Visual="Material"
+                     Clicked="ButtonForgot"
+                     IsEnabled="{Binding IsEnabledTxt}"
+                    />
+                        </StackLayout>
+                        <ActivityIndicator
                        IsRunning="{Binding IsRunningTxt}"
                        IsVisible="{Binding IsVisibleTxt}"
-                       Color="#D40015"
+                       Color="OrangeRed"
                        Scale="0.8"
                      
                        />
-                </StackLayout>
+                    </StackLayout>
 
 
-                <StackLayout Grid.Row="7" HorizontalOptions="Center" Orientation="Vertical" >
-                    <Button
+                    <StackLayout Grid.Row="7" HorizontalOptions="Center" Orientation="Vertical" >
+                        <Button
                      Text="Log in"
                             TextColor="{OnPlatform iOS=White,Android=white}"
                             Font="Ubuntu"
                            FontSize="{OnPlatform Android=14,iOS=14}"
-                            BackgroundColor="#881921"
-                            BorderColor="#f2f2f2"
+                            BackgroundColor="OrangeRed"
+                            BorderColor="Black"
                             BorderWidth="1.0"
                             WidthRequest="300"
                             HeightRequest="50"
@@ -214,15 +203,22 @@
                             Command="{Binding LoginCommand}"
                             IsEnabled="{Binding IsEnabledTxt}" 
                     />
-                        <Switch IsToggled="{Binding Rememberme}"  ThumbColor="white" OnColor="#D40015" x:Name="Remember">
-                        
-                    </Switch>
-                    <Button
-                            Text="No estas registrado? Sign Up"
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Recordar contraseña" TextColor="black" VerticalOptions="Center" HorizontalOptions="CenterAndExpand"></Label>
+                            <Frame Padding="1" CornerRadius="100" >
+                                <Switch IsToggled="{Binding Rememberme}" HorizontalOptions="CenterAndExpand"  ThumbColor="OrangeRed" OnColor="OrangeRed" x:Name="Remember"></Switch>
+                            </Frame>
+
+                        </StackLayout>
+
+
+
+                        <Button
+                            Text="No estas registrado?"
                             TextColor="{OnPlatform iOS=White,Android=white}"
                             FontSize="{OnPlatform Android=14,iOS=14}"
-                            BackgroundColor="#881921"
-                            BorderColor="#f2f2f2"
+                            BackgroundColor="OrangeRed"
+                            BorderColor="black"
                             FontAttributes="Bold"
                             CornerRadius="10"
                             BorderWidth="1.0"
@@ -230,9 +226,9 @@
                             Clicked="registro_Clicked"
                             />
 
-                </StackLayout>
+                    </StackLayout>
 
-            </Grid>
+                </Grid>
             </Grid>
         </ScrollView>
     </ContentPage.Content>

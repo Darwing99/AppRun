@@ -31,7 +31,7 @@
                                            
 
                                             <StackLayout HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Margin="10" Orientation="Vertical">
-                                                <Label  Text="&#xe566;" FontSize="40" FontFamily="Material/Sharp"></Label>
+                                                <Label TextColor="OrangeRed"  Text="&#xe566;" FontSize="40" FontFamily="Material/Sharp"></Label>
                                                
 
                                             </StackLayout>
@@ -52,7 +52,7 @@
                                                         <FormattedString>
                                                             <Span Text="{Binding distancia}"></Span>
                                                             <Span Text=" "></Span>
-                                                            <Span Text="Metros"></Span>
+                                                            <Span Text="Km"></Span>
                                                         </FormattedString>
                                                     </Label.FormattedText>
                                                 </Label>

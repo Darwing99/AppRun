@@ -2,12 +2,27 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppRun.Clasificacion"
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              Title="Clasificaciones">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Clasificacion"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid>
+            <StackLayout 
+                        Orientation="Horizontal"
+                        VerticalOptions="Start"
+                        Padding="10"
+                        x:Name="searchLayout">
+                <yummy:PancakeView Margin="0,32,0,0" BackgroundColor="#96e7a7" Padding="20,0"
+                               HorizontalOptions="FillAndExpand" HeightRequest="150" CornerRadius="20">
+
+                    <yummy:PancakeView.Shadow>
+                        <yummy:DropShadow x:Name="shadow" Color="{Binding ShadowColor}" Offset="{Binding ShadowOffset}" />
+                    </yummy:PancakeView.Shadow>
+
+                    <Label Text="Clasificacion de los mejores corredores" HorizontalTextAlignment="Center"
+                       HorizontalOptions="Center" VerticalOptions="Center" TextColor="#000000" />
+
+                </yummy:PancakeView>
+            </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

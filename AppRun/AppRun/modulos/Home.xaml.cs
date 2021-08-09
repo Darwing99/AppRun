@@ -28,8 +28,9 @@ namespace AppRun
 
         public void Handle_Stop_Clicked(object sender, EventArgs e)
         {
-            searchLayout.IsVisible = true;
-            distanceAndTime.IsVisible = false;
+            //searchLayout.IsVisible = true;
+            Time.IsVisible = false;
+            distance.IsVisible = false;
             stopRouteButton.IsVisible = false;
             map.Polylines.Clear();
 
@@ -49,8 +50,9 @@ namespace AppRun
         void OnCalculate(System.Object sender, System.EventArgs e)
         {
 
-            searchLayout.IsVisible = false;
-            distanceAndTime.IsVisible = true;
+            //searchLayout.IsVisible = false;
+            Time.IsVisible = true;
+            distance.IsVisible = true;
             stopRouteButton.IsVisible = true;
             //distancia.Text = Preferences.Get("distancia", "Hola");
         }

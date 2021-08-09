@@ -91,7 +91,7 @@ namespace AppRun
             MyDonutChart.Chart = new DonutChart { Entries = lista, IsAnimated = true };
             MyBarChart.Chart = new BarChart { Entries = tiempo, IsAnimated = true, BarAreaAlpha = 29 };
             MyPointChart.Chart = new PointChart { Entries = lista, IsAnimated = true };
-            MyRadialGaugeChart.Chart = new RadialGaugeChart { Entries = lista, IsAnimated = true };
+           // MyRadialGaugeChart.Chart = new RadialGaugeChart { Entries = lista, IsAnimated = true };
         }
         public Progreso()
         {

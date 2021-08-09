@@ -1,12 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
              ios:Page.UseSafeArea="true"
-            
              x:Class="AppRun.modulos.SearchPlacePage"
-         
-             >
+             Title="Destinos de la carrera">
+
     <StackLayout >
 
         <Grid VerticalOptions="FillAndExpand"
@@ -24,15 +23,14 @@
 
             <StackLayout Grid.Row="0"  
                              Padding="10"
-                             BackgroundColor="LightGray"
+                             BackgroundColor="White"
                              Orientation="Horizontal">
                 <Image Source="ic_search"
                                HeightRequest="20"
                                WidthRequest="20"/>
-                <Entry Placeholder="Posicion Inicial"
+                <Entry Placeholder="Lugar Inicial" BackgroundColor="white" TextColor="Black"
                                Text="{Binding UbicacionActual}"
                                FontSize="18"
-                               IsEnabled="false"
                                x:Name="originEntry"
                                ClassId="origin"
                                FontAttributes="Italic"
@@ -42,19 +40,20 @@
 
             <StackLayout Grid.Row="1"
                            Padding="10"
-                           BackgroundColor="LightGray"
+                           BackgroundColor="White"
                            Orientation="Horizontal">
                 <Image Source="ic_search"
                                HeightRequest="20"
                                WidthRequest="20"/>
-                <Entry Placeholder="Where to?" 
+                <Entry Placeholder="Lugar de destino" 
                                Text="{Binding OriginText}"
-                               FontSize="18"
+                               FontSize="18" BackgroundColor="white" TextColor="Black"
                                x:Name="destinationEntry"
                                ClassId="destination"
                                FontAttributes="Italic"
                                ReturnType="Search"
                                HorizontalOptions="FillAndExpand" />
+
             </StackLayout>
 
             <ListView VerticalOptions="FillAndExpand"
@@ -86,7 +85,7 @@
                                  FontAttributes="Bold"
                                  Margin="20,10"
                                  x:Name="recentSearch"
-                                 Text="History"/>
+                                 Text="Historial de Ubicaciones"/>
                     </StackLayout>
                 </ListView.Header>
                 <ListView.ItemTemplate>
@@ -130,4 +129,5 @@
             </ListView>
         </Grid>
     </StackLayout>
+
 </ContentPage>
