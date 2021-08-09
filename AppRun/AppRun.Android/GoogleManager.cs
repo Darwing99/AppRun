@@ -76,7 +76,7 @@ namespace AppRun.Droid
 			}
 			else
 			{
-				_onLoginComplete?.Invoke(null, "An error occured!");
+				_onLoginComplete?.Invoke(null, "Error!");
 			}
 		}
 

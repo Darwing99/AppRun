@@ -7,62 +7,103 @@ using System.Threading.Tasks;
 using SkiaSharp;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using AppRun.services;
+using AppRun.Model;
+using AppRun.clases;
+using Xamarin.Essentials;
+using System.Threading;
 
 namespace AppRun
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Progreso : ContentPage
     {
-     
-        private readonly List<Microcharts.ChartEntry> _entries = new List<Microcharts.ChartEntry>()
+        List<CarrerasModelApi> service;
+        RestApiCarreras restService;
+        DateTime fecha;
+        public double distancia;
+        public double Distancia
         {
-            new Microcharts.ChartEntry(200)
+            get { return this.distancia; }
+            set { distancia= value; }
+        }
+
+        private readonly List<ChartEntry> lista=new List<ChartEntry>();
+
+        private readonly List<ChartEntry> tiempo=new List<ChartEntry>();
+        public async void Data()
+        {
+
+            try
             {
-                Label = "January",
-                ValueLabel = "200",
-                Color = SKColor.Parse("#FF0033"),
-            },
-            new Microcharts.ChartEntry(400)
+                service = await restService.GetRepositoriesAsync(Constantes.urlGetCarreras);
+               var datos = service.Where(c => c.idUser.ToString().Contains(Preferences.Get("id", "").ToString()));
+
+                if (datos != null)
+                {
+                    var random = new Random();
+
+
+                    var entries = new List<Entry>();
+                    foreach (var data in datos)
+                    {
+                        var color = String.Format("#{0:X6}", random.Next(0x1000000));
+
+                        lista.Add(new ChartEntry((float)(data.distancia))
+                        {
+                            Label = data.fecha.ToString(),
+                            ValueLabel = data.distancia.ToString(),
+                            Color = SKColor.Parse(color)
+
+                        });
+
+                        tiempo.Add(new ChartEntry((float)(data.tiempo))
+                        {
+                            Label = (data.carrera.ToString()==null ||data.carrera.ToString()=="") ? "carrera"+data.fecha.ToString():data.carrera.ToString(),
+                            ValueLabel = data.tiempo.ToString(),
+                            Color = SKColor.Parse(color)
+
+                        });
+                    }
+                }
+            }
+            catch (Exception e)
+
             {
-                Label = "February",
-                ValueLabel = "400",
-                Color = SKColor.Parse("#FF8000"),
-            },
-            new Microcharts.ChartEntry(300)
-            {
-                Label = "March",
-                ValueLabel = "300",
-                Color = SKColor.Parse("#FFE600"),
-            },
-            new Microcharts.ChartEntry(250)
-            {
-                Label = "April",
-                ValueLabel = "250",
-                Color = SKColor.Parse("#1AB34D"),
-            },
-            new Microcharts.ChartEntry(650)
-            {
-                Label = "May",
-                ValueLabel = "650",
-                Color = SKColor.Parse("#1A66FF"),
-            },
-            new Microcharts.ChartEntry(500)
-            {
-                Label = "June",
-                ValueLabel = "500",
-                Color = SKColor.Parse("#801AB3"),
-            },
-        };
+                return;
+            }
+         
+           
+
+
+
+        }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            
+            tiempo.Clear();
+            lista.Clear();
+            Data();
+            
+            
+            MyLineChart.Chart = new LineChart { Entries = lista, AnimationProgress = 4, LineMode = LineMode.Straight, LabelTextSize = 20, IsAnimated = true };
+            MyDonutChart.Chart = new DonutChart { Entries = lista, IsAnimated = true };
+            MyBarChart.Chart = new BarChart { Entries = tiempo, IsAnimated = true, BarAreaAlpha = 29 };
+            MyPointChart.Chart = new PointChart { Entries = lista, IsAnimated = true };
+           // MyRadialGaugeChart.Chart = new RadialGaugeChart { Entries = lista, IsAnimated = true };
+        }
         public Progreso()
         {
             InitializeComponent();
+            restService = new RestApiCarreras();
 
-            MyLineChart.Chart = new LineChart { Entries = _entries,AnimationProgress=4, LineMode= LineMode.Straight,LabelTextSize=14,IsAnimated=true};
-            MyDonutChart.Chart = new DonutChart { Entries = _entries, IsAnimated = true };
-            MyBarChart.Chart = new BarChart { Entries = _entries, IsAnimated = true, BarAreaAlpha=29};
-            MyPointChart.Chart = new PointChart { Entries = _entries, IsAnimated = true };
-            MyRadialGaugeChart.Chart = new RadialGaugeChart { Entries = _entries, IsAnimated = true};
-
+        }
+        protected override void OnParentSet()
+        {
+            base.OnParentSet();
+            
+            
         }
 
 

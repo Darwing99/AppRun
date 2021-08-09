@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "AppRun": {
+      "commandName": "Project",
+      "workingDirectory": "D:\\Proyecto\\AppRun"
+    }
+  }
+}

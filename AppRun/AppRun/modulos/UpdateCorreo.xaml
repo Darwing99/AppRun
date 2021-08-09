@@ -13,10 +13,10 @@
                             <StackLayout Orientation="Horizontal">
 
                                 <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center">
-                                    <Label   Text="{Binding NombrePreferencias, Mode=TwoWay}" Margin="10" FontAttributes="Bold" FontSize="20" HorizontalTextAlignment="Start">
+                                    <Label TextColor="Black"  Text="{Binding NombrePreferencias, Mode=TwoWay}" Margin="0" FontAttributes="Bold" FontSize="20" HorizontalTextAlignment="Start">
 
                                     </Label>
-                                    <Label  Text="{Binding EmailPreferencias, Mode=TwoWay}"  FontSize="17" HorizontalTextAlignment="Start" >
+                                    <Label TextColor="Black"  Text="{Binding EmailPreferencias, Mode=TwoWay}"  FontSize="12" HorizontalTextAlignment="Start" >
 
                                     </Label>
                                 </StackLayout>
@@ -28,10 +28,6 @@
                                     </Frame>
 
                                 </StackLayout>
-
-
-
-
 
                             </StackLayout>
 
@@ -45,46 +41,42 @@
                             <StackLayout Orientation="Vertical">
 
                                 <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center">
-                                    <Label  Text="Nuevo Correo*" Margin="10" FontAttributes="Bold" FontSize="20" HorizontalTextAlignment="Start">
 
-                                    </Label>
                                     <StackLayout Orientation="Horizontal">
-                                        <Label VerticalOptions="End" Text="&#xe0be;" FontSize="40" FontFamily="Material/Sharp" TextColor="Red"></Label>
-                                        <Entry Text="{Binding EmailUpdate, Mode=TwoWay}"  BackgroundColor="white" TextColor="Black"  Keyboard="Email" Visual="Material" x:Name="correonuevo" FontSize="17" HorizontalOptions="FillAndExpand" >
-
-                                        </Entry>
-                                    </StackLayout>
-                                   
-                                </StackLayout>
-                                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center">
-                                    <Label  Text="Contraseña" Margin="10" FontAttributes="Bold" FontSize="20" HorizontalTextAlignment="Start">
-
-                                    </Label>
-                                    <StackLayout Orientation="Horizontal">
-                                        <Label VerticalOptions="End" Text="&#xf042;" FontSize="40" FontFamily="Material/Sharp" TextColor="Red"></Label>
-                                        <Entry Text="{Binding conPasswordUpdate, Mode=TwoWay}" BackgroundColor="white" TextColor="Black"  Keyboard="Text" IsPassword="True" Visual="Material" x:Name="password" FontSize="17" HorizontalOptions="FillAndExpand" >
+                                        <Label VerticalOptions="End" Text="&#xe0be;" FontSize="40" FontFamily="Material/Sharp" TextColor="OrangeRed"></Label>
+                                        <Entry Placeholder="Nuevo Correo:*" Text="{Binding EmailUpdate, Mode=TwoWay}"  BackgroundColor="white" TextColor="Black"  Keyboard="Email" Visual="Material" x:Name="correonuevo" FontSize="17" HorizontalOptions="FillAndExpand" >
 
                                         </Entry>
                                     </StackLayout>
 
                                 </StackLayout>
                                 <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center">
-                                   
 
-                                   
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label VerticalOptions="End" Text="&#xf042;" FontSize="40" FontFamily="Material/Sharp" TextColor="OrangeRed"></Label>
+                                        <Entry Placeholder="Contraseña:" Text="{Binding conPasswordUpdate, Mode=TwoWay}" BackgroundColor="white" TextColor="Black"  Keyboard="Text" IsPassword="True" Visual="Material" x:Name="password" FontSize="17" HorizontalOptions="FillAndExpand" >
+
+                                        </Entry>
+                                    </StackLayout>
+
+                                </StackLayout>
+                                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+
+
+
                                     <StackLayout Margin="30"  HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
                                         <StackLayout.GestureRecognizers>
                                             <TapGestureRecognizer Command="{Binding updateEmail}">
-                                                
+
                                             </TapGestureRecognizer>
                                         </StackLayout.GestureRecognizers>
                                         <Frame>
                                             <StackLayout Orientation="Horizontal">
-                                                <Label VerticalOptions="End" Text="&#xe923;" FontSize="30" FontFamily="Material/Sharp" TextColor="Red"></Label>
-                                                <Label  BackgroundColor="White" TextColor="Black"  HorizontalOptions="FillAndExpand" Text="Actualizar Correo"></Label>
+                                                <Label VerticalOptions="Center" Text="&#xe923;" FontSize="30" FontFamily="Material/Sharp" TextColor="OrangeRed"></Label>
+                                                <Label VerticalOptions="Center" BackgroundColor="White" FontSize="18" TextColor="Black"  HorizontalOptions="CenterAndExpand" Text="Actualizar Correo"></Label>
                                             </StackLayout>
                                         </Frame>
-                                      
+
                                     </StackLayout>
 
                                 </StackLayout>

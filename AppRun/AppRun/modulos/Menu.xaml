@@ -1,64 +1,70 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-            xmlns:local="clr-namespace:AppRun.ViewModel"
-             x:Class="AppRun.Menu"
-         
-             Title="Flyout">
-   
-   
-  <StackLayout BackgroundColor="White">
-       
+             xmlns:local="clr-namespace:AppRun.ViewModel"
+             x:Class="AppRun.Menu"        
+             Title="Flyout"
+             StyleClass="FlyoutItemLayoutStyle">
+
+
+    <StackLayout BackgroundColor="White">
+
         <ListView x:Name="MenuItemsListView"
               SeparatorVisibility="None"
+              SeparatorColor="AntiqueWhite"
+              HorizontalOptions="StartAndExpand"
+              
               HasUnevenRows="true"
               ItemsSource="{Binding MenuItems}">
-      <ListView.Header>
-
-                <StackLayout Margin="0,0,0,40" Orientation="Vertical">
+            <ListView.Header>
+                <StackLayout  Orientation="Vertical">
                     <StackLayout>
-
-                        <Frame  Padding="-20"  IsClippedToBounds="True" CornerRadius="100" HorizontalOptions="CenterAndExpand" HeightRequest="{OnPlatform iOS=150,Android=150}"
-                                              WidthRequest="{OnPlatform iOS=150,Android=150}"  Margin="0,32,0,0" BackgroundColor="#3498db" >
-                            <Image  x:Name="perfil" Source="{Binding PerfilRest, Mode=TwoWay}" HorizontalOptions="Center" VerticalOptions="Center" Aspect="AspectFill" />
+                        <Frame  Padding="-20"  
+                                IsClippedToBounds="True"
+                                CornerRadius="100" 
+                                HorizontalOptions="CenterAndExpand" 
+                                HeightRequest="{OnPlatform iOS=150,Android=150}"
+                                Margin="0,32,0,0"      
+                                WidthRequest="{OnPlatform iOS=150,Android=150}"  
+                                BackgroundColor="OrangeRed">
+                            <Image  x:Name="perfil" Source="loguito" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Aspect="AspectFill" />
                         </Frame>
-                     </StackLayout>
-                    <StackLayout>
+                    </StackLayout>
+                    <StackLayout Padding="0,0,0,20">
                         <StackLayout.GestureRecognizers>
                             <TapGestureRecognizer Tapped="ToolbarItem_Clicked"></TapGestureRecognizer>
                         </StackLayout.GestureRecognizers>
-
-                        <Label Margin="10" x:Name="userlogueado"  FontAttributes="Bold" FontSize="20" HorizontalTextAlignment="Center">
-
+                        <Label Margin="10" x:Name="userlogueado" TextColor="Black" HorizontalOptions="Center" FontAttributes="Bold" FontSize="20" VerticalOptions="Start"  Padding="0,10,10,0">
                         </Label>
-                       
                     </StackLayout>
 
 
                 </StackLayout>
             </ListView.Header>
-            
-      <ListView.ItemTemplate>
-        <DataTemplate>
-          <ViewCell>
-            <StackLayout Orientation="Horizontal" Padding="30,15" HorizontalOptions="FillAndExpand">
 
-               <Image Aspect="AspectFill" Source="{Binding icono}"></Image> 
-              <Label Margin="5"  VerticalOptions="FillAndExpand" 
-                    VerticalTextAlignment="Center" 
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell Tapped="ViewCell_Tapped" >
+                        <StackLayout Orientation="Horizontal" Padding="20,0" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand">
+
+                            <Image Aspect="AspectFit" WidthRequest="40"  Source="{Binding icono}"></Image>
+                            <Label Margin="10" Padding="1" VerticalOptions="CenterAndExpand" 
+                    WidthRequest="200"
                     Text="{Binding Title}" 
                     FontAttributes="Bold"
-                    FontSize="20"/>
-                
-            </StackLayout>
-              
-          </ViewCell>
-            
-        </DataTemplate>
-      </ListView.ItemTemplate>
-    </ListView>
+                    TextColor="Black"
+                    FontSize="18"/>
 
-        
+                        </StackLayout>
+                    </ViewCell>
+
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+
+        </ListView>
+
+
 
     </StackLayout>
 </ContentPage>

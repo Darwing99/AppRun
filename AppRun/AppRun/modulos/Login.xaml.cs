@@ -1,8 +1,6 @@
 ﻿using AppRun.ViewModel;
 using AppRun.modulos;
-using AppRun.services;
 using System;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -13,7 +11,7 @@ namespace AppRun
     public partial class Login : ContentPage
     {
       
-
+        protected override bool OnBackButtonPressed() { return true; }
         public Login()
         {
  

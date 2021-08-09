@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-          
              xmlns:chart1="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
              x:Class="AppRun.Progreso"
              Title="Progreso">
@@ -10,58 +9,50 @@
             <ScrollView>
                 <StackLayout HorizontalOptions="FillAndExpand">
                     <StackLayout  Padding="20,10,20,0"  HorizontalOptions="FillAndExpand" Orientation="Vertical">
-                     
+
                         <StackLayout HorizontalOptions="FillAndExpand">
-                            <Label Text="Calorias Quemadas"  FontSize="20" FontAttributes="Bold" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+                            <Label Text="Calorias Quemadas" Padding="10" TextColor="Black" HorizontalOptions="CenterAndExpand"  FontSize="25" FontAttributes="Bold"  VerticalOptions="FillAndExpand" />
+
                             <Frame VerticalOptions="FillAndExpand" CornerRadius="5" HasShadow="True">
 
                                 <StackLayout Orientation="Vertical">
 
                                     <chart1:ChartView HeightRequest="150"  VerticalOptions="FillAndExpand" x:Name="MyLineChart" ></chart1:ChartView>
-                                    
+
                                 </StackLayout>
 
                             </Frame>
-                            <Label Text="Carreras"  FontSize="20" FontAttributes="Bold" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+                            <Label Text="Carreras" Padding="10"  TextColor="Black" HorizontalOptions="CenterAndExpand"  FontSize="25" FontAttributes="Bold"  VerticalOptions="FillAndExpand" />
                             <Frame VerticalOptions="FillAndExpand" CornerRadius="5" HasShadow="True">
 
                                 <StackLayout Orientation="Vertical">
 
-                                   
+
                                     <chart1:ChartView HeightRequest="100" HorizontalOptions="FillAndExpand" x:Name="MyDonutChart" ></chart1:ChartView>
-                                    
+
 
                                 </StackLayout>
 
                             </Frame>
-                            <Label Text="Tiempo"  FontSize="20" FontAttributes="Bold" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+                            <Label Text="Tiempo Total" Padding="10"  TextColor="Black" HorizontalOptions="CenterAndExpand"  FontSize="25" FontAttributes="Bold"  VerticalOptions="FillAndExpand" />
                             <Frame VerticalOptions="FillAndExpand" CornerRadius="5" HasShadow="True">
 
                                 <StackLayout Orientation="Vertical">
 
-                                    
+
                                     <chart1:ChartView HeightRequest="100"  VerticalOptions="FillAndExpand" x:Name="MyPointChart" ></chart1:ChartView>
-                                   
+
 
                                 </StackLayout>
 
                             </Frame>
-                            <Frame VerticalOptions="FillAndExpand" CornerRadius="5" HasShadow="True">
-
-                                <StackLayout Orientation="Vertical">
-
-                                
-                                    <chart1:ChartView HeightRequest="200"  VerticalOptions="FillAndExpand" x:Name="MyRadialGaugeChart" ></chart1:ChartView>
-                                 
-                                </StackLayout>
-
-                            </Frame>
+                            <Label Text="Tiempo por carrera" Padding="10"  TextColor="Black" HorizontalOptions="CenterAndExpand"  FontSize="25" FontAttributes="Bold"  VerticalOptions="FillAndExpand" />
                             <Frame VerticalOptions="FillAndExpand" CornerRadius="5" HasShadow="True">
 
                                 <StackLayout Orientation="Vertical">
 
 
-                                  
+
                                     <chart1:ChartView HeightRequest="200"  VerticalOptions="FillAndExpand" x:Name="MyBarChart" ></chart1:ChartView>
 
                                 </StackLayout>
@@ -69,10 +60,10 @@
                             </Frame>
 
                         </StackLayout >
-                     
+
 
                     </StackLayout>
-                    
+
                 </StackLayout>
             </ScrollView>
         </StackLayout>

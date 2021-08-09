@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using AppRun.clases;
@@ -19,7 +20,7 @@ namespace AppRun.ViewModel
         private readonly IGoogleManager _googleManager;
         GoogleUser GoogleUser = new GoogleUser();
         public bool IsLogedIn { get; set; }
-        IFirebaseAuthentication auth;
+        IFirebaseAuthentication aut;
 
         List<UsuariosRest> service;
         RestApiLogin restService;
@@ -106,14 +107,16 @@ namespace AppRun.ViewModel
 
         //Autenticacion con google
 
+      
         public async void LoginGoogle()
         {
 
             var authProvider = new FirebaseAuthProvider(new FirebaseConfig(Constantes.ApiKey));
+           
             try
             {
-
-                var auth = await authProvider.SignInWithGoogleIdTokenAsync("645734344");
+                
+                var auth = await authProvider.SignInWithGoogleIdTokenAsync("666");
                 var content = await auth.GetFreshAuthAsync();
                 var serializedcontnet = JsonConvert.SerializeObject(content);
                 string correo = content.User.Email.ToString();
@@ -164,45 +167,44 @@ namespace AppRun.ViewModel
                         "Ok");
                     return;
                 }
+            var authProvider = new FirebaseAuthProvider(new FirebaseConfig(Constantes.ApiKey));
+            try
+            {
 
+                var auth = await authProvider.SignInWithEmailAndPasswordAsync(EmailTxt.ToString(), PasswordTxt.ToString());
+                var content = await auth.GetFreshAuthAsync();
+                var serializedcontnet = JsonConvert.SerializeObject(content);
 
+                string token = content.FirebaseToken;
+                string correo = content.User.Email.ToString();
+                string iduser = content.User.LocalId.ToString();
+                service = await restService.GetRepositoriesAsync(Constantes.urlGet);
+                var listaSeleccionada = service.Where(c => c.idToken.ToString().Contains(iduser.ToString()));
 
-                var authProvider = new FirebaseAuthProvider(new FirebaseConfig(Constantes.ApiKey));
-                try
+                if (listaSeleccionada != null)
                 {
-                    
-                    var auth = await authProvider.SignInWithEmailAndPasswordAsync(EmailTxt.ToString(), PasswordTxt.ToString());
-                    var content = await auth.GetFreshAuthAsync();
-                    var serializedcontnet = JsonConvert.SerializeObject(content);
 
-                    string token = content.FirebaseToken;
-                    string correo = content.User.Email.ToString();
-                    string iduser = content.User.LocalId.ToString();
-                    service = await restService.GetRepositoriesAsync(Constantes.urlGet);
-                    var listaSeleccionada = service.Where(c => c.idToken.ToString().Contains(iduser.ToString()));
-                  
-                    if (listaSeleccionada != null)
-                    {
-              
-                        byte[] image = listaSeleccionada.FirstOrDefault().image;
-                        Preferences.Set("id", listaSeleccionada.FirstOrDefault().id.ToString());
-                     
-                        Preferences.Set("nombre", listaSeleccionada.FirstOrDefault().name);
+                    // byte[] image = listaSeleccionada.FirstOrDefault().image;
+                    Preferences.Set("id", listaSeleccionada.FirstOrDefault().id.ToString());
+
+                    Preferences.Set("nombre", listaSeleccionada.FirstOrDefault().name);
                 }
-                    Preferences.Set("correo", correo);
-                    Preferences.Set("iduser", iduser);
-                  
-                    this.IsVisibleTxt = true;
-                    this.IsRunningTxt = true;
-                    await Application.Current.MainPage.Navigation.PushAsync(new Inicio());
+                Preferences.Set("correo", correo);
+                Preferences.Set("iduser", iduser);
+
+                this.IsVisibleTxt = true;
+                this.IsRunningTxt = true;
+                await Application.Current.MainPage.Navigation.PushAsync(new Inicio());
 
             }
-                catch (Exception ex)
-                {
-                    await App.Current.MainPage.DisplayAlert("Alert", "Usuario o contraseña invalida", "OK");
-                }
+            catch (Exception ex)
+            {
+                await App.Current.MainPage.DisplayAlert("Alert", "Usuario o contraseña invalida", "OK");
+            }
 
-                this.IsEnabledTxt = false;
+
+
+            this.IsEnabledTxt = false;
 
                 await Task.Delay(20);
 
@@ -243,8 +245,7 @@ namespace AppRun.ViewModel
 
 
 
-
-
+      
 
         //Login Con Google
 
@@ -256,24 +257,27 @@ namespace AppRun.ViewModel
             }
         }
 
-        private void OnLoginComplete(GoogleUser googleUser, string message)
+        private async void OnLoginComplete(GoogleUser googleUser, string message)
         {
-
+           
 
             if (googleUser != null)
             {
                 GoogleUser = googleUser;
-
-                Preferences.Set("id", GoogleUser.id);
-                Preferences.Set("correo", GoogleUser.Email);
+               
+                string correo = GoogleUser.Email;
+                string iduser = GoogleUser.id;
+               
+                Preferences.Set("correo", correo);
+                Preferences.Set("iduser", iduser);
                 Preferences.Set("nombre", GoogleUser.Name);
                 Preferences.Set("foto", GoogleUser.Picture.ToString());
-                EmailTxt = GoogleUser.Email;
-                IsLogedIn = true;
+                LoginGoogle();
+                await Application.Current.MainPage.Navigation.PushAsync(new Inicio());
             }
             else
             {
-                Application.Current.MainPage.DisplayAlert("Message", message, "Ok");
+                await Application.Current.MainPage.DisplayAlert("Message", message, "Ok");
             }
         }
 

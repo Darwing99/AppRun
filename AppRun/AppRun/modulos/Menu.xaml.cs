@@ -17,7 +17,7 @@ namespace AppRun
     public partial class Menu : ContentPage
     {
         public ListView ListView;
-
+        ViewCell lastCell;
         public Menu()
         {
             InitializeComponent();
@@ -99,6 +99,17 @@ namespace AppRun
         {
             await Navigation.PushAsync(new Settings());
 
+        }
+        private void ViewCell_Tapped(object sender, System.EventArgs e)
+        {
+            if (lastCell != null)
+                lastCell.View.BackgroundColor = Color.Transparent;
+            var viewCell = (ViewCell)sender;
+            if (viewCell.View != null)
+            {
+                viewCell.View.BackgroundColor = Color.OrangeRed;
+                lastCell = viewCell;
+            }
         }
     }
 }
