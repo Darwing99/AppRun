@@ -2,14 +2,34 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppRun.Corredores"
+               xmlns:vm="clr-namespace:AppRun.ViewModel"
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              xmlns:xct="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
              Title="Corredores"
              >
+
+    <ContentPage.BindingContext>
+        <vm:CorredoresViewModel/>
+    </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout>
-            <SearchBar PlaceholderColor="Black" x:Name="search" Text="{Binding BuscarCorredores}" SearchCommand="{Binding BuscarCorredor}"  Placeholder="Buscar Corredores">
+            <StackLayout 
+                        Orientation="Horizontal"
+                        VerticalOptions="Start"
+                        Padding="10"
+                        x:Name="searchLayout">
+                <yummy:PancakeView x:Name="multiGradient" HorizontalOptions="FillAndExpand" HeightRequest="150"
+                               CornerRadius="10" 
+                               BackgroundGradientStops="{Binding BackgroundGradientStops}"
+                               BackgroundGradientStartPoint="{Binding BackgroundGradientStartPoint2}"
+                               BackgroundGradientEndPoint="{Binding BackgroundGradientEndPoint2}">
 
-            </SearchBar>
+                    <SearchBar PlaceholderColor="Black" x:Name="search" Text="{Binding BuscarCorredores}" FontFamily="Hammer" SearchCommand="{Binding BuscarCorredor}" TextColor="Black"  Placeholder="Buscar Corredores">
+
+                    </SearchBar>
+                </yummy:PancakeView>
+            </StackLayout>
+            
             <ScrollView>
               
                 <StackLayout Margin="10">

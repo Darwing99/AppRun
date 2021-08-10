@@ -19,7 +19,7 @@ namespace AppRun.Droid
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            StartActivity(new Intent(Application.Context, typeof(MainActivity)));
+           // StartActivity(new Intent(Application.Context, typeof(MainActivity)));
             // Create your application here
         }
 

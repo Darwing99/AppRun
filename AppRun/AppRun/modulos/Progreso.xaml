@@ -2,89 +2,67 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:chart1="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
-              xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              x:Class="AppRun.Progreso"
+              xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              Title="Progreso">
     <ContentPage.Content>
-        <StackLayout>
-            <ScrollView>
-                <StackLayout HorizontalOptions="FillAndExpand">
-                    <StackLayout VerticalOptions="Center" IsVisible="false" x:Name="nografico">
-                       
-                        <yummy:PancakeView x:Name="cornerRadius" BackgroundColor="White" Margin="10,10,10,10" Border="{yummy:BorderMarkup Color=OrangeRed, Thickness=3}"
-                        CornerRadius="82" HorizontalOptions="FillAndExpand" HeightRequest="150">
-                            <Grid>
-                                <Image Source="fondo" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Aspect="AspectFill" />
-                                <Label BackgroundColor="#CC000000" Padding="5" Text="Aqui podras ver todas tus carreras e informacion extra."
-                           HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" TextColor="White" />
-                            </Grid>
-                        </yummy:PancakeView>
-                      
-                    </StackLayout>
-                    <StackLayout IsVisible="true" x:Name="graficos"  Padding="20,10,20,0"  HorizontalOptions="FillAndExpand" Orientation="Vertical">
+        <StackLayout >
+            <ScrollView Padding="5,0,0,0" Visual="Material">
+                <StackLayout HorizontalOptions="FillAndExpand" Padding="2,0">
+                    <StackLayout  Padding="20,10,20,0"  HorizontalOptions="FillAndExpand" Orientation="Vertical">
 
                         <StackLayout HorizontalOptions="FillAndExpand">
-                            <Label Text="Tiempos por carrera(segundos) " Padding="10" TextColor="Black" HorizontalOptions="CenterAndExpand"  FontSize="20" FontAttributes="Bold"  VerticalOptions="FillAndExpand" />
-
-                            <Frame VerticalOptions="FillAndExpand" CornerRadius="5" HasShadow="True">
-
-                                <StackLayout Orientation="Vertical">
-
-                                    <chart1:ChartView HeightRequest="150"  VerticalOptions="FillAndExpand" x:Name="MyLineChart" ></chart1:ChartView>
-
-                                </StackLayout>
-
-                            </Frame>
-                            <Label Text="Distancias Recorridas" Padding="10"  TextColor="Black" HorizontalOptions="CenterAndExpand"  FontSize="20" FontAttributes="Bold"  VerticalOptions="FillAndExpand" />
-                            <Frame VerticalOptions="FillAndExpand" CornerRadius="5" HasShadow="True">
-
-                                <StackLayout Orientation="Vertical">
+                            <StackLayout Orientation="Vertical" Padding="2,0">
+                                <Label Text="Calorias Quemadas" Padding="10" TextColor="Black" HorizontalOptions="CenterAndExpand"  FontSize="25" FontAttributes="Bold"  VerticalOptions="FillAndExpand" />
+                                <yummy:PancakeView Margin="0,0,0,0" BackgroundColor="White"
+                                            HorizontalOptions="FillAndExpand"  HeightRequest="150" CornerRadius="40,10,40,10">
+                                    <yummy:PancakeView.Shadow>
+                                        <yummy:DropShadow x:Name="shadow" Color="{Binding ShadowColor}" Offset="{Binding ShadowOffset}" />
+                                    </yummy:PancakeView.Shadow>
+                                    <chart1:ChartView HeightRequest="150"   VerticalOptions="FillAndExpand" x:Name="MyLineChart" ></chart1:ChartView>
+                                </yummy:PancakeView>
+                            </StackLayout>
 
 
+                            <StackLayout Orientation="Vertical">
+                                <Label Text="Carreras" Padding="10"  TextColor="Black" HorizontalOptions="CenterAndExpand"  FontSize="25" FontAttributes="Bold"  VerticalOptions="FillAndExpand" />
+                                <yummy:PancakeView Margin="0,0,0,0" BackgroundColor="White"
+                                            HorizontalOptions="FillAndExpand"  HeightRequest="150" CornerRadius="40,10,40,10">
+                                    <yummy:PancakeView.Shadow>
+                                        <yummy:DropShadow  Color="{Binding ShadowColor}" Offset="{Binding ShadowOffset}" />
+                                    </yummy:PancakeView.Shadow>
                                     <chart1:ChartView HeightRequest="100" HorizontalOptions="FillAndExpand" x:Name="MyDonutChart" ></chart1:ChartView>
+                                </yummy:PancakeView>
+
+                            </StackLayout>
 
 
-                                </StackLayout>
-
-                            </Frame>
-                            <Label Text="Tiempo Total" Padding="10"  TextColor="Black" HorizontalOptions="CenterAndExpand"  FontSize="20" FontAttributes="Bold"  VerticalOptions="FillAndExpand" />
-                            <Frame VerticalOptions="FillAndExpand" CornerRadius="5" HasShadow="True">
-
-                                <StackLayout Orientation="Vertical">
-
-
+                            <StackLayout Orientation="Vertical">
+                                <Label Text="Tiempo Total" Padding="10"  TextColor="Black" HorizontalOptions="CenterAndExpand"  FontSize="25" FontAttributes="Bold"  VerticalOptions="FillAndExpand" />
+                                <yummy:PancakeView Margin="0,0,0,0" BackgroundColor="White"
+                                            HorizontalOptions="FillAndExpand"  HeightRequest="150" CornerRadius="40,10,40,10">
+                                    <yummy:PancakeView.Shadow>
+                                        <yummy:DropShadow  Color="{Binding ShadowColor}" Offset="{Binding ShadowOffset}" />
+                                    </yummy:PancakeView.Shadow>
                                     <chart1:ChartView HeightRequest="100"  VerticalOptions="FillAndExpand" x:Name="MyPointChart" ></chart1:ChartView>
 
+                                </yummy:PancakeView>
 
-                                </StackLayout>
+                            </StackLayout>
 
-                            </Frame>
-                            <Label Text="Calorias  quemadas por carrera" Padding="10"  TextColor="Black" HorizontalOptions="CenterAndExpand"  FontSize="20" FontAttributes="Bold"  VerticalOptions="FillAndExpand" />
-                            <Frame VerticalOptions="FillAndExpand" CornerRadius="5" HasShadow="True">
-
-                                <StackLayout Orientation="Vertical">
-
+                            <StackLayout Orientation="Vertical">
+                                <Label Text="Tiempo por carrera" Padding="10"  TextColor="Black" HorizontalOptions="CenterAndExpand"  FontSize="25" FontAttributes="Bold"  VerticalOptions="FillAndExpand" />
+                                <yummy:PancakeView Margin="0,0,0,0" BackgroundColor="White"
+                                            HorizontalOptions="FillAndExpand"  HeightRequest="150" CornerRadius="40,10,40,10">
+                                    <yummy:PancakeView.Shadow>
+                                        <yummy:DropShadow  Color="{Binding ShadowColor}" Offset="{Binding ShadowOffset}" />
+                                    </yummy:PancakeView.Shadow>
                                     <chart1:ChartView HeightRequest="200"  VerticalOptions="FillAndExpand" x:Name="MyBarChart" ></chart1:ChartView>
 
-                                </StackLayout>
-
-                            </Frame>
-                            <Label Text="Calorias  quemadas por carrera" Padding="10"  TextColor="Black" HorizontalOptions="CenterAndExpand"  FontSize="20" FontAttributes="Bold"  VerticalOptions="FillAndExpand" />
-                            <Frame VerticalOptions="FillAndExpand" CornerRadius="5" HasShadow="True">
-
-                                <StackLayout Orientation="Vertical">
-
-                                    <chart1:ChartView HeightRequest="200"  VerticalOptions="FillAndExpand" x:Name="MyRadar" ></chart1:ChartView>
-
-                                </StackLayout>
-
-                            </Frame>
-
-                        </StackLayout >
-
-
+                                </yummy:PancakeView>
+                            </StackLayout>
+                        </StackLayout>
                     </StackLayout>
-
                 </StackLayout>
             </ScrollView>
         </StackLayout>

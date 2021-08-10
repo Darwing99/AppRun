@@ -84,8 +84,8 @@ namespace AppRun
                 }
                 if (datos.Count()==0)
                 {
-                    graficos.IsVisible = false;
-                    nografico.IsVisible = true;
+                   // graficos.IsVisible = false;
+                   //nografico.IsVisible = true;
                 }
             }
             catch (Exception e)
@@ -116,7 +116,7 @@ namespace AppRun
             MyBarChart.Chart = new BarChart { Entries = calorias, IsAnimated = true, LabelTextSize = 25, BarAreaAlpha = 29,LabelOrientation=Orientation.Horizontal,ValueLabelOrientation=Orientation.Horizontal};
             MyPointChart.Chart = new PointChart { Entries = lista, IsAnimated = true, LabelTextSize = 25, LabelOrientation = Orientation.Horizontal, ValueLabelOrientation = Orientation.Horizontal };
             // MyRadialGaugeChart.Chart = new RadialGaugeChart { Entries = lista, IsAnimated = true };
-            MyRadar.Chart = new RadarChart { Entries = lista, IsAnimated = true };
+            //MyRadar.Chart = new RadarChart { Entries = lista, IsAnimated = true };
         }
         public Progreso()
         {

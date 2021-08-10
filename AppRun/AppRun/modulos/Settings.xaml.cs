@@ -55,14 +55,19 @@ namespace AppRun
             await Navigation.PushAsync(new UpdateFoto());
            
         }
+        private async void TapGestureRecognizer_Poli(object sender, EventArgs e)
+        {
 
+            await Navigation.PushAsync(new PoliticaPriv());
+
+        }
         private async void cerrar_Clicked(object sender, EventArgs e)
         {
             Preferences.Clear();
-         
-            await Navigation.PushAsync(new Login(),true);
           
-            NavigationPage.SetHasNavigationBar(this, false);
+            await Navigation.PopAsync();
+
+            
         }
         
     }

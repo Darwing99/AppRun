@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppRun.modulos.PoliticaPriv"
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             Title="Informacion">
+    <ContentPage.Content>
+        <Grid>
+            <StackLayout  Orientation="Vertical" VerticalOptions="CenterAndExpand"
+                        Padding="10"
+                        x:Name="searchLayout">
+                <Frame Margin="40" CornerRadius="10">
+                    <Grid>
+                        <StackLayout Orientation="Vertical">
+                            <Label IsVisible="false" x:Name="idusuario" TextColor="black">
+
+                            </Label>
+                            <Frame  HeightRequest="{OnPlatform iOS=200,Android=200}"
+                                WidthRequest="{OnPlatform iOS=200,Android=200}" Padding="0" HorizontalOptions="CenterAndExpand" IsClippedToBounds="True" CornerRadius="100">
+                                <Image   HeightRequest="{OnPlatform iOS=200,Android=200}"
+                                WidthRequest="{OnPlatform iOS=200,Android=200}" Source="{Binding PerfilRest, Mode=TwoWay}" IsVisible="{Binding fotoVisible, Mode=TwoWay}" Visual="Material" HorizontalOptions="CenterAndExpand"  x:Name="perfil">
+
+
+                                </Image>
+                            </Frame>
+
+
+                            <Label x:Name="nombre" TextColor="black"  Text="{Binding NombrePreferencias, Mode=TwoWay}"  Margin="10"  FontAttributes="Bold" FontSize="20" HorizontalTextAlignment="Center">
+
+                            </Label>
+                            <Label x:Name="correo" TextColor="black" Text="{Binding EmailPreferencias, Mode=TwoWay}" FontSize="12" HorizontalOptions="CenterAndExpand">
+
+                            </Label>
+                        </StackLayout>
+                    </Grid>
+                </Frame>
+
+                <yummy:PancakeView  x:Name="cornerRadius" BackgroundColor="OrangeRed" Margin="0,32,0,0" Border="{yummy:BorderMarkup Color=OrangeRed, Thickness=2}"
+                CornerRadius="10,10" HorizontalOptions="FillAndExpand" HeightRequest="150">
+                    <Grid >
+                        <Image  Source="layoutheader" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Aspect="AspectFill" />
+                        <Label  BackgroundColor="#CC000000" Padding="5" Text="Revisa nuestra politica de privacidad."
+                           HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" TextColor="White" />
+
+                        <Entry IsVisible="false" x:Name="entURL" Text="https://sites.google.com/view/runforcegym/inicio"></Entry>
+                    </Grid>
+                </yummy:PancakeView>
+
+                <Button x:Name="btnBrowse" BackgroundColor="OrangeRed" Text="Click aqui" Clicked="btnOpenBrowser_Clicked" />
+
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

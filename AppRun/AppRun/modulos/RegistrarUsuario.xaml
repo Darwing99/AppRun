@@ -5,12 +5,10 @@
              x:Class="AppRun.modulos.RegistrarUsuario"
              Title="Sign Up">
     <ContentPage.Content>
-        <ScrollView>
+        <ScrollView Padding="10">
             <Grid>
-               
-                <Grid RowSpacing="{OnPlatform iOS=25,Android=20}">
 
-
+                <Grid RowSpacing="{OnPlatform iOS=25,Android=12}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <!--1-->
@@ -40,9 +38,11 @@
 
                             </TapGestureRecognizer>
                         </StackLayout.GestureRecognizers>
-                        <Frame HorizontalOptions="CenterAndExpand"  CornerRadius="100">
+                        <Frame Padding="0,0"  HorizontalOptions="CenterAndExpand"  CornerRadius="80">
                             <Image
-                        HorizontalOptions="CenterAndExpand"
+                         Aspect="AspectFill"  
+                        VerticalOptions="CenterAndExpand"
+                        HorizontalOptions="CenterAndExpand"      
                         Source="{Binding Camarabtn}"
                         HeightRequest="{OnPlatform iOS=120,Android=120}"
                         WidthRequest="{OnPlatform iOS=120,Android=120}"
@@ -58,6 +58,7 @@
 
                         <Entry
                     Placeholder="Email"
+                             BackgroundColor="White"
                     Visual="Material"
                     Keyboard="Email"
                     MaxLength="100"
@@ -75,9 +76,10 @@
 
 
                         <Entry
-                    Placeholder="Paswword"
+                            BackgroundColor="White"
+                    Placeholder="Password"
                     Visual="Material"
-                    MaxLength="105"
+                    MaxLength="50"
                     IsPassword="True"
                     FontSize="{OnPlatform Android=15,iOS=16}"
                     Text="{Binding PasswordTxt, Mode=TwoWay}"
@@ -96,7 +98,7 @@
                         <Entry
                     Placeholder="Nombre"
                     Visual="Material"
-                    MaxLength="100"
+                    MaxLength="200" BackgroundColor="White"
                     Keyboard="Text"
                     FontSize="{OnPlatform Android=15,iOS=16}"
                     Text="{Binding NameTxt, Mode=TwoWay}"
@@ -109,10 +111,14 @@
                         <StackLayout WidthRequest="300">
 
 
+
+
+
                             <Entry
                     Placeholder="Confirmar Contraseña"
-                    MaxLength="100"
+                    MaxLength="50"
                     Visual="Material"
+                                 BackgroundColor="White"
                     IsPassword="True"
                     FontSize="{OnPlatform Android=15,iOS=16}"
                     Keyboard="Text"
@@ -126,23 +132,16 @@
 
 
                     </StackLayout>
-                    <StackLayout Grid.Row="6" HorizontalOptions="Center" WidthRequest="300" Orientation="Horizontal" Spacing="20">
-                        <StackLayout  WidthRequest="300">
-
-
-
-                            <Frame
-                                   BackgroundColor="Transparent" 
-                                 BorderColor="#D40015"   
-                                 HasShadow="{OnPlatform Android=true,iOS=false}"
-                                 Padding="{OnPlatform Android=6,iOS=0}"
-                                 CornerRadius="{OnPlatform Android=7}"
+                    <StackLayout Grid.Row="6" HorizontalOptions="Center" WidthRequest="300" Orientation="Horizontal">
+                        <StackLayout BackgroundColor="Black" WidthRequest="300">
+                            <Frame Padding="12,10"
                                  >
 
                                 <StackLayout >
-                                    <Label   BackgroundColor="Transparent" TextColor="OrangeRed" Text="Selecciona Pais"></Label>
-                                    <Picker SelectedItem="{Binding paisSeleccionado}"   FontSize="{OnPlatform Android=20,iOS=20}"  BackgroundColor="Transparent" 
-                                     TextColor="OrangeRed" Visual="Material"   x:Name="pickerRegion" ></Picker>
+                                    <Label    TextColor="OrangeRed" Text="Selecciona Pais"></Label>
+                                    <Picker SelectedItem="{Binding paisSeleccionado}" 
+                                             BackgroundColor="White"
+                                     TextColor="Black" Visual="Material" SelectedIndex="33" x:Name="pickerRegion" ></Picker>
 
                                 </StackLayout>
 
@@ -167,7 +166,6 @@
                         <Button 
                      Text="Register"
                             TextColor="Black"
-                           
                             FontSize="{OnPlatform Android=15}"
                             BackgroundColor="#fcfcfc"
                             BorderColor="Black"
@@ -178,17 +176,17 @@
                             Command="{Binding RegisterCommand}"
                             IsEnabled="{Binding IsEnabledTxt, Mode=TwoWay}"
                     />
+
                         <Button
-                             CornerRadius="7"
-                            Margin="20"
-                            Text="Already have an acount? Log in"
+                            CornerRadius="7"
+                            Text="Ya tienes una cuenta? Log in"
                             TextColor="{OnPlatform iOS=Black}"
                             FontSize="{OnPlatform Android=11,iOS=12}"
                             BackgroundColor="OrangeRed"
                             Clicked="NavToLogin_Clicked"
                             />
-
                     </StackLayout>
+
                 </Grid>
             </Grid>
         </ScrollView>

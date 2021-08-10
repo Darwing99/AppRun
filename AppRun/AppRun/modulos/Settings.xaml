@@ -105,48 +105,22 @@
 
                     </StackLayout>
                 </Frame>
+
                 <Frame HasShadow="False" VerticalOptions="CenterAndExpand"  Margin="20,10,20,10" CornerRadius="10">
                     <StackLayout Orientation="Horizontal">
                         <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer x:Name="terminos" >
+                            <TapGestureRecognizer x:Name="politica" Tapped="TapGestureRecognizer_Poli" >
 
                             </TapGestureRecognizer>
                         </StackLayout.GestureRecognizers>
-                        <Label HorizontalOptions="StartAndExpand"  TextColor="Black"    FontAttributes="Bold"  Text="Términos y condiciones">
+                        <Label HorizontalOptions="StartAndExpand"  TextColor="Black"    FontAttributes="Bold" Text="Información">
 
                         </Label>
                         <Label Text="&#xe5cc;" FontSize="30" FontFamily="Material/Sharp" TextColor="black"></Label>
 
                     </StackLayout>
                 </Frame>
-                <Frame HasShadow="False" VerticalOptions="CenterAndExpand"  Margin="20,10,20,10" CornerRadius="10">
-                    <StackLayout Orientation="Horizontal">
-                        <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer x:Name="politica" >
 
-                            </TapGestureRecognizer>
-                        </StackLayout.GestureRecognizers>
-                        <Label HorizontalOptions="StartAndExpand"  TextColor="Black"    FontAttributes="Bold" Text="Política de privacidad">
-
-                        </Label>
-                        <Label Text="&#xe5cc;" FontSize="30" FontFamily="Material/Sharp" TextColor="black"></Label>
-
-                    </StackLayout>
-                </Frame>
-                <Frame HasShadow="False" VerticalOptions="CenterAndExpand"  Margin="20,10,20,10" CornerRadius="10">
-                    <StackLayout Orientation="Horizontal">
-                        <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer x:Name="information" >
-
-                            </TapGestureRecognizer>
-                        </StackLayout.GestureRecognizers>
-                        <Label HorizontalOptions="StartAndExpand" TextColor="Black"    FontAttributes="Bold"  Text="Información">
-
-                        </Label>
-                        <Label Text="&#xe5cc;" FontSize="30" FontFamily="Material/Sharp" TextColor="black"></Label>
-
-                    </StackLayout>
-                </Frame>
                 <Frame HasShadow="False" VerticalOptions="CenterAndExpand"  Margin="20,10,20,10" CornerRadius="10">
 
                     <StackLayout Orientation="Horizontal">
@@ -168,6 +142,5 @@
                 </Frame>
             </StackLayout>
         </ScrollView>
-
     </ContentPage.Content>
 </ContentPage>

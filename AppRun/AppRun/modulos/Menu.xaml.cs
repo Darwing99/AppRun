@@ -37,39 +37,47 @@ namespace AppRun
                 {
                     FontFamily = "UserIcons",
                     Glyph = "\U000F02DC",
-                    Color = Color.OrangeRed
+                    Color = Color.Black
                 };
                 var Run = new FontImageSource()
                 {
                     FontFamily = "UserIcons",
                     Glyph = "\U000F070E",
-                    Color = Color.OrangeRed
+                    Color = Color.Black
                 };
                 var progress = new FontImageSource()
                 {
                     FontFamily = "UserIcons",
-                     Glyph = "\U000F0996",
-                     Color = Color.OrangeRed
+                    Glyph = "\U000F0996",
+                    Color = Color.Black
                 };
                 var Estadistica = new FontImageSource()
                 {
                     FontFamily = "UserIcons",
                     Glyph = "\U000F0EA2",
-                    Color = Color.OrangeRed
+                    Color = Color.Black
                 };
                 var IconClasificacion = new FontImageSource()
                 {
                     FontFamily = "UserIcons",
-                    Glyph = "\U000F039A",
-                    Color=Color.OrangeRed
+                    Glyph = "\U000F1326",
+                    Color = Color.Black
 
                 };
                 var IconPerfil = new FontImageSource()
                 {
                     FontFamily = "UserIcons",
-                    Glyph = "\U000F0004",
-                    Color = Color.OrangeRed,
-                    
+                    Glyph = "\U000F105C",
+                    Color = Color.Black
+
+
+                };
+                var IconIniciarRutina = new FontImageSource()
+                {
+                    FontFamily = "UserIcons",
+                    Glyph = "\U000F1103",
+                    Color = Color.Black
+
 
                 };
                 MenuItems = new ObservableCollection<MenuItem>(new[]
@@ -79,7 +87,9 @@ namespace AppRun
                     new MenuItem { Id = 2, Title = "Progreso",icono=progress, TargetType=typeof(Progreso) },
                     new MenuItem { Id = 3, Title = "Estadisticas",icono=Estadistica,TargetType=typeof(Estadisticas) },
                     new MenuItem { Id = 4, Title = "Clasificación",icono=IconClasificacion,TargetType=typeof(Clasificacion) },
-                    new MenuItem { Id = 5, Title = "Perfil",icono=IconPerfil,TargetType=typeof(Settings) },
+                    new MenuItem { Id = 5, Title = "Iniciar Rutina",icono=IconIniciarRutina,TargetType=typeof(Home) },
+                    new MenuItem { Id = 6, Title = "Configuración",icono=IconPerfil,TargetType=typeof(Settings) },
+
                 });
             }
 

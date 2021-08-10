@@ -265,6 +265,13 @@ namespace AppRun.ViewModel
                 return new Command(() => updatePasswordUsuario());
             }
         }
+        public ICommand DeleteCuentaCommand
+        {
+            get
+            {
+                return new Command(() => DeleteCuenta());
+            }
+        }
 
 
         async void TomarSeleccionarFoto()
@@ -624,6 +631,42 @@ namespace AppRun.ViewModel
                 {
                     await App.Current.MainPage.DisplayAlert("Datos", "No se pudo actualizar", "OK");
                 }
+
+            }
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("Datos", "La contraseña es incorrecta", "OK");
+            }
+        }
+
+
+        public async void DeleteCuenta()
+        {
+
+
+            // var updateContrasenia = authUpdate.ChangeUserPassword(tokenfirebase, newpassword.Text);
+
+            if (string.IsNullOrEmpty(conPasswordUpdate))
+            {
+
+                await App.Current.MainPage.DisplayAlert("Alerta", "Debe confirmar password", "OK");
+                return;
+            }
+
+            if (Id == null) return;
+            if (conPasswordUpdate == PasswordActual && Id != "")
+            {
+                this.RunningProgress = true;
+                this.Progress = true;
+                var authUpdate = new FirebaseAuthProvider(new FirebaseConfig(Constantes.ApiKey));
+                var auth = await authUpdate.SignInWithEmailAndPasswordAsync(EmailPreferencias, PasswordActual);
+                var content = await auth.GetFreshAuthAsync();
+                string token = content.FirebaseToken;
+
+                var delete = authUpdate.DeleteUserAsync(token);
+
+                service = await restService.DeleteTodoItemAsync(Constantes.urlGet+id);
+              
 
             }
             else

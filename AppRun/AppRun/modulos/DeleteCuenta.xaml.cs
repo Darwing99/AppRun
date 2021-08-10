@@ -1,7 +1,4 @@
-﻿using AppRun.clases;
-using AppRun.Model;
-using AppRun.services;
-
+﻿using AppRun.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,19 +8,15 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace AppRun
+namespace AppRun.modulos
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Corredores : ContentPage
+    public partial class DeleteCuenta : ContentPage
     {
-        
-        public Corredores()
+        public DeleteCuenta()
         {
             InitializeComponent();
-          //  BindingContext = new MainPageModel();
-          
-           
+            BindingContext = new UpdateViewModel();
         }
-       
     }
 }

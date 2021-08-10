@@ -5,7 +5,7 @@ using Xamarin.Forms.Xaml;
 
 using System.Text.Json.Serialization;
 using AppRun.modulos;
-
+using System.Linq;
 
 namespace AppRun
 {
@@ -17,7 +17,7 @@ namespace AppRun
         public Home()
         {
             InitializeComponent();
-
+           
         }
 
         public async void OnEnterAddressTapped(object sender, EventArgs e)

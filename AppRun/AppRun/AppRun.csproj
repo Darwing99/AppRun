@@ -22,6 +22,7 @@
     <None Remove="Material\Fonts\materialdesignicons.ttf" />
     <None Remove="Material\Fonts\MaterialIcons-Regular.ttf" />
     <None Remove="Material\Fonts\MaterialIconsSharp-Regular.otf" />
+    <None Remove="Material\Fonts\MaterialRounded.otf" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,6 +30,7 @@
     <EmbeddedResource Include="Material\Fonts\materialdesignicons.ttf" />
     <EmbeddedResource Include="Material\Fonts\MaterialIcons-Regular.ttf" />
     <EmbeddedResource Include="Material\Fonts\MaterialIconsSharp-Regular.otf" />
+    <EmbeddedResource Include="Material\Fonts\MaterialRounded.otf" />
   </ItemGroup>
 
   <ItemGroup>
@@ -74,6 +76,9 @@
     <EmbeddedResource Update="modulos\Corredores.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="modulos\DeleteCuenta.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="modulos\Estadisticas.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -90,6 +95,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="modulos\Login.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="modulos\PoliticaPriv.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="modulos\Progreso.xaml">

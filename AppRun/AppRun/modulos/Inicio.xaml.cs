@@ -20,7 +20,7 @@ namespace AppRun
                 Navigation.PopAsync();
             }
         }
-        protected override bool OnBackButtonPressed() { return true; }
+        
         private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             var item = e.SelectedItem as MenuItem;
