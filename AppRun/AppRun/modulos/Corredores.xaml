@@ -8,15 +8,14 @@
     <ContentPage.Content>
         <StackLayout>
             <SearchBar PlaceholderColor="Black" x:Name="search" Text="{Binding BuscarCorredores}" SearchCommand="{Binding BuscarCorredor}"  Placeholder="Buscar Corredores">
-                
+
             </SearchBar>
-            
             <ScrollView>
               
                 <StackLayout Margin="10">
                     
                     <ListView RefreshControlColor="OrangeRed"  IsRefreshing="{Binding Refresc}" SelectedItem="{Binding SelectedCorredor}"   
-                              RowHeight="100"  x:Name="listaCorredores" ItemsSource="{Binding ListOfItems}"  >
+                              RowHeight="130"  x:Name="listaCorredores" ItemsSource="{Binding ListOfItems}"  >
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
@@ -26,14 +25,12 @@
                                                 <Frame Padding="-10,-10" HeightRequest="100" HorizontalOptions="StartAndExpand" IsClippedToBounds="True" CornerRadius="100">
                                                     <Image HeightRequest="100"  WidthRequest="100" Source="{Binding image,Converter={StaticResource bisc}}" ></Image>
                                                 </Frame>
-                                            
                                             </StackLayout >
-
                                             <StackLayout HorizontalOptions="EndAndExpand" Orientation="Vertical">
                                                 <Label FontAttributes="Bold" Text="{Binding name}"></Label>
-                                                <Label FontAttributes="Bold" Text="{Binding direccion}"></Label>
+                                                <Label FontAttributes="Bold" Text="{Binding pais}"></Label>
                                             </StackLayout>
-                                          
+                                       
                                         </StackLayout>
 
                                     </Frame>

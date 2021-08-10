@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -257,7 +258,13 @@ namespace AppRun.ViewModel
                 return new Command(() => TomarSeleccionarFoto());
             }
         }
-
+        public ICommand UpdatePasswordCommand
+        {
+            get
+            {
+                return new Command(() => updatePasswordUsuario());
+            }
+        }
 
 
         async void TomarSeleccionarFoto()
@@ -474,7 +481,7 @@ namespace AppRun.ViewModel
 
 
             var authUpdate = new FirebaseAuthProvider(new FirebaseConfig(Constantes.ApiKey));
-           
+            
             // var updateContrasenia = authUpdate.ChangeUserPassword(tokenfirebase, newpassword.Text);
             if (string.IsNullOrEmpty(EmailUpdate))
             {
@@ -492,10 +499,13 @@ namespace AppRun.ViewModel
             if (Id == null) return;
             if (conPasswordUpdate == PasswordActual && Id != "")
             {
-                string token = "eyJhbGciOiJSUzI1NiIsImtpZCI6IjFiYjk2MDVjMzZlOThlMzAxMTdhNjk1MTc1NjkzODY4MzAyMDJiMmQiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vYXBwLXJ1bm5pbmctMzE3MDAzIiwiYXVkIjoiYXBwLXJ1bm5pbmctMzE3MDAzIiwiYXV0aF90aW1lIjoxNjI3MzUzNzUwLCJ1c2VyX2lkIjoiU1VDaEN5NzQ5SmFIYUVjcnUwNEFpYzBvZXE5MyIsInN1YiI6IlNVQ2hDeTc0OUphSGFFY3J1MDRBaWMwb2VxOTMiLCJpYXQiOjE2MjczNTM3NTAsImV4cCI6MTYyNzM1NzM1MCwiZW1haWwiOiJkYXJ3aW5nMDEwMDAxMDBAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7ImVtYWlsIjpbImRhcndpbmcwMTAwMDEwMEBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.cIkq16pn1gdimejS6k8tpZUmrAEbH331mJVwV9UK-YTs6jYTNO_0xaOzs5SG_eqI3-7iFEUDnXeyuTivBkdzntHpVFr9ZhmU7Hcp-ymCHM0r9OqZ0fFJGefCP301XsZh7IW5ORc4-xxWOSI3OhEtyRvKTn-xiUp71tLFVj-OVBeI0lE9jVX52AYPAkucqw-eJvqSgBwImejXnnTHxBnL9yCnVDQBlVfbQ78wQjMCtbXAtcEDLh_gXmHecWkcEj4ybZSY0rilJoxSwXKl-WUkrML8eWB1AK1d_d6a8Pp4-Cn863de1jxp4ClbXOGNmW87QyTTIRNzdG1XUEvOYfneKg";
-                var updateEmail = authUpdate.ChangeUserEmail(token, EmailUpdate);
-                if (updateEmail.IsCompleted)
-                {
+               
+                var auth = await authUpdate.SignInWithEmailAndPasswordAsync(EmailPreferencias, PasswordActual);
+                var content = await auth.GetFreshAuthAsync();
+                string token = content.FirebaseToken;
+
+                var updateEmail = authUpdate.ChangeUserEmail(token,EmailUpdate);
+               
                     this.RunningProgress = true;
                     this.Progress = true;
                     var user = new UsuariosRest
@@ -504,7 +514,7 @@ namespace AppRun.ViewModel
                         idToken = IdToken,
                         tokenfirebase = IdTokenFirebase,
                         correo = EmailUpdate,
-                        name = NameUpdate,
+                        name = NombrePreferencias,
                         pais = paisSeleccionado,
                         fecha = Fecha,
                         estado = true,
@@ -521,18 +531,100 @@ namespace AppRun.ViewModel
                     var response = await client.PostAsync(Constantes.urlPost, contentJSON);
                     if (response.StatusCode == HttpStatusCode.OK)
                     {
-                        await App.Current.MainPage.DisplayAlert("Datos", "Se actualizo el nombre", "OK");
+                        await App.Current.MainPage.DisplayAlert("Datos", "Se actualizo el correo", "OK");
                         this.RunningProgress = false;
                         this.Progress = false;
                         Preferences.Set("nombre", NameUpdate);
+                        Preferences.Set("correo", EmailUpdate);
 
+                    }else
+                    {
+                    await App.Current.MainPage.DisplayAlert("Datos", "No se pudo actualizar", "OK");
                     }
+               
+            }
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("Datos", "La contraseña es incorrecta", "OK");
+            }
+        }
+
+
+
+        //actualizar password
+        public async void updatePasswordUsuario()
+        {
+
+
+            var authUpdate = new FirebaseAuthProvider(new FirebaseConfig(Constantes.ApiKey));
+
+            // var updateContrasenia = authUpdate.ChangeUserPassword(tokenfirebase, newpassword.Text);
+            if (string.IsNullOrEmpty(PasswordUpdate))
+            {
+
+                await App.Current.MainPage.DisplayAlert("Alerta", "Campo password esta vacio", "OK");
+                return;
+            }
+            if (string.IsNullOrEmpty(PasswordActual))
+            {
+
+                await App.Current.MainPage.DisplayAlert("Alerta", "Campo password esta vacio", "OK");
+                return;
+            }
+            if (string.IsNullOrEmpty(conPasswordUpdate))
+            {
+
+                await App.Current.MainPage.DisplayAlert("Alerta", "Debe confirmar password", "OK");
+                return;
+            }
+
+            if (Id == null) return;
+            if (conPasswordUpdate == PasswordActual && Id != "")
+            {
+
+                var auth = await authUpdate.SignInWithEmailAndPasswordAsync(EmailPreferencias, PasswordActual);
+                var content = await auth.GetFreshAuthAsync();
+                string token = content.FirebaseToken;
+
+                var updateEmail = authUpdate.ChangeUserPassword(token, PasswordUpdate);
+
+                this.RunningProgress = true;
+                this.Progress = true;
+                var user = new UsuariosRest
+                {
+                    id = Convert.ToInt32(Id),
+                    idToken = IdToken,
+                    tokenfirebase = IdTokenFirebase,
+                    correo = EmailPreferencias,
+                    name = NombrePreferencias,
+                    pais = paisSeleccionado,
+                    fecha = Fecha,
+                    estado = true,
+                    password = PasswordUpdate,
+                    image = PerfilByte,
+                    direccion = Direccion,
+
+                };
+
+
+                var client = new HttpClient();
+                var json = JsonConvert.SerializeObject(user);
+                var contentJSON = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await client.PostAsync(Constantes.urlPost, contentJSON);
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    await App.Current.MainPage.DisplayAlert("Datos", "Se actualizo la contraseña", "OK");
+                    this.RunningProgress = false;
+                    this.Progress = false;
+                  
+                   
+
                 }
                 else
                 {
                     await App.Current.MainPage.DisplayAlert("Datos", "No se pudo actualizar", "OK");
                 }
-               
+
             }
             else
             {

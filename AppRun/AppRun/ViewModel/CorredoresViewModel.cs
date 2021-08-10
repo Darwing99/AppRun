@@ -55,8 +55,6 @@ namespace AppRun.ViewModel
             }
         }
 
-    
-
         public ICommand BuscarCorredor
         {
             get

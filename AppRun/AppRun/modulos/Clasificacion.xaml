@@ -2,12 +2,16 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppRun.Clasificacion"
+             xmlns:vm="clr-namespace:AppRun.ViewModel"
              xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              Title="Clasificaciones">
+    <ContentPage.BindingContext>
+        <vm:ModelViewClasificacion/>
+    </ContentPage.BindingContext>
     <ContentPage.Content>
         <Grid>
             <StackLayout 
-                        Orientation="Horizontal"
+                        Orientation="Vertical"
                         VerticalOptions="Start"
                         Padding="10"
                         x:Name="searchLayout">
@@ -22,6 +26,37 @@
                        HorizontalOptions="Center" VerticalOptions="Center" TextColor="#000000" />
 
                 </yummy:PancakeView>
+
+                <StackLayout BackgroundColor="AliceBlue" Margin="10">
+
+                    <ListView RefreshControlColor="OrangeRed"  IsRefreshing="{Binding Refresc}" 
+                              RowHeight="300"  x:Name="listaCorredores" ItemsSource="{Binding Clasificacion}"  >
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Frame Margin="10" HeightRequest="50" CornerRadius="2">
+                                        <StackLayout  Margin="0" Orientation="Horizontal">
+                                            
+                                            <StackLayout HorizontalOptions="EndAndExpand" Orientation="Vertical">
+                                                <Label FontAttributes="Bold" Text="{Binding name}"></Label>
+                                                <Label FontAttributes="Bold" Text="{Binding tiempohoras}"></Label>
+                                                <Label FontAttributes="Bold" Text="{Binding calorias}"></Label>
+                                                <Label FontAttributes="Bold" Text="{Binding velocidad}"></Label>
+                                                <Label FontAttributes="Bold" Text="{Binding distancia}"></Label>
+                                                
+                                            </StackLayout>
+
+                                        </StackLayout>
+
+                                    </Frame>
+
+                                </ViewCell>
+
+
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
             </StackLayout>
         </Grid>
     </ContentPage.Content>

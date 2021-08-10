@@ -39,7 +39,7 @@ namespace AppRun
             try
             {
                 service = await restService.GetRepositoriesAsync(Constantes.urlGetCarreras);
-               var datos = service.Where(c => c.idUser.ToString().Contains(Preferences.Get("id", "").ToString()));
+                var datos = service.Where(c => c.idUser.ToString().Contains(Preferences.Get("id", "").ToString()));
 
                 if (datos != null)
                 {
@@ -51,10 +51,10 @@ namespace AppRun
                     {
                         var color = String.Format("#{0:X6}", random.Next(0x1000000));
 
-                        lista.Add(new ChartEntry((float)(data.distancia))
+                        lista.Add(new ChartEntry((float)(data.tiempo))
                         {
-                            Label = data.fecha.ToString(),
-                            ValueLabel = data.distancia.ToString(),
+                            Label = data.carrera.ToString(),
+                            ValueLabel = data.tiempo.ToString(),
                             Color = SKColor.Parse(color)
 
                         });
@@ -82,6 +82,11 @@ namespace AppRun
                         });
                     }
                 }
+                if (datos.Count()==0)
+                {
+                    graficos.IsVisible = false;
+                    nografico.IsVisible = true;
+                }
             }
             catch (Exception e)
 
@@ -106,11 +111,12 @@ namespace AppRun
             Data();
             
             
-            MyLineChart.Chart = new LineChart { Entries = lista, AnimationProgress = 4, LineMode = LineMode.Straight, LabelTextSize = 20, IsAnimated = true };
+            MyLineChart.Chart = new LineChart { Entries = lista, AnimationProgress = 4, LineMode = LineMode.Straight, LabelTextSize = 25, LabelOrientation = Orientation.Horizontal, ValueLabelOrientation = Orientation.Horizontal, IsAnimated = true };
             MyDonutChart.Chart = new DonutChart { Entries = distancias, IsAnimated = true };
-            MyBarChart.Chart = new BarChart { Entries = velocidad, IsAnimated = true, BarAreaAlpha = 29};
-            MyPointChart.Chart = new PointChart { Entries = lista, IsAnimated = true };
-           // MyRadialGaugeChart.Chart = new RadialGaugeChart { Entries = lista, IsAnimated = true };
+            MyBarChart.Chart = new BarChart { Entries = calorias, IsAnimated = true, LabelTextSize = 25, BarAreaAlpha = 29,LabelOrientation=Orientation.Horizontal,ValueLabelOrientation=Orientation.Horizontal};
+            MyPointChart.Chart = new PointChart { Entries = lista, IsAnimated = true, LabelTextSize = 25, LabelOrientation = Orientation.Horizontal, ValueLabelOrientation = Orientation.Horizontal };
+            // MyRadialGaugeChart.Chart = new RadialGaugeChart { Entries = lista, IsAnimated = true };
+            MyRadar.Chart = new RadarChart { Entries = lista, IsAnimated = true };
         }
         public Progreso()
         {

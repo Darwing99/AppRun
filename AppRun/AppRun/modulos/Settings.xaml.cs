@@ -59,7 +59,7 @@ namespace AppRun
         private async void cerrar_Clicked(object sender, EventArgs e)
         {
             Preferences.Clear();
-           
+         
             await Navigation.PushAsync(new Login(),true);
           
             NavigationPage.SetHasNavigationBar(this, false);

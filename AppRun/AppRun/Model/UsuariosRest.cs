@@ -18,13 +18,14 @@ namespace AppRun.Model
         [JsonProperty("correo")]
         public string correo { get; set; }
         [JsonProperty("pais")]
-        public string pais;
+        public string pais { get; set; }
         [JsonProperty("fecha")]
         public DateTime fecha { get; set; }
         [JsonProperty("image")]
         public byte[] image { get; set; }
         [JsonProperty("direccion")]
         public string direccion { get; set; }
+       
         [JsonProperty("password")]
         public string password { get; set; }
         [JsonProperty("estado")]

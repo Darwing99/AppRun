@@ -4,6 +4,7 @@
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
              ios:Page.UseSafeArea="true"
              x:Class="AppRun.modulos.SearchPlacePage"
+             FocusOriginCommand="{Binding FocusOriginCommand}"
              Title="Destinos de la carrera">
 
     <StackLayout >
@@ -59,7 +60,7 @@
             <ListView VerticalOptions="FillAndExpand"
                         BackgroundColor="Transparent"
                         Grid.Row="2"
-                        Footer=""
+                      
                         SelectedItem="{Binding PlaceSelected, Mode=TwoWay}"
                         x:Name="list"
                         ItemsSource="{Binding Places}"

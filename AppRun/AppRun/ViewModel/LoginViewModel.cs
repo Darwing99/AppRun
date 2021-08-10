@@ -219,23 +219,17 @@ namespace AppRun.ViewModel
                 var authReset = new FirebaseAuthProvider(new FirebaseConfig(Constantes.ApiKey));
                 try
                 {
-
-                if (string.IsNullOrEmpty(EmailTxt.ToString()))
-                {
-                    await App.Current.MainPage.DisplayAlert("Alerta", "Escriba un Email","OK");
-                    return;
+                    if (string.IsNullOrEmpty(EmailTxt.ToString()))
+                    {
+                        await App.Current.MainPage.DisplayAlert("Alerta", "Escriba un Email","OK");
+                        return;
+                    }
+                    else
+                    {
+                        var auth = authReset.SendEmailVerificationAsync(EmailTxt.ToString());
+                        string result = await App.Current.MainPage.DisplayPromptAsync("Codigo de recuperacion", "Cual es el Codigo?");
+                    }
                 }
-                else
-                {
-                    var auth = authReset.SendPasswordResetEmailAsync(EmailTxt.ToString());
-                   
-                    string result = await App.Current.MainPage.DisplayPromptAsync("Codigo de recuperacion", "Cual es el Codigo?");
-                  
-                }
-
-          
-
-            }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);

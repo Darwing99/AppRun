@@ -335,14 +335,13 @@ namespace AppRun.ViewModel
 
                 idToken = 0,
                 idUser =Convert.ToInt32(user),
-                tiempo=TiempoSegundos,
-                distancia=Distancia,
+                tiempo=Math.Round(TiempoSegundos,3),
+                distancia= Math.Round(Distancia,3),
                 carrera = NombreCarrera,
-                calorias=calorias,
+                calorias= Math.Round(calorias,3),
                 fecha = Fecha,
-                velocidad= velocidadenmetrosporsegundo,
-                tiempohoras=tiempoSegundos/3600,
-                
+                velocidad= Math.Round(velocidadenmetrosporsegundo,3),
+                tiempohoras= Math.Round(tiempoSegundos / 3600,3),
                 fotos=null,
                 estado = true
                
@@ -364,7 +363,6 @@ namespace AppRun.ViewModel
                 await App.Current.MainPage.DisplayAlert("Registro", "Error al guardar Rutina", "OK");
             }
         }
-
 
         public void StopRoute()
         {
@@ -414,20 +412,18 @@ namespace AppRun.ViewModel
                     }
                     else
                     {
-                       
-                        await Application.Current.MainPage.Navigation.PopAsync(false);
+
+                        await Application.Current.MainPage.Navigation.PopToRootAsync();
                         
                         LoadRouteCommand.Execute(null);
-                        CleanFields();
-
-
+                       
 
                     }
                   
                 }
             }
         }
-
+    
         void CleanFields()
         {
             UbicacionActual = OriginText = string.Empty;
@@ -450,7 +446,6 @@ namespace AppRun.ViewModel
                 var placemark = placemarks?.FirstOrDefault();
                 if (placemark != null)
                 {
-
                     //posicion inicial de mi ubicacion 
                     UbicacionActual = placemark.FeatureName;
                     var lat = placemark.Location.Latitude;

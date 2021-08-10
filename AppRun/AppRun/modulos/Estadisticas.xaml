@@ -19,10 +19,11 @@
 
                         </Image>
                     </StackLayout>
-                    <ListView  IsRefreshing="{Binding Refresc}"    
-                              RowHeight="250"  x:Name="listaCorredores" ItemsSource="{Binding Carreras}"  >
+                    <ListView  SeparatorColor="White" BackgroundColor="white" IsRefreshing="{Binding Refresc}"    
+                              RowHeight="320"  x:Name="listaCorredores" ItemsSource="{Binding Carreras}"  >
+                   
                         <ListView.ItemTemplate>
-                            <DataTemplate>
+                            <DataTemplate >
                                 <ViewCell>
                                     <Frame Margin="10" Padding="10" HeightRequest="50" CornerRadius="10">
                                         <StackLayout  Margin="10" Orientation="Horizontal">

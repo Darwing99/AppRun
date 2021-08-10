@@ -24,8 +24,7 @@ namespace AppRun.Model
    
         public byte[] image { get; set; }
         public ImageSource foto { get; set; }
-        public string direccion { get; set; }
-
+       
         public string password { get; set; }
 
         public bool estado { get; set; }
