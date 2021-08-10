@@ -280,7 +280,7 @@ namespace AppRun.ViewModel
                     var distance = googleDirection.Routes.First().Legs.First().Distance.Text;
                     var distancef = googleDirection.Routes.First().Legs.First().Distance.Value;
                     DistanciaPoints = distance.ToString();
-                    Distancia = distancef/1000;
+                    Distancia = Math.Round(Convert.ToDouble(distancef)/1000,3);
                     Stopwatch.Reset();
                     Stopwatch.Start();
                     Horas = Stopwatch.Elapsed.Hours.ToString();

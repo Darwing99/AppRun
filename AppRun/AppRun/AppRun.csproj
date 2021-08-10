@@ -61,9 +61,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="modulos\ContentVista.xaml.cs">
-      <DependentUpon>ContentVista.xaml</DependentUpon>
-    </Compile>
     <Compile Update="modulos\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
@@ -74,9 +71,6 @@
 
   <ItemGroup>
     <EmbeddedResource Update="modulos\Clasificacion.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="modulos\ContentVista.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="modulos\Corredores.xaml">
