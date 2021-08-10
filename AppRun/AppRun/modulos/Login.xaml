@@ -206,7 +206,7 @@
                         <StackLayout Orientation="Horizontal">
                             <Label Text="Recordar contraseña" TextColor="black" VerticalOptions="Center" HorizontalOptions="CenterAndExpand"></Label>
                             <Frame Padding="1" CornerRadius="100" >
-                                <Switch IsToggled="{Binding Rememberme}" HorizontalOptions="CenterAndExpand"  ThumbColor="OrangeRed" OnColor="OrangeRed" x:Name="Remember"></Switch>
+                                <Switch IsToggled="{Binding Rememberme,Mode=TwoWay}" HorizontalOptions="CenterAndExpand"  ThumbColor="OrangeRed" OnColor="OrangeRed" x:Name="Remember"></Switch>
                             </Frame>
 
                         </StackLayout>

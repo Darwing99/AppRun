@@ -61,14 +61,17 @@ namespace AppRun
             await Navigation.PushAsync(new PoliticaPriv());
 
         }
-        private async void cerrar_Clicked(object sender, EventArgs e)
+        private  void cerrar_Clicked(object sender, EventArgs e)
         {
             Preferences.Clear();
-          
-            await Navigation.PopAsync();
+            ResetNavigationStack();
+            
 
             
         }
-        
+        public void ResetNavigationStack() {
+            Application.Current.MainPage = new NavigationPage(new Login());
+
+        }
     }
 }

@@ -94,7 +94,7 @@ namespace AppRun.ViewModel
     public async void Corredores()
     {
         Refresc = true;
-      
+      /*
                 usuarios = await restUser.GetRepositoriesAsync(Constantes.urlGet);
                 var user = usuarios;
                
@@ -136,7 +136,7 @@ namespace AppRun.ViewModel
                 
             
 
-
+            */
             Refresc = false;
         
         

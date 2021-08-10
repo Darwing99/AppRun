@@ -16,7 +16,7 @@ namespace AppRun
         {
             InitializeComponent();
          
-            if (Preferences.Get("Rememberme",true)!=false && (Preferences.Get("correo", "") != "") && (Preferences.Get("iduser", "") != ""))
+            if (Preferences.Get("Rememberme", true)!=false && (Preferences.Get("correo", "") != "") && (Preferences.Get("iduser", "") != ""))
             {
               
                 MainPage = new NavigationPage(new Inicio());

@@ -32,6 +32,7 @@
                 <Entry Placeholder="Lugar Inicial" BackgroundColor="white" TextColor="Black"
                                Text="{Binding UbicacionActual}"
                                FontSize="18"
+                               IsEnabled="false"
                                x:Name="originEntry"
                                ClassId="origin"
                                FontAttributes="Italic"

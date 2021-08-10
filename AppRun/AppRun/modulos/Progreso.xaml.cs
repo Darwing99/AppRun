@@ -32,7 +32,7 @@ namespace AppRun
         private readonly List<ChartEntry> calorias = new List<ChartEntry>();
         private readonly List<ChartEntry> velocidad = new List<ChartEntry>();
         private readonly List<ChartEntry> distancias = new List<ChartEntry>();
-        private readonly List<ChartEntry> tiempo=new List<ChartEntry>();
+       // private readonly List<ChartEntry> tiempo=new List<ChartEntry>();
         public async void Data()
         {
 
@@ -51,10 +51,10 @@ namespace AppRun
                     {
                         var color = String.Format("#{0:X6}", random.Next(0x1000000));
 
-                        lista.Add(new ChartEntry((float)(data.tiempo))
+                        lista.Add(new ChartEntry((float)Math.Round(data.tiempo / 3600, 3))
                         {
                             Label = data.carrera.ToString(),
-                            ValueLabel = data.tiempo.ToString(),
+                            ValueLabel = Math.Round(data.tiempo/3600,3).ToString()+"  hr",
                             Color = SKColor.Parse(color)
 
                         });
@@ -62,21 +62,21 @@ namespace AppRun
                         distancias.Add(new ChartEntry((float)(data.distancia))
                         {
                             Label = (data.carrera.ToString()==null ||data.carrera.ToString()=="") ? "carrera"+data.fecha.ToString():data.carrera.ToString(),
-                            ValueLabel = data.distancia.ToString(),
+                            ValueLabel = data.distancia.ToString()+" km",
                             Color = SKColor.Parse(color)
 
                         });
                         calorias.Add(new ChartEntry((float)(data.calorias))
                         {
                             Label = (data.carrera.ToString() == null || data.carrera.ToString() == "") ? "carrera" + data.fecha.ToString() : data.carrera.ToString(),
-                            ValueLabel = data.calorias.ToString(),
+                            ValueLabel = data.calorias.ToString()+ " Cal",
                             Color = SKColor.Parse(color)
 
                         });
                         velocidad.Add(new ChartEntry((float)(data.velocidad))
                         {
                             Label = (data.carrera.ToString() == null || data.carrera.ToString() == "") ? "carrera" + data.fecha.ToString() : data.carrera.ToString(),
-                            ValueLabel = data.velocidad.ToString(),
+                            ValueLabel = data.velocidad.ToString()+" m/s",
                             Color = SKColor.Parse(color)
 
                         });
@@ -103,7 +103,6 @@ namespace AppRun
         {
             base.OnAppearing();
             
-            tiempo.Clear();
             distancias.Clear();
             calorias.Clear();
             lista.Clear();
@@ -111,18 +110,23 @@ namespace AppRun
             Data();
             
             
-            MyLineChart.Chart = new LineChart { Entries = lista, AnimationProgress = 4, LineMode = LineMode.Straight, LabelTextSize = 25, LabelOrientation = Orientation.Horizontal, ValueLabelOrientation = Orientation.Horizontal, IsAnimated = true };
-            MyDonutChart.Chart = new DonutChart { Entries = distancias, IsAnimated = true };
+            MyLineChart.Chart = new LineChart { Entries = velocidad, AnimationProgress = 4,  LabelTextSize = 25, LabelOrientation = Orientation.Horizontal, ValueLabelOrientation = Orientation.Horizontal, IsAnimated = true };
+            MyDonutChart.Chart = new DonutChart { Entries = lista, IsAnimated = true };
             MyBarChart.Chart = new BarChart { Entries = calorias, IsAnimated = true, LabelTextSize = 25, BarAreaAlpha = 29,LabelOrientation=Orientation.Horizontal,ValueLabelOrientation=Orientation.Horizontal};
-            MyPointChart.Chart = new PointChart { Entries = lista, IsAnimated = true, LabelTextSize = 25, LabelOrientation = Orientation.Horizontal, ValueLabelOrientation = Orientation.Horizontal };
+            MyPointChart.Chart = new PointChart { Entries = distancias, IsAnimated = true, LabelTextSize = 25, LabelOrientation = Orientation.Horizontal, ValueLabelOrientation = Orientation.Horizontal };
             // MyRadialGaugeChart.Chart = new RadialGaugeChart { Entries = lista, IsAnimated = true };
             //MyRadar.Chart = new RadarChart { Entries = lista, IsAnimated = true };
         }
         public Progreso()
         {
             InitializeComponent();
+            distancias.Clear();
+            calorias.Clear();
+            lista.Clear();
+            velocidad.Clear();
             restService = new RestApiCarreras();
 
+            OnAppearing();
         }
         protected override void OnParentSet()
         {
@@ -130,6 +134,8 @@ namespace AppRun
             
             
         }
+
+        
 
 
     }

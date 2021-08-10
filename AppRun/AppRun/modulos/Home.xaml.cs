@@ -22,7 +22,7 @@ namespace AppRun
 
         public async void OnEnterAddressTapped(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new SearchPlacePage() { BindingContext = this.BindingContext }, false);
+            await Navigation.PushModalAsync(new SearchPlacePage() { BindingContext = this.BindingContext }, false);
 
         }
 

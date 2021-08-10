@@ -413,7 +413,7 @@ namespace AppRun.ViewModel
                     else
                     {
 
-                        await Application.Current.MainPage.Navigation.PopToRootAsync();
+                        await Application.Current.MainPage.Navigation.PopModalAsync(false);
                         
                         LoadRouteCommand.Execute(null);
                        

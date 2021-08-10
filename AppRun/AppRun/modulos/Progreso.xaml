@@ -13,9 +13,9 @@
 
                         <StackLayout HorizontalOptions="FillAndExpand">
                             <StackLayout Orientation="Vertical" Padding="2,0">
-                                <Label Text="Calorias Quemadas" Padding="10" TextColor="Black" HorizontalOptions="CenterAndExpand"  FontSize="25" FontAttributes="Bold"  VerticalOptions="FillAndExpand" />
+                                <Label Text="Velocidad por carrera" Padding="10" TextColor="Black" HorizontalOptions="CenterAndExpand"  FontSize="22" FontAttributes="Bold"  VerticalOptions="FillAndExpand" />
                                 <yummy:PancakeView Margin="0,0,0,0" BackgroundColor="White"
-                                            HorizontalOptions="FillAndExpand"  HeightRequest="150" CornerRadius="40,10,40,10">
+                                             HorizontalOptions="FillAndExpand"  HeightRequest="150" CornerRadius="0,10,30,10">
                                     <yummy:PancakeView.Shadow>
                                         <yummy:DropShadow x:Name="shadow" Color="{Binding ShadowColor}" Offset="{Binding ShadowOffset}" />
                                     </yummy:PancakeView.Shadow>
@@ -25,9 +25,9 @@
 
 
                             <StackLayout Orientation="Vertical">
-                                <Label Text="Carreras" Padding="10"  TextColor="Black" HorizontalOptions="CenterAndExpand"  FontSize="25" FontAttributes="Bold"  VerticalOptions="FillAndExpand" />
+                                <Label Text="Tiempos por carrera" Padding="10"  TextColor="Black" HorizontalOptions="CenterAndExpand"  FontSize="22" FontAttributes="Bold"  VerticalOptions="FillAndExpand" />
                                 <yummy:PancakeView Margin="0,0,0,0" BackgroundColor="White"
-                                            HorizontalOptions="FillAndExpand"  HeightRequest="150" CornerRadius="40,10,40,10">
+                                             HorizontalOptions="FillAndExpand"  HeightRequest="150" CornerRadius="0,10,30,10">
                                     <yummy:PancakeView.Shadow>
                                         <yummy:DropShadow  Color="{Binding ShadowColor}" Offset="{Binding ShadowOffset}" />
                                     </yummy:PancakeView.Shadow>
@@ -38,9 +38,9 @@
 
 
                             <StackLayout Orientation="Vertical">
-                                <Label Text="Tiempo Total" Padding="10"  TextColor="Black" HorizontalOptions="CenterAndExpand"  FontSize="25" FontAttributes="Bold"  VerticalOptions="FillAndExpand" />
+                                <Label Text="Distancias por carrera" Padding="10"  TextColor="Black" HorizontalOptions="CenterAndExpand"  FontSize="22" FontAttributes="Bold"  VerticalOptions="FillAndExpand" />
                                 <yummy:PancakeView Margin="0,0,0,0" BackgroundColor="White"
-                                            HorizontalOptions="FillAndExpand"  HeightRequest="150" CornerRadius="40,10,40,10">
+                                             HorizontalOptions="FillAndExpand"  HeightRequest="150" CornerRadius="0,10,30,10">
                                     <yummy:PancakeView.Shadow>
                                         <yummy:DropShadow  Color="{Binding ShadowColor}" Offset="{Binding ShadowOffset}" />
                                     </yummy:PancakeView.Shadow>
@@ -50,10 +50,10 @@
 
                             </StackLayout>
 
-                            <StackLayout Orientation="Vertical">
-                                <Label Text="Tiempo por carrera" Padding="10"  TextColor="Black" HorizontalOptions="CenterAndExpand"  FontSize="25" FontAttributes="Bold"  VerticalOptions="FillAndExpand" />
+                            <StackLayout Margin="0,0,0,10" Orientation="Vertical">
+                                <Label Text="Calorias quemadas por carrera" Padding="10"  TextColor="Black" HorizontalOptions="CenterAndExpand"  FontSize="22" FontAttributes="Bold"  VerticalOptions="FillAndExpand" />
                                 <yummy:PancakeView Margin="0,0,0,0" BackgroundColor="White"
-                                            HorizontalOptions="FillAndExpand"  HeightRequest="150" CornerRadius="40,10,40,10">
+                                            HorizontalOptions="FillAndExpand"  HeightRequest="150" CornerRadius="0,10,30,10">
                                     <yummy:PancakeView.Shadow>
                                         <yummy:DropShadow  Color="{Binding ShadowColor}" Offset="{Binding ShadowOffset}" />
                                     </yummy:PancakeView.Shadow>

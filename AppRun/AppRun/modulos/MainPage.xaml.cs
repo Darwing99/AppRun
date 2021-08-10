@@ -9,7 +9,8 @@ using Xamarin.Forms;
 
 namespace AppRun
 {
-    public partial class MainPage : ContentPage
+    [DesignTimeVisible(true)]
+    public partial class MainPage : Shell
     {
 
         public MainPage()
